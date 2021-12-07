@@ -1,6 +1,8 @@
 package ensf480.controller;
 
 import java.sql.*;
+import java.util.ArrayList;
+import ensf480.model.*;
 
 public class dbConnectionController {
     
@@ -19,26 +21,45 @@ public class dbConnectionController {
         }
     }
 
-    public String selectProperties(){
-        StringBuffer properties = new StringBuffer();
+    public ArrayList<Property> selectProperties(){
+
+        ArrayList<Property> props = new ArrayList<>();
         
-        try {                    
+        try {
+            this.createConnection();                    
             Statement myStmt = dbConnection.createStatement();
             resultSet = myStmt.executeQuery("SELECT * FROM property");
             
             while (resultSet.next()){
-                //System.out.println("Print results: " + resultSet.getString("name") + ", " + resultSet.getString("owner"));
-                
-                properties.append(resultSet.getInt("pid") + ", " + resultSet.getString("quadrant"));
-                properties.append('\n');
+                Property property = new Property(resultSet.getString("type"), resultSet.getString("address"), resultSet.getString("quadrant"), resultSet.getInt("bedrooms"),
+                 resultSet.getInt("bathrooms"), resultSet.getBoolean("isFurnished"), resultSet.getInt("ownerId"));
+                property.setId(resultSet.getInt("pid"));
+                props.add(property);
             }
             
             myStmt.close();
+            this.close();
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return properties.toString();
+        return props;
     }
+
+    public Property addProperty(Property property){
+        try{
+            this.createConnection();
+            String query = "Insert INTO property (status, type, address, quadrant, bedrooms, bathrooms, isFurnished, ownerId) VALUES(?,?,?,?,?,?,?,?)";
+            PreparedStatement myStmt = dbConnection.prepareStatement(query);
+
+            myStmt.setString(1, property.getStatus());
+        }
+        catch(SQLException exception){
+            exception.printStackTrace();
+        }
+    }
+
+
 
     public void close() {
         try {

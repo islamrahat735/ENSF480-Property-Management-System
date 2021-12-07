@@ -1,5 +1,8 @@
 package ensf480;
+import java.util.ArrayList;
+
 import ensf480.controller.*;
+import ensf480.model.*;
 /**
  * Hello world!
  *
@@ -12,8 +15,8 @@ public class App
 
         db.createConnection();
 
-        String allPropertiesString = db.selectProperties();
-        System.out.println(allPropertiesString);
+        ArrayList<Property> allProperties = db.selectProperties();
+        System.out.println(allProperties.toString());
 
         db.close();
     }
