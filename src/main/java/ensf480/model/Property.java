@@ -1,16 +1,13 @@
 package ensf480.model;
 
-
 public class Property {
     //private static int idGenerator = 1;
     
-    private int id = 0;
-
-
+    private int id = -1;
 
     private PropertyStatus status;
     private PropertyType type;
-    private String address;
+    private Address address;
     private Quadrant quadrant;
  
     private int numBedrooms;
@@ -19,12 +16,11 @@ public class Property {
     private String description;
     private int ownerId;
         
-    public Property(String type, String address, String quadrant, int numBedrooms, int numBathrooms, boolean isFurnished, int ownerId) {
+    public Property(String type, Address address, int numBedrooms, int numBathrooms, boolean isFurnished, int ownerId) {
         //this.id = idGenerator;
         this.status = PropertyStatus.SUSPENDED;
         this.type = PropertyType.valueOf(type.toUpperCase());
         this.address = address;
-        this.quadrant = Quadrant.valueOf(quadrant.toUpperCase());
         this.numBedrooms = numBedrooms;
         this.numBathrooms = numBathrooms;
         this.isFurnished = isFurnished;
@@ -59,11 +55,11 @@ public class Property {
         this.type = PropertyType.valueOf(type.toUpperCase());
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return this.address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
@@ -91,7 +87,7 @@ public class Property {
         this.numBathrooms = numBathrooms;
     }
 
-    public boolean isIsFurnished() {
+    public boolean getIsFurnished() {
         return this.isFurnished;
     }
 
@@ -127,11 +123,9 @@ public class Property {
             ", quadrant='" + getQuadrant() + "'" +
             ", numBedrooms='" + getNumBedrooms() + "'" +
             ", numBathrooms='" + getNumBathrooms() + "'" +
-            ", isFurnished='" + isIsFurnished() + "'" +
+            ", isFurnished='" + getIsFurnished() + "'" +
             ", description='" + getDescription() + "'" +
             ", ownerId='" + getOwnerId() + "'" +
             "}";
     }
-
-
 }

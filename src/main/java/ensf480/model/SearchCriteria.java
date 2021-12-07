@@ -1,8 +1,7 @@
 package ensf480.model;
 
 public class SearchCriteria {
-    //search is done by city
-    private String city;
+    //private String city;
     
     //SearchCriteria stores a bunch of different attributes that are optional
     private PropertyType type;
@@ -14,8 +13,7 @@ public class SearchCriteria {
     private String streetAddress;
 
     //city is mandatory criteria
-    public SearchCriteria(String city) {
-        this.city = city;
+    public SearchCriteria() {
     }
 
     //and a bunch of getters/setters

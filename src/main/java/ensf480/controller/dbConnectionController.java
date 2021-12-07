@@ -31,7 +31,8 @@ public class dbConnectionController {
             resultSet = myStmt.executeQuery("SELECT * FROM property");
             
             while (resultSet.next()){
-                Property property = new Property(resultSet.getString("type"), resultSet.getString("address"), resultSet.getString("quadrant"), resultSet.getInt("bedrooms"),
+                Address address = new Address(resultSet.getString("address"), resultSet.getString("quadrant"));
+                Property property = new Property(resultSet.getString("type"), address, resultSet.getInt("bedrooms"),
                  resultSet.getInt("bathrooms"), resultSet.getBoolean("isFurnished"), resultSet.getInt("ownerId"));
                 property.setId(resultSet.getInt("pid"));
                 props.add(property);

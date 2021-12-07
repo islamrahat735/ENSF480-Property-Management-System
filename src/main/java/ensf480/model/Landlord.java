@@ -31,8 +31,8 @@ class Landlord{
 		this.ownedProperties = ownedProperties;
 	}
 
-    public Property registerProperty(String type, String address, String quadrant, int numBedrooms, int numBathrooms, boolean isFurnished, int ownerId){
-        Property property = new Property(type, address, quadrant, numBedrooms, numBathrooms, isFurnished, ownerId);
+    public Property registerProperty(String type, Address address, int numBedrooms, int numBathrooms, boolean isFurnished, int ownerId){
+        Property property = new Property(type, address, numBedrooms, numBathrooms, isFurnished, ownerId);
         ownedProperties.add(property);
         return property;
     }

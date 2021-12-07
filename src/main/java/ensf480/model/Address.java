@@ -3,21 +3,18 @@ package ensf480.model;
 
 
 public class Address {
-    private String province; //assuming all properties are within Canada
-    private String city;
+    //private String province;
+    //private String city;
     private Quadrant quadrant;
     private String street_address; //includes apt #
 
-    public Address(String province, String city, String quadrant, String street_address) {
-        this.province = province.toLowerCase();
-        this.city = city.toLowerCase();
-        if(!quadrant.isEmpty()) {
-            this.quadrant = Quadrant.valueOf(quadrant.toUpperCase());
-        }
+    public Address(String street_address, String quadrant) {
         this.street_address = street_address;
+        this.quadrant = Quadrant.valueOf(quadrant.toUpperCase());
     }
 
     //getters and setters
+    /*
     public String getProvince() {
         return this.province;
     }
@@ -33,13 +30,14 @@ public class Address {
 	public void setCity(String city) {
 		this.city = city;
 	}
+    */
 
-	public Quadrant getQuadrant() {
-		return this.quadrant;
+	public String getQuadrant() {
+		return this.quadrant.toString();
 	}
 
-	public void setQuadrant(Quadrant quadrant) {
-		this.quadrant = quadrant;
+	public void setQuadrant(String quadrant) {
+		this.quadrant = Quadrant.valueOf(quadrant.toUpperCase());
 	}
 
     public String getStreet_address() {
@@ -49,6 +47,16 @@ public class Address {
 	public void setStreet_address(String street_address) {
 		this.street_address = street_address;
 	}
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            " quadrant='" + getQuadrant() + "'" +
+            ", street_address='" + getStreet_address() + "'" +
+            "}";
+    }
+
 }
 
 enum Quadrant {
