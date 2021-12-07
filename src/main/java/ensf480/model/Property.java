@@ -15,6 +15,8 @@ public class Property {
     private boolean isFurnished;
     private String description;
     private int ownerId;
+
+    private String dateListed;
         
     public Property(String type, Address address, int numBedrooms, int numBathrooms, boolean isFurnished, int ownerId) {
         //this.id = idGenerator;

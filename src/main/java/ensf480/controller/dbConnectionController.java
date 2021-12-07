@@ -5,17 +5,23 @@ import java.util.ArrayList;
 import ensf480.model.*;
 
 public class dbConnectionController {
+    private final String USERNAME;
+    private final String PASSWORD;
+    private final String URL;
     
     private Connection dbConnection;
     private ResultSet resultSet;
 
-    public dbConnectionController(){   
+    public dbConnectionController(String username, String password, String url) {
+        this.USERNAME = username;
+        this.PASSWORD = password;
+        this.URL = url;   
+        createConnection();
     }
 
-    public void createConnection(){
-                
+    public void createConnection() {
         try{
-            dbConnection = DriverManager.getConnection("jdbc:mysql://localhost/propertyms", "propertyms", "ensf480");
+            dbConnection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -33,7 +39,7 @@ public class dbConnectionController {
             while (resultSet.next()){
                 Address address = new Address(resultSet.getString("address"), resultSet.getString("quadrant"));
                 Property property = new Property(resultSet.getString("type"), address, resultSet.getInt("bedrooms"),
-                 resultSet.getInt("bathrooms"), resultSet.getBoolean("isFurnished"), resultSet.getInt("ownerId"));
+                resultSet.getInt("bathrooms"), resultSet.getBoolean("isFurnished"), resultSet.getInt("ownerId"));
                 property.setId(resultSet.getInt("pid"));
                 props.add(property);
             }
@@ -47,7 +53,7 @@ public class dbConnectionController {
         return props;
     }
 
-    public Property addProperty(Property property){
+    public void addProperty(Property property){
         try{
             this.createConnection();
             String query = "Insert INTO property (status, type, address, quadrant, bedrooms, bathrooms, isFurnished, ownerId) VALUES(?,?,?,?,?,?,?,?)";

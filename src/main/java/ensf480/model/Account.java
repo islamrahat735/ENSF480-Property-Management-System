@@ -4,6 +4,16 @@ public class Account {
     private String username;
     private String password;
 
+    private String fname;
+    private String lname;
+
+    public Account(String username, String password, String fname, String lname){
+        this.username = username;
+        this.password = password;
+        this.fname = fname;
+        this.lname = lname;
+    }
+
 	public String getUsername() {
 		return this.username;
 	}
@@ -12,7 +22,6 @@ public class Account {
 		this.username = username;
 	}
 
-    //uh-oh security!
 	public String getPassword() {
 		return this.password;
 	}
@@ -21,8 +30,19 @@ public class Account {
 		this.password = password;
 	}
 
-    public Account(String username, String password){
-        this.username = username;
-        this.password = password;
+    public String getFname() {
+        return this.fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getLname() {
+        return this.lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
     }
 }
