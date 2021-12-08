@@ -16,6 +16,16 @@ CREATE TABLE Property(
     PRIMARY KEY (pid)
 );
 
+CREATE TABLE Landlord(
+    lid int AUTO_INCREMENT,
+    username varchar(255),
+    password varchar(255),
+    fname varchar(255),
+    lname varchar(255),
+
+    PRIMARY KEY (username)
+);
+
 
 INSERT INTO Property(status, type, address, quadrant, bedrooms, bathrooms, isFurnished, ownerId)
 VALUES ("Active", "Apartment", "centre street", "NE", 2, 2, 1, 1);

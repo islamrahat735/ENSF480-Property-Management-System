@@ -8,7 +8,6 @@ public class Property {
     private PropertyStatus status;
     private PropertyType type;
     private Address address;
-    private Quadrant quadrant;
  
     private int numBedrooms;
     private int numBathrooms;
@@ -65,13 +64,7 @@ public class Property {
         this.address = address;
     }
 
-    public Quadrant getQuadrant() {
-        return this.quadrant;
-    }
 
-    public void setQuadrant(Quadrant quadrant) {
-        this.quadrant = quadrant;
-    }
 
     public int getNumBedrooms() {
         return this.numBedrooms;
@@ -122,7 +115,6 @@ public class Property {
             ", status='" + getStatus() + "'" +
             ", type='" + getType() + "'" +
             ", address='" + getAddress() + "'" +
-            ", quadrant='" + getQuadrant() + "'" +
             ", numBedrooms='" + getNumBedrooms() + "'" +
             ", numBathrooms='" + getNumBathrooms() + "'" +
             ", isFurnished='" + getIsFurnished() + "'" +

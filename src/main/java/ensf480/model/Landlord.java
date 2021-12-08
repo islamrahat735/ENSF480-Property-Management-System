@@ -2,7 +2,7 @@ package ensf480.model;
 
 import java.util.ArrayList;
 
-class Landlord extends Account {
+public class Landlord extends Account {
     private static int nextID = 1;
     
     private ArrayList<Property> ownedProperties = new ArrayList<>();
@@ -13,6 +13,10 @@ class Landlord extends Account {
         super(username, password, fname, lname);
         id = nextID;
         nextID++;
+    }
+
+    public Landlord(){
+        
     }
 
     
