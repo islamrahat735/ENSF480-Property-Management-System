@@ -5,15 +5,21 @@ public class SearchCriteria {
     
     //SearchCriteria stores a bunch of different attributes that are optional
     private PropertyType type;
-    private Address address;
     private int numBedrooms;
     private int numBathrooms;
-    private boolean isFurnished;
-    private Quadrant quadrant;
-    private String streetAddress;
+    private int isFurnished;
 
-    //city is mandatory criteria
+    private String streetAddress;
+    private Quadrant quadrant;
+
+    //starts with all criteria empty
     public SearchCriteria() {
+        type = null;
+        numBedrooms = -1;
+        numBathrooms = -1;
+        isFurnished = -1;
+        streetAddress = null;
+        quadrant = null;
     }
 
     //and a bunch of getters/setters
@@ -23,14 +29,6 @@ public class SearchCriteria {
 
     public void setType(PropertyType type) {
         this.type = type;
-    }
-
-    public Address getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public int getNumBedrooms() {
@@ -49,11 +47,18 @@ public class SearchCriteria {
         this.numBathrooms = numBathrooms;
     }
 
-    public boolean isIsFurnished() {
+    public int getIsFurnished() {
         return this.isFurnished;
     }
 
-    public void setIsFurnished(boolean isFurnished) {
+    public boolean isFurnished() {
+        if(isFurnished == 1)
+            return true;
+        else
+            return false;
+    }
+
+    public void setIsFurnished(int isFurnished) {
         this.isFurnished = isFurnished;
     }
 
