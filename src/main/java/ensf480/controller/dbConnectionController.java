@@ -170,6 +170,97 @@ public class dbConnectionController {
         return landlord;
     }
 
+    public ArrayList<Property> getLandlordProperties( Landlord landlord){
+        ArrayList<Property> props = new ArrayList<>();
+        
+        try {
+            this.createConnection();                    
+            PreparedStatement myStmt = dbConnection.prepareStatement("SELECT * FROM property WHERE ownerId = ?");
+
+            myStmt.setInt(1, landlord.getId());
+            resultSet = myStmt.executeQuery();
+            
+            while (resultSet.next()){
+                Address address = new Address(resultSet.getString("address"), resultSet.getString("quadrant"));
+                Property property = new Property(resultSet.getString("type"), address, resultSet.getInt("bedrooms"),
+                resultSet.getInt("bathrooms"), resultSet.getBoolean("isFurnished"), resultSet.getInt("ownerId"));
+                property.setId(resultSet.getInt("pid"));
+                props.add(property);
+            }
+            
+            myStmt.close();
+            this.close();
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return props;
+    }
+
+    //Manager
+    public Manager getManager(String username, String password){
+        Manager manager = null;
+        try{
+            this.createConnection();
+            String query = "SELECT * FROM property WHERE username = ? AND password = ?";
+            PreparedStatement myStmt = dbConnection.prepareStatement(query);
+
+            myStmt.setString(1, username);
+            myStmt.setString(2, password);
+
+            resultSet = myStmt.executeQuery();
+            while(resultSet.next()){
+                manager = new Manager(resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("fname"), resultSet.getString("lname"));
+                manager.setId(resultSet.getInt("lid"));
+            }
+            myStmt.close();
+            this.close();
+        }catch(SQLException exception){
+            exception.printStackTrace();
+        }
+        return manager;
+    }
+
+    //Search Criteria
+
+    public SearchCriteria getSearchCriteria(RegisteredRenter renter){
+        SearchCriteria criteria = null;
+        try{
+            this.createConnection();
+            String query = "SELECT * FROM Search_Criteria WHERE rid = ?";
+            PreparedStatement myStmt = dbConnection.prepareStatement(query);
+            myStmt.setInt(1, renter.getId());
+
+            resultSet = myStmt.executeQuery();
+
+            while(resultSet.next()){
+                criteria = new SearchCriteria();
+                if(resultSet.getString("isFurnished") != null){
+                    if(resultSet.getString("isFurnished").equals("T")){
+                        criteria.setIsFurnished(true);
+                    }
+                    else if(resultSet.getString("isFurnished").equals("F")){
+                        criteria.setIsFurnished(false);
+                    }
+                }
+                if(resultSet.getString("type") != null){
+                    criteria.setType(resultSet.getString("type"));
+                }
+                if(resultSet.getString("quadrant") != null){
+                    criteria.setType(resultSet.getString("quadrant"));
+                }
+                criteria.setNumBathrooms(resultSet.getInt("bedrooms"));
+                criteria.setNumBathrooms(resultSet.getInt("bathrooms"));  
+            }
+            myStmt.close();
+            this.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return criteria;
+    }
+
+
     public void close() {
         try {
             if(resultSet != null){

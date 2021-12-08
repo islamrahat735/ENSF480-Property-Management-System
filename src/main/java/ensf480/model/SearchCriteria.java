@@ -5,12 +5,12 @@ public class SearchCriteria {
     
     //SearchCriteria stores a bunch of different attributes that are optional
     private PropertyType type;
-    private Address address;
+    //private Address address;
     private int numBedrooms;
     private int numBathrooms;
     private boolean isFurnished;
     private Quadrant quadrant;
-    private String streetAddress;
+    //private String streetAddress;
 
     //city is mandatory criteria
     public SearchCriteria() {
@@ -21,17 +21,17 @@ public class SearchCriteria {
         return this.type.toString();
     }
 
-    public void setType(PropertyType type) {
-        this.type = type;
+    public void setType(String type) {
+        this.type = PropertyType.valueOf(type.toUpperCase());
     }
 
-    public Address getAddress() {
-        return this.address;
-    }
+    // public Address getAddress() {
+    //     return this.address;
+    // }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+    // public void setAddress(Address address) {
+    //     this.address = address;
+    // }
 
     public int getNumBedrooms() {
         return this.numBedrooms;
@@ -57,19 +57,38 @@ public class SearchCriteria {
         this.isFurnished = isFurnished;
     }
 
-    public Quadrant getQuadrant() {
-        return this.quadrant;
+    public String getQuadrant() {
+        return this.quadrant.toString();
     }
 
-    public void setQuadrant(Quadrant quadrant) {
-        this.quadrant = quadrant;
+    public void setQuadrant(String quadrant) {
+        this.quadrant = Quadrant.valueOf(quadrant.toUpperCase());
     }
 
-    public String getStreetAddress() {
-        return this.streetAddress;
+    // public String getStreetAddress() {
+    //     return this.streetAddress;
+    // }
+
+    // public void setStreetAddress(String streetAddress) {
+    //     this.streetAddress = streetAddress;
+    // }
+
+
+    public boolean getIsFurnished() {
+        return this.isFurnished;
     }
 
-    public void setStreetAddress(String streetAddress) {
-        this.streetAddress = streetAddress;
+    @Override
+    public String toString() {
+        return "{" +
+            " type='" + getType() + "'" +
+            ", numBedrooms='" + getNumBedrooms() + "'" +
+            ", numBathrooms='" + getNumBathrooms() + "'" +
+            ", isFurnished='" + isIsFurnished() + "'" +
+            ", quadrant='" + getQuadrant() + "'" +
+            "}";
     }
+
+
+
 }
