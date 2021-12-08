@@ -12,6 +12,29 @@ public class RegisteredRenter extends Account implements ListingObserver {
         super(username, password, fname, lname);
     }
 
+    public void update(Property property) {
+        if (property.matchesCriteria(notifCriteria)) {
+            String from = "Notification System";
+            String title = "A property with your criteria has been posted!";
+            String message = property.toString();
+            addEmail(new Email(from, title, message));
+        }
+    }
+
+    //setters and getters
+    public void setNotifCriteria(SearchCriteria criteria) {
+        this.notifCriteria = criteria;
+    }
+
+    public SearchCriteria getNotifCriteria() {
+        return notifCriteria;
+    }
+
+    public ArrayList<Email> getInbox() {
+        return inbox;
+    }
+
+    //inbox methods
     public void addEmail(Email email) {
         inbox.add(email);
     }
@@ -22,17 +45,5 @@ public class RegisteredRenter extends Account implements ListingObserver {
 
     public void clearInbox() {
         inbox.clear();
-    }
-
-    public void subscribe(SearchCriteria notifCriteria) {
-        this.notifCriteria = notifCriteria;
-    }
-
-    public void unsubscribe() {
-        notifCriteria = null;
-    }
-
-    public void update() {
-        
     }
 }

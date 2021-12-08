@@ -1,9 +1,9 @@
 package ensf480.model;
 
 public class Property {
-    //private static int idGenerator = 1;
+    private static int nextID = 1;
     
-    private int id = -1;
+    private int id;
 
     private PropertyStatus status;
     private PropertyType type;
@@ -28,11 +28,31 @@ public class Property {
         this.isFurnished = isFurnished;
         this.ownerId = ownerId;
 
-        //idGenerator++;
+        id = nextID;
+        nextID++;
+    }
+
+    //checks each category and returns false if any of them mismatch
+    public boolean matchesCriteria(SearchCriteria criteria) {
+        //if it isn't null and the values aren't equal, the search doesn't match the criteria
+        if(criteria.getType() != null && this.type != PropertyType.valueOf(criteria.getType()))
+            return false;
+        if(criteria.getNumBedrooms() != -1 && this.numBedrooms != criteria.getNumBedrooms())
+            return false;
+        if(criteria.getNumBathrooms() != -1 && this.numBathrooms != criteria.getNumBathrooms())
+            return false;
+        if(criteria.getIsFurnished() != -1 && this.isFurnished != criteria.isFurnished())
+            return false;
+        if(criteria.getStreetAddress() != null && this.address.getStreetAddress() != criteria.getStreetAddress())
+            return false;
+        if(criteria.getQuadrant() != null && Quadrant.valueOf(this.address.getQuadrant()) != criteria.getQuadrant())
+            return false;
+        
+        //all criteria passed, thus this property matches it
+        return true;
     }
 
     //getters and setters
-
     public int getId() {
         return this.id;
     }
@@ -89,7 +109,7 @@ public class Property {
         this.numBathrooms = numBathrooms;
     }
 
-    public boolean getIsFurnished() {
+    public boolean isFurnished() {
         return this.isFurnished;
     }
 
@@ -112,8 +132,6 @@ public class Property {
     public void setOwnerId(int ownerId) {
         this.ownerId = ownerId;
     }
-    
-
 
     @Override
     public String toString() {
@@ -125,7 +143,7 @@ public class Property {
             ", quadrant='" + getQuadrant() + "'" +
             ", numBedrooms='" + getNumBedrooms() + "'" +
             ", numBathrooms='" + getNumBathrooms() + "'" +
-            ", isFurnished='" + getIsFurnished() + "'" +
+            ", isFurnished='" + isFurnished() + "'" +
             ", description='" + getDescription() + "'" +
             ", ownerId='" + getOwnerId() + "'" +
             "}";

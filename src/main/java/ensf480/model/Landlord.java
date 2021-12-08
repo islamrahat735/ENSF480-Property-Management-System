@@ -15,10 +15,13 @@ class Landlord extends Account {
         nextID++;
     }
 
-    
     public ArrayList<Property> getOwnedProperties() {
 		return this.ownedProperties;
 	}
+
+    public Property getProperty(int index) {
+        return ownedProperties.get(index);
+    }
 
     public Property addProperty(String type, Address address, int numBedrooms, int numBathrooms, boolean isFurnished, int ownerId){
         Property property = new Property(type, address, numBedrooms, numBathrooms, isFurnished, ownerId);
@@ -31,7 +34,6 @@ class Landlord extends Account {
     }
 
     public void editProperty(Property oldProperty, Property newProperty){
-        
         int target = ownedProperties.indexOf(oldProperty);
 
         if(target != -1){
