@@ -11,7 +11,8 @@ public class App
 {
     public static void main( String[] args )
     {
-        dbConnectionController db = new dbConnectionController("jdbc:mysql://localhost/propertyms", "propertyms", "ensf480");
+        dbConnectionController db = new dbConnectionController("propertyms", "ensf480", "jdbc:mysql://localhost/propertyms");
+        //dbConnectionController db = new dbConnectionController();
 
         ArrayList<Property> allProperties = db.selectProperties();
         System.out.println(allProperties.toString());

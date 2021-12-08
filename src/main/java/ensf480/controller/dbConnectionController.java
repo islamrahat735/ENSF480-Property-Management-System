@@ -16,7 +16,6 @@ public class dbConnectionController {
         this.USERNAME = username;
         this.PASSWORD = password;
         this.URL = url;   
-        createConnection();
     }
 
     public void createConnection() {
