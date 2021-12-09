@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 import ensf480.controller.*;
 import ensf480.model.*;
+import ensf480.view.*;
+import java.awt.EventQueue;
 /**
  * Hello world!
  *
@@ -21,5 +23,6 @@ public class App
         System.out.println(allProperties.toString());
 
         db.close();
+
     }
 }
