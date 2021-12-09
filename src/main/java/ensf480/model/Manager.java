@@ -4,6 +4,10 @@ public class Manager extends Account {
 
     private int id;
 
+    public Manager(String username, String password, String fname, String lname){
+        super(username, password, fname, lname);
+    }
+
     public int getId() {
         return this.id;
     }
@@ -11,20 +15,4 @@ public class Manager extends Account {
     public void setId(int id) {
         this.id = id;
     }
-
-    public Manager(String username, String password, String fname, String lname){
-        super(username, password, fname, lname);
-    }
-
-    public void editProperty(Property property){
-
-    }
-
-    public void setFeeRate(int cost, int durationDays){}
-
-    // public Manager(String username, String password, String fname, String lname) {
-    //     super(username, password, fname, lname);
-    //     id = nextID;
-    //     nextID++;
-    // }
 }

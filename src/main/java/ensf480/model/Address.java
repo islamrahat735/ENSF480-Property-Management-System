@@ -1,10 +1,6 @@
 package ensf480.model;
 
-
-
 public class Address {
-    //private String province;
-    //private String city;
     private Quadrant quadrant;
     private String streetAddress; //includes apt #
 
