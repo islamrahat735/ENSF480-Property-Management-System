@@ -2,6 +2,17 @@ DROP DATABASE IF EXISTS PROPERTYMS;
 CREATE DATABASE PROPERTYMS; 
 USE PROPERTYMS;
 
+CREATE TABLE Landlord(
+    lid int AUTO_INCREMENT,
+    username varchar(255),
+    password varchar(255),
+    fname varchar(255),
+    lname varchar(255),
+
+    PRIMARY KEY (lid)
+);
+
+
 CREATE TABLE Property(
     pid int AUTO_INCREMENT,
     status varchar(255),
@@ -11,20 +22,13 @@ CREATE TABLE Property(
     bedrooms int,
     bathrooms int,
     isFurnished bit,
-    ownerId int,
+    ownerId int, 
 
-    PRIMARY KEY (pid)
+    PRIMARY KEY (pid),
+    FOREIGN KEY (ownerId) REFERENCES Landlord (lid)
+
 );
 
-CREATE TABLE Landlord(
-    lid int AUTO_INCREMENT,
-    username varchar(255),
-    password varchar(255),
-    fname varchar(255),
-    lname varchar(255),
-
-    PRIMARY KEY (username)
-);
 
 CREATE TABLE Manager(
     mid int AUTO_INCREMENT,
@@ -33,7 +37,7 @@ CREATE TABLE Manager(
     fname varchar(255),
     lname varchar(255),
 
-    PRIMARY KEY (username)
+    PRIMARY KEY (mid)
 );
 
 CREATE TABLE Registered_Renter(
@@ -43,7 +47,7 @@ CREATE TABLE Registered_Renter(
     fname varchar(255),
     lname varchar(255),
 
-    PRIMARY KEY (username)
+    PRIMARY KEY (rid)
 );
 
 Create Table Search_Criteria(
@@ -55,13 +59,16 @@ Create Table Search_Criteria(
     isFurnished varchar(1),
 
     FOREIGN KEY (rid) REFERENCES Registered_Renter(rid)
-)
+);
 
 Create Table Fee(
     fee int,
     durationInDays int
-)
+);
 
+
+INSERT INTO Landlord(username, password, fname, lname)
+VALUES ("landlord@gmail.com", "password", "Bob", "Jones");
 
 INSERT INTO Property(status, type, address, quadrant, bedrooms, bathrooms, isFurnished, ownerId)
 VALUES ("Active", "Apartment", "centre street", "NE", 2, 2, 1, 1);
