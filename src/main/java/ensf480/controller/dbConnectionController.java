@@ -67,6 +67,7 @@ public class dbConnectionController {
                 resultSet.getInt("bathrooms"), resultSet.getBoolean("isFurnished"), resultSet.getInt("ownerId"));
                 property.setId(resultSet.getInt("pid"));
                 props.add(property);
+                property.setStatus(resultSet.getString("status"));
             }
             
             myStmt.close();

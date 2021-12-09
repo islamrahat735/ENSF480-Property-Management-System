@@ -146,6 +146,6 @@ public class Property {
             ", isFurnished='" + isFurnished() + "'" +
             ", description='" + getDescription() + "'" +
             ", ownerId='" + getOwnerId() + "'" +
-            "}";
+            "}\n";
     }
 }

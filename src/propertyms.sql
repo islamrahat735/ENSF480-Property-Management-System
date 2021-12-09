@@ -4,7 +4,7 @@ USE PROPERTYMS;
 
 CREATE TABLE Landlord(
     lid int AUTO_INCREMENT,
-    username varchar(255),
+    username varchar(255) UNIQUE,
     password varchar(255),
     fname varchar(255),
     lname varchar(255),
@@ -32,7 +32,7 @@ CREATE TABLE Property(
 
 CREATE TABLE Manager(
     mid int AUTO_INCREMENT,
-    username varchar(255),
+    username varchar(255) UNIQUE,
     password varchar(255),
     fname varchar(255),
     lname varchar(255),
@@ -42,7 +42,7 @@ CREATE TABLE Manager(
 
 CREATE TABLE Registered_Renter(
     rid int AUTO_INCREMENT,
-    username varchar(255),
+    username varchar(255)  UNIQUE,
     password varchar(255),
     fname varchar(255),
     lname varchar(255),
@@ -79,6 +79,13 @@ VALUES ("landlord@gmail.com", "password", "Bob", "Jones"),
 INSERT INTO Property(status, type, address, quadrant, bedrooms, bathrooms, isFurnished, ownerId)
 VALUES ("Active", "Apartment", "centre street", "NE", 2, 2, 1, 1),
         ("Active", "Attached_house", "University dr.", "NW", 2, 2, 1, 2),
-        ("Rented", "Attached_house", "Bowness dr.", "SW", 2, 2, 1, 3);
+        ("Rented", "Attached_house", "Bowness dr.", "SW", 2, 2, 1, 3),
+        ("Active", "Attached_house", "Panorama Hills dr.", "NW", 2, 2, 1, 2),
+        ("Active", "Attached_house", "Charleswood dr.", "NW", 2, 2, 1, 2),
+        ("Active", "Attached_house", "Brentwood dr.", "NW", 2, 2, 1, 2);
 
--- INSERT INTO Registered_Renter()
+INSERT INTO Registered_Renter(username, password, fname, lname)
+VALUES ('coolio123', 'hi', 'Michael', 'Hans');
+
+INSERT INTO Search_Criteria(rid, type, quadrant, bedrooms, bathrooms, isFurnished)
+VALUES (1, NULL, "NW", NULL, NULL, 1)
