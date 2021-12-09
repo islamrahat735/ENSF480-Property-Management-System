@@ -23,8 +23,8 @@ CREATE TABLE Property(
     bathrooms int,
     isFurnished bit,
     ownerId int,
-    listDate varchar(255),
-    rentDate varchar(255), 
+    listDate date,
+    rentDate date, 
 
     PRIMARY KEY (pid),
     FOREIGN KEY (ownerId) REFERENCES Landlord (lid)

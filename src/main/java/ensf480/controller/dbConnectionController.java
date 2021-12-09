@@ -41,8 +41,13 @@ public class dbConnectionController {
                 resultSet.getInt("bathrooms"), resultSet.getBoolean("isFurnished"), resultSet.getInt("ownerId"));
                 property.setId(resultSet.getInt("pid"));
                 property.setStatus(resultSet.getString("status"));
-                property.setDateListed(resultSet.getString("listDate"));
-                property.setDateRented(resultSet.getString("rentDate"));
+                if(resultSet.getDate("listDate") != null){
+                    property.setDateListed(resultSet.getDate("listDate").toString());
+                }
+                if(resultSet.getDate("rentDate") != null){
+                    property.setDateRented(resultSet.getDate("rentDate").toString());
+                }
+                
                 props.add(property);
             }
             
@@ -70,8 +75,12 @@ public class dbConnectionController {
                 resultSet.getInt("bathrooms"), resultSet.getBoolean("isFurnished"), resultSet.getInt("ownerId"));
                 property.setId(resultSet.getInt("pid"));
                 property.setStatus(resultSet.getString("status"));
-                property.setDateListed(resultSet.getString("listDate"));
-                property.setDateRented(resultSet.getString("rentDate"));
+                if(resultSet.getDate("listDate") != null){
+                    property.setDateListed(resultSet.getDate("listDate").toString());
+                }
+                if(resultSet.getDate("rentDate") != null){
+                    property.setDateRented(resultSet.getDate("rentDate").toString());
+                }
                 props.add(property);
                 
             }
@@ -99,9 +108,21 @@ public class dbConnectionController {
             myStmt.setInt(6, property.getNumBathrooms());
             myStmt.setBoolean(7, property.isFurnished());
             myStmt.setInt(8, property.getOwnerId());
-            myStmt.setString(9, property.getdateListed());
-            myStmt.setString(10, property.getDateRented());
-
+            if(property.getDateListed() != null){
+                myStmt.setDate(9, Date.valueOf(property.getdateListed()));
+            }
+            else{
+                myStmt.setDate(9, null);
+            }
+            
+            if(property.getDateRented() != null){
+                myStmt.setDate(10, Date.valueOf(property.getDateRented()));
+            }
+            else{
+                myStmt.setDate(10, null);
+            }
+            
+            
             myStmt.executeUpdate();
 
             myStmt.close();
@@ -115,7 +136,7 @@ public class dbConnectionController {
     public void updateProperty(Property property){
         try{
             this.createConnection();
-            String query = "UPDATE property SET status = ?, type = ?, address = ?, quadrant = ?, bedrooms = ?, bathrooms = ?, isFurnished = ?, ownerId = ? WHERE pid = ?";
+            String query = "UPDATE property SET status = ?, type = ?, address = ?, quadrant = ?, bedrooms = ?, bathrooms = ?, isFurnished = ?, ownerId = ?, listDate = ?, rentDate = ? WHERE pid = ?";
             PreparedStatement myStmt = dbConnection.prepareStatement(query);
 
             myStmt.setString(1, property.getStatus());
@@ -132,7 +153,23 @@ public class dbConnectionController {
             }
             
             myStmt.setInt(8, property.getOwnerId());
-            myStmt.setInt(9, property.getId());
+
+            if(property.getDateListed() != null){
+                myStmt.setDate(9, Date.valueOf(property.getdateListed()));
+            }
+            else{
+                myStmt.setDate(9, null);
+            }
+            
+            if(property.getDateRented() != null){
+                myStmt.setDate(10, Date.valueOf(property.getDateRented()));
+            }
+            else{
+                myStmt.setDate(10, null);
+            }
+
+            myStmt.setInt(11, property.getId());
+            
 
             myStmt.executeUpdate();
 
@@ -200,6 +237,12 @@ public class dbConnectionController {
                 Property property = new Property(resultSet.getString("type"), address, resultSet.getInt("bedrooms"),
                 resultSet.getInt("bathrooms"), resultSet.getBoolean("isFurnished"), resultSet.getInt("ownerId"));
                 property.setId(resultSet.getInt("pid"));
+                if(resultSet.getDate("listDate") != null){
+                    property.setDateListed(resultSet.getDate("listDate").toString());
+                }
+                if(resultSet.getDate("rentDate") != null){
+                    property.setDateRented(resultSet.getDate("rentDate").toString());
+                }
                 props.add(property);
             }
             
