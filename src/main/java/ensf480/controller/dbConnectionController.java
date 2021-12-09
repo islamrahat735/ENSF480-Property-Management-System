@@ -256,7 +256,7 @@ public class dbConnectionController {
                     criteria.setType(PropertyType.valueOf(resultSet.getString("type").toUpperCase()));
                 }
                 if(resultSet.getString("quadrant") != null){
-                    criteria.setType(Quadrant.valueOf(resultSet.getString("quadrant")));
+                    criteria.setQuadrant(Quadrant.valueOf(resultSet.getString("quadrant").toUpperCase()));
                 }
                 criteria.setNumBathrooms(resultSet.getInt("bedrooms"));
                 criteria.setNumBathrooms(resultSet.getInt("bathrooms"));  

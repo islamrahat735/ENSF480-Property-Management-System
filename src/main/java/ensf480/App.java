@@ -17,7 +17,7 @@ public class App
         //dbConnectionController db = new dbConnectionController();
         Address address = new Address("university dr.", "NW");
         Property property = new Property("apartment", address, 3, 3, true, 1);
-        //db.addProperty(property);
+        db.addProperty(property);
         ArrayList<Property> allProperties = db.selectProperties();
         db.deleteProperty(allProperties.get(1));
         System.out.println(allProperties.toString());
