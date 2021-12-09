@@ -90,4 +90,7 @@ INSERT INTO Registered_Renter(username, password, fname, lname)
 VALUES ('coolio123', 'hi', 'Michael', 'Hans');
 
 INSERT INTO Search_Criteria(rid, type, quadrant, bedrooms, bathrooms, isFurnished)
-VALUES (1, NULL, "NW", -1, -1, NULL)
+VALUES (1, NULL, "NW", -1, -1, NULL);
+
+INSERT INTO Manager(username, password, fname, lname)
+VALUES ('manager', 'pass', 'Bob', 'Moore');

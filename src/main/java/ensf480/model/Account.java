@@ -49,4 +49,16 @@ public class Account {
     public void setLname(String lname) {
         this.lname = lname;
     }
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            " username='" + getUsername() + "'" +
+            ", password='" + getPassword() + "'" +
+            ", fname='" + getFname() + "'" +
+            ", lname='" + getLname() + "'" +
+            "}";
+    }
+
 }

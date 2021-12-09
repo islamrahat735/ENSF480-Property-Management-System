@@ -15,7 +15,8 @@ public class Property {
     private String description;
     private int ownerId;
 
-    private String dateListed;
+    private String dateListed = null;
+    private String dateRented = null;
         
     public Property(String type, Address address, int numBedrooms, int numBathrooms, boolean isFurnished, int ownerId) {
         //this.id = idGenerator;
@@ -27,8 +28,8 @@ public class Property {
         this.isFurnished = isFurnished;
         this.ownerId = ownerId;
 
-        id = nextID;
-        nextID++;
+        //id = nextID;
+        //nextID++;
     }
 
     //checks each category and returns false if any of them mismatch
@@ -134,6 +135,32 @@ public class Property {
         this.dateListed = dateListed;
     }
 
+
+    public boolean isIsFurnished() {
+        return this.isFurnished;
+    }
+
+    public boolean getIsFurnished() {
+        return this.isFurnished;
+    }
+
+
+    public String getDateListed() {
+        return this.dateListed;
+    }
+
+    public void setDateListed(String dateListed) {
+        this.dateListed = dateListed;
+    }
+
+    public String getDateRented() {
+        return this.dateRented;
+    }
+
+    public void setDateRented(String dateRented) {
+        this.dateRented = dateRented;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -143,9 +170,14 @@ public class Property {
             ", address='" + getAddress() + "'" +
             ", numBedrooms='" + getNumBedrooms() + "'" +
             ", numBathrooms='" + getNumBathrooms() + "'" +
-            ", isFurnished='" + isFurnished() + "'" +
+            ", isFurnished='" + isIsFurnished() + "'" +
             ", description='" + getDescription() + "'" +
             ", ownerId='" + getOwnerId() + "'" +
+            ", dateListed='" + getDateListed() + "'" +
+            ", dateRented='" + getDateRented() + "'" +
             "}\n";
     }
+
+
+   
 }

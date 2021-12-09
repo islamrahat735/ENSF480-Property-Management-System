@@ -40,6 +40,9 @@ public class dbConnectionController {
                 Property property = new Property(resultSet.getString("type"), address, resultSet.getInt("bedrooms"),
                 resultSet.getInt("bathrooms"), resultSet.getBoolean("isFurnished"), resultSet.getInt("ownerId"));
                 property.setId(resultSet.getInt("pid"));
+                property.setStatus(resultSet.getString("status"));
+                property.setDateListed(resultSet.getString("listDate"));
+                property.setDateRented(resultSet.getString("rentDate"));
                 props.add(property);
             }
             
@@ -66,8 +69,11 @@ public class dbConnectionController {
                 Property property = new Property(resultSet.getString("type"), address, resultSet.getInt("bedrooms"),
                 resultSet.getInt("bathrooms"), resultSet.getBoolean("isFurnished"), resultSet.getInt("ownerId"));
                 property.setId(resultSet.getInt("pid"));
-                props.add(property);
                 property.setStatus(resultSet.getString("status"));
+                property.setDateListed(resultSet.getString("listDate"));
+                property.setDateRented(resultSet.getString("rentDate"));
+                props.add(property);
+                
             }
             
             myStmt.close();
@@ -82,7 +88,7 @@ public class dbConnectionController {
     public void addProperty(Property property){
         try{
             this.createConnection();
-            String query = "Insert INTO property (status, type, address, quadrant, bedrooms, bathrooms, isFurnished, ownerId) VALUES(?,?,?,?,?,?,?,?)";
+            String query = "Insert INTO property (status, type, address, quadrant, bedrooms, bathrooms, isFurnished, ownerId, listDate, rentDate ) VALUES(?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement myStmt = dbConnection.prepareStatement(query);
 
             myStmt.setString(1, property.getStatus());
@@ -93,6 +99,8 @@ public class dbConnectionController {
             myStmt.setInt(6, property.getNumBathrooms());
             myStmt.setBoolean(7, property.isFurnished());
             myStmt.setInt(8, property.getOwnerId());
+            myStmt.setString(9, property.getdateListed());
+            myStmt.setString(10, property.getDateRented());
 
             myStmt.executeUpdate();
 
@@ -209,7 +217,7 @@ public class dbConnectionController {
         Manager manager = null;
         try{
             this.createConnection();
-            String query = "SELECT * FROM property WHERE username = ? AND password = ?";
+            String query = "SELECT * FROM Manager WHERE username = ? AND password = ?";
             PreparedStatement myStmt = dbConnection.prepareStatement(query);
 
             myStmt.setString(1, username);
@@ -218,7 +226,7 @@ public class dbConnectionController {
             resultSet = myStmt.executeQuery();
             while(resultSet.next()){
                 manager = new Manager(resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("fname"), resultSet.getString("lname"));
-                manager.setId(resultSet.getInt("lid"));
+                manager.setId(resultSet.getInt("mid"));
             }
             myStmt.close();
             this.close();
@@ -269,6 +277,16 @@ public class dbConnectionController {
         }
         return criteria;
     }
+
+    // public Fee getFee(){
+    //     Fee fee = null;
+    //     try{
+    //         this.createConnection();
+    //     }catch(SQLException e){
+
+    //     }
+    //     return fee;
+    // }
 
 
     public void close() {

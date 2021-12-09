@@ -32,8 +32,14 @@ public class ManagerView extends JPanel {
 		add(viewLandlordsButton);
 		
 		JButton viewPropertiesButton = new JButton("View Properties");
+
+        viewPropertiesButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                MainFrame.getManagerViewPropertiesView();
+            }
+        });
 		viewPropertiesButton.setBounds(319, 133, 199, 52);
-		add(viewPropertiesButton);
+        add(viewPropertiesButton);
 		
 		JButton emailButton = new JButton("Access Email System");
 		emailButton.setBounds(319, 524, 199, 50);

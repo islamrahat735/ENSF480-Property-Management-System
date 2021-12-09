@@ -15,4 +15,13 @@ public class Manager extends Account {
     public void setId(int id) {
         this.id = id;
     }
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "', " + super.toString() +
+            "}";
+    }
+
 }

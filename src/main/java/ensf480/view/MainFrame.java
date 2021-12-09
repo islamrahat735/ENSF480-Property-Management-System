@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -17,6 +18,7 @@ public class MainFrame extends JFrame {
 
 	public static JPanel contentPane;
 	static MainFrame frame;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -103,5 +105,23 @@ public class MainFrame extends JFrame {
 		contentPane.repaint();
 		frame.setTitle("Search For Properties");
 	}
+
+	public static void getManagerView() {
+        ManagerView managerView = new ManagerView();
+        
+        contentPane.removeAll();
+        contentPane.add(managerView);
+        contentPane.revalidate();
+        contentPane.repaint();
+    }
+
+	public static void getManagerViewPropertiesView() {
+        ManagerViewPropertiesView managerViewPropertiesView = new ManagerViewPropertiesView();
+        
+        contentPane.removeAll();
+        contentPane.add(managerViewPropertiesView);
+        contentPane.revalidate();
+        contentPane.repaint();
+    }
 
 }
