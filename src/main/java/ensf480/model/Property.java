@@ -9,7 +9,7 @@ public class Property {
     private PropertyType type;
     private Address address;
     private Quadrant quadrant;
- 
+
     private int numBedrooms;
     private int numBathrooms;
     private boolean isFurnished;
@@ -131,6 +131,14 @@ public class Property {
 
     public void setOwnerId(int ownerId) {
         this.ownerId = ownerId;
+    }
+
+    public String getdateListed() {
+        return dateListed;
+    }
+
+    public void setdateListed(String dateListed) {
+        this.dateListed = dateListed;
     }
 
     @Override

@@ -6,11 +6,13 @@ class Landlord extends Account {
     private static int nextID = 1;
     
     private ArrayList<Property> ownedProperties = new ArrayList<>();
+    private Inbox inbox;
 
     private int id;
 
     public Landlord(String username, String password, String fname, String lname){
         super(username, password, fname, lname);
+        inbox = new Inbox();
         id = nextID;
         nextID++;
     }
@@ -47,5 +49,9 @@ class Landlord extends Account {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Inbox getInbox() {
+        return inbox;
     }
 }
