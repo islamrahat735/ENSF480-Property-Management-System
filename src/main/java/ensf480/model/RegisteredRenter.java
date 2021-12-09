@@ -3,6 +3,17 @@ package ensf480.model;
 //observer of the observer pattern, gets updated whenever a new listing is posted
 public class RegisteredRenter extends Account implements ListingObserver {
 
+    private int id;
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+ 
+
     private SearchCriteria notifCriteria; //the user's defined criteria to get notified by
     private Inbox inbox;
 

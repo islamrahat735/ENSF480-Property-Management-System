@@ -14,6 +14,10 @@ public class Account {
         this.lname = lname;
     }
 
+    public Account(){
+
+    }
+
 	public String getUsername() {
 		return this.username;
 	}
