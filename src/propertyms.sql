@@ -67,8 +67,18 @@ Create Table Fee(
 );
 
 
+INSERT INTO Fee(fee, durationInDays)
+VALUES (50, 60);
+
 INSERT INTO Landlord(username, password, fname, lname)
-VALUES ("landlord@gmail.com", "password", "Bob", "Jones");
+VALUES ("landlord@gmail.com", "password", "Bob", "Jones"),
+        ("landlord1@gmail.com", "pass", "Chris", "Walker"),
+        ("landlord2@gmail.com", "idk", "John", "Doe");
+
 
 INSERT INTO Property(status, type, address, quadrant, bedrooms, bathrooms, isFurnished, ownerId)
-VALUES ("Active", "Apartment", "centre street", "NE", 2, 2, 1, 1);
+VALUES ("Active", "Apartment", "centre street", "NE", 2, 2, 1, 1),
+        ("Active", "Attached_house", "University dr.", "NW", 2, 2, 1, 2),
+        ("Rented", "Attached_house", "Bowness dr.", "SW", 2, 2, 1, 3);
+
+-- INSERT INTO Registered_Renter()
