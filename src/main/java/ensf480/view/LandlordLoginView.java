@@ -32,7 +32,7 @@ public class LandlordLoginView extends JPanel {
 		
 		loginEmailField = new JTextField(); // create new JTextField
 		loginEmailField.setBounds(10, 42, 241, 19); // set bounds
-		loginEmailField.setColumns(10); // set amount o columns for loginEmailField
+		loginEmailField.setColumns(10); // set amount of columns for loginEmailField
 		add(loginEmailField); // add to view
 		
 		JLabel loginPasswordLabel = new JLabel("Password"); // create new JLabel

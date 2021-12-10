@@ -14,20 +14,20 @@ public class LandlordPayFeeView extends JPanel {
 	 * Create the panel.
 	 */
 	public LandlordPayFeeView(final int landlordID) {
-	setBounds(300, 200, 850, 600);
-	setLayout(null);
+	setBounds(300, 200, 850, 600); // set bounds
+	setLayout(null); // set layout to null, absolute positioning
 	
-	JLabel lblNewLabel = new JLabel("Current Fee:");
-	lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-	lblNewLabel.setBounds(215, 173, 200, 25);
-	add(lblNewLabel);
+	JLabel lblNewLabel = new JLabel("Current Fee:"); // create new JLabel
+	lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20)); // set font
+	lblNewLabel.setBounds(215, 173, 200, 25); // set bounds
+	add(lblNewLabel); // add view
 	
-	JLabel lblNewLabel_1 = new JLabel("Duration:");
-	lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-	lblNewLabel_1.setBounds(215, 249, 200, 25);
-	add(lblNewLabel_1);
+	JLabel lblNewLabel_1 = new JLabel("Duration:"); // create new JLabel 
+	lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20)); // set font 
+	lblNewLabel_1.setBounds(215, 249, 200, 25); // set bounds
+	add(lblNewLabel_1); //add to view
 	
-	JButton btnNewButton = new JButton("Pay Fee");
+	JButton btnNewButton = new JButton("Pay Fee"); 
 	btnNewButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			//Change status to active

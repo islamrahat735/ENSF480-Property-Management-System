@@ -22,7 +22,7 @@ public class InvalidFeeDialog extends JDialog {
 	public static void main(String[] args) {
 		try {
 			InvalidFeeDialog dialog = new InvalidFeeDialog(); // create new InvalidFeeDialog
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE); // destroy JDialog and everything contained within when closec
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE); // destroy JDialog and everything contained within when closed
 			dialog.setVisible(true); // set as visible
 		} catch (Exception e) {
 			e.printStackTrace();
