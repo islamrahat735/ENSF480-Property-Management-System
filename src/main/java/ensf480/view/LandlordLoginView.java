@@ -2,14 +2,21 @@ package ensf480.view;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import ensf480.controller.LoginController;
 
 public class LandlordLoginView extends JPanel {
 
-	private JTextField loginEmailTextField;
-	private JPasswordField loginPasswordField;
+	private JTextField loginEmailField;
+	private JTextField loginPasswordField;
+	JDialog loginFailedDialog = new LoginFailedDialog();
+	
 	
 	/**
 	 * Create the panel.
@@ -23,10 +30,10 @@ public class LandlordLoginView extends JPanel {
 		loginEmailLabel.setBounds(10, 9, 241, 13);
 		add(loginEmailLabel);
 		
-		loginEmailTextField = new JTextField();
-		loginEmailTextField.setBounds(10, 42, 241, 19);
-		loginEmailTextField.setColumns(10);
-		add(loginEmailTextField);
+		loginEmailField = new JTextField();
+		loginEmailField.setBounds(10, 42, 241, 19);
+		loginEmailField.setColumns(10);
+		add(loginEmailField);
 		
 		JLabel loginPasswordLabel = new JLabel("Password");
 		loginPasswordLabel.setBounds(10, 109, 241, 13);
@@ -37,6 +44,19 @@ public class LandlordLoginView extends JPanel {
 		add(loginPasswordField);
 		
 		JButton loginButton = new JButton("Login");
+		loginButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String loginEmail = loginEmailField.getText();
+				String loginPassword = loginPasswordField.getText();
+				LoginController loginController = new LoginController();
+				int landlordID = loginController.loginLandlord(loginEmail, loginPassword);
+				if(landlordID != -1) {
+					MainFrame.getLandlordView(landlordID);
+				}else{
+					loginFailedDialog.setVisible(true);
+				}
+			}
+		});
 		loginButton.setBounds(10, 161, 104, 21);
 		add(loginButton);
 	}

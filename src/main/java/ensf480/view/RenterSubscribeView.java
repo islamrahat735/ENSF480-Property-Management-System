@@ -2,6 +2,7 @@ package ensf480.view;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
@@ -10,17 +11,18 @@ import javax.swing.JToggleButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class URenterView extends JPanel {
+public class RenterSubscribeView extends JPanel {
 	String PT;
 	int NBD;
 	int NBA;
 	int F;
 	String CQ;
+    JDialog actionSuccessfulDialog = new ActionSuccessfulDialog();
 
 	/**
 	 * Create the panel.
 	 */
-	public URenterView() {
+	public RenterSubscribeView(final int renterID) {
 		setBounds(300, 200, 850, 600);
 		setLayout(null);
 		
@@ -92,61 +94,61 @@ public class URenterView extends JPanel {
 		numberOfBathroomsComboBox.setBounds(444, 184, 161, 20);
 		add(numberOfBathroomsComboBox);
 		
-		JButton searchButton = new JButton("Search");
-		searchButton.addActionListener(new ActionListener() {
+		JButton subscribeButton = new JButton("Subscribe");
+		subscribeButton.addActionListener(new ActionListener() { // add code to strore search criteria into db
 			public void actionPerformed(ActionEvent e) {
+                actionSuccessfulDialog.setVisible(true);
 				//Property Type
-				if(includeCheckBoxPT.isSelected()) {
-					PT = (String) propertyTypeComboBox.getSelectedItem();
-				} else {
-					PT = null;
-				}
+				// if(includeCheckBoxPT.isSelected()) {
+				// 	PT = (String) propertyTypeComboBox.getSelectedItem();
+				// } else {
+				// 	PT = null;
+				// }
 				
-				//Number of Bedrooms
-				if(includeCheckBoxNBD.isSelected()) {
-					NBD = Integer.parseInt((String) numberOfBedroomsComboBox.getSelectedItem());
-				} else {
-					NBD = -1;
-				}
+				// //Number of Bedrooms
+				// if(includeCheckBoxNBD.isSelected()) {
+				// 	NBD = (int) numberOfBedroomsComboBox.getSelectedItem();
+				// } else {
+				// 	NBD = -1;
+				// }
 				
-				//Number of Bathrooms
-				if(includeCheckBoxNBA.isSelected()) {
-					NBD = Integer.parseInt((String) numberOfBathroomsComboBox.getSelectedItem());
-					NBA = (int) numberOfBathroomsComboBox.getSelectedItem();
-				} else {
-					NBA = -1;
-				}
+				// //Number of Bathrooms
+				// if(includeCheckBoxNBA.isSelected()) {
+				// 	NBA = (int) numberOfBathroomsComboBox.getSelectedItem();
+				// } else {
+				// 	NBA = -1;
+				// }
 				
-				//Furnished
-				if(includeCheckBoxF.isSelected()) {
-					if (furnishedCheckBox.isSelected()) {
-						F = 1;
-					} else {
-						F = 0;
-					}
-				} else {
-					F = -1;
-				}
+				// //Furnished
+				// if(includeCheckBoxF.isSelected()) {
+				// 	if (furnishedCheckBox.isSelected()) {
+				// 		F = 1;
+				// 	} else {
+				// 		F = 0;
+				// 	}
+				// } else {
+				// 	F = -1;
+				// }
 				
-				//City Quadrant
-				if(includeCheckBoxCQ.isSelected()) {
-					CQ = (String) cityQuadrantComboBox.getSelectedItem();
-				} else {
-					CQ = null;
-				}
+				// //City Quadrant
+				// if(includeCheckBoxCQ.isSelected()) {
+				// 	CQ = (String) cityQuadrantComboBox.getSelectedItem();
+				// } else {
+				// 	CQ = null;
+				// }
 				
-				MainFrame.getAllRenterViewPropertiesView(PT, NBD, NBA, F, CQ);
+				// MainFrame.getAllRenterViewPropertiesView(PT, NBD, NBA, F, CQ);
 				
 				
 			}
 		});
-		searchButton.setBounds(361, 428, 126, 21);
-		add(searchButton);
+		subscribeButton.setBounds(361, 428, 126, 21);
+		add(subscribeButton);
 		
 		JButton backButton = new JButton("Back");
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getLandingView();
+				MainFrame.getRenterView(renterID);
 			}
 		});
 		backButton.setBounds(751, 10, 89, 23);

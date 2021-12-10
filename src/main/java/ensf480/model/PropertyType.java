@@ -1,5 +1,6 @@
 package ensf480.model;
 
+//enum that represents one of 6 different property types
 public enum PropertyType {
     APARTMENT,
     ATTACHED_HOUSE,

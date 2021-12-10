@@ -1,5 +1,6 @@
 package ensf480.model;
 
+//enum that represents one of four Property statuses
 public enum PropertyStatus {
     ACTIVE, //property listed, fee paid
     RENTED, //property sold

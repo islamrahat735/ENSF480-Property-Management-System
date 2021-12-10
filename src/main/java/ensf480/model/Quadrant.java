@@ -1,5 +1,6 @@
 package ensf480.model;
 
+//enum that represents the quadrants of Calgary
 public enum Quadrant {
     NE,
     NW,

@@ -1,7 +1,4 @@
 package ensf480.view;
-
-
-
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +12,7 @@ public class LandingView extends JPanel {
 	public JButton uRenterViewButton;
 	private JButton managerLoginViewButton;
 	private JButton landlordLoginViewButton;
+	//private InvalidAddressDialog abc = new InvalidAddressDialog();
 	/**
 	 * Create the panel.
 	 */
@@ -22,13 +20,14 @@ public class LandingView extends JPanel {
 		setBounds(300, 200, 850, 600);
 		setLayout(null);
 		
+		//abc.setVisible(true);
 		registerViewButton = new JButton("Renter Registration");
 		registerViewButton.setBounds(331, 103, 159, 21);
 		add(registerViewButton);
 		
 		registerViewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getRegisterView();
+				MainFrame.getRenterRegisterView();
 			}
 		});
 		

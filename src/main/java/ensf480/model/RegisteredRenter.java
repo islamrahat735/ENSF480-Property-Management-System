@@ -1,28 +1,31 @@
 package ensf480.model;
+import java.util.ArrayList;
 
-//observer of the observer pattern, gets updated whenever a new listing is posted
+//Registered Renter account
+//observer pattern, gets updated whenever a new listing is posted
 public class RegisteredRenter extends Account implements ListingObserver {
 
     private int id;
 
     private SearchCriteria notifCriteria; //the user's defined criteria to get notified by
-    private Inbox inbox;
+
 
     public RegisteredRenter(String username, String password, String fname, String lname) {
         super(username, password, fname, lname);
-        inbox = new Inbox();
         notifCriteria = null;
     }
 
-    public void update(Property property) {
-        if(notifCriteria != null) {
-            if (property.matchesCriteria(notifCriteria)) {
-                String from = "Notification System";
-                String title = "A property with your criteria has been posted!";
-                String message = property.toString();
-                inbox.addEmail(new Email(from, title, message));
-            }
+    //update function that is called whenever a new property is listed
+    public Email update(Property property) {
+        //if the user is subscribed to some sort of criteria and the property matches their criteria
+        if(notifCriteria != null && property.matchesCriteria(notifCriteria)) {
+            //create and return an email to send them
+            String from = "Notification System";
+            String title = "A property with your criteria has been posted!";
+            String message = property.toString();
+            return new Email(from, title, message); 
         }
+        return null; //if it doesn't match their criteria, returns null
     }
 
     //setters and getters
@@ -32,10 +35,6 @@ public class RegisteredRenter extends Account implements ListingObserver {
 
     public SearchCriteria getNotifCriteria() {
         return notifCriteria;
-    }
-
-    public Inbox getInbox() {
-        return inbox;
     }
 
     public int getId() {

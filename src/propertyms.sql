@@ -60,12 +60,35 @@ Create Table Search_Criteria(
     bathrooms int,
     isFurnished varchar(1),
 
+    PRIMARY KEY (rid),
     FOREIGN KEY (rid) REFERENCES Registered_Renter(rid)
 );
 
 Create Table Fee(
-    fee int,
+    fee float,
     durationInDays int
+);
+
+Create Table R_Inbox(
+    eid int AUTO_INCREMENT,
+    rid int,
+    ufrom varchar(255),
+    title varchar(255),
+    msg TEXT(65535),
+
+    PRIMARY KEY(eid),
+    FOREIGN KEY (rid) REFERENCES Registered_Renter(rid)
+);
+
+Create Table L_Inbox(
+    eid int AUTO_INCREMENT,
+    lid int,
+    ufrom varchar(255),
+    title varchar(255),
+    msg TEXT(65535),
+
+    PRIMARY KEY(eid),
+    FOREIGN KEY (lid) REFERENCES Landlord(lid)
 );
 
 
@@ -79,12 +102,14 @@ VALUES ("landlord@gmail.com", "password", "Bob", "Jones"),
 
 
 INSERT INTO Property(status, type, address, quadrant, bedrooms, bathrooms, isFurnished, ownerId, listDate, rentDate)
-VALUES ("Active", "Apartment", "centre street", "NE", 2, 2, 1, 1, "2021-12-08", NULL),
+VALUES ("Cancelled", "Apartment", "centre street", "NE", 2, 2, 1, 1, "2021-12-08", NULL),
         ("Active", "Attached_house", "University dr.", "NW", 2, 2, 1, 2, "2021-12-08", NULL ),
         ("Rented", "Attached_house", "Bowness dr.", "SW", 2, 2, 1, 3, NULL, "2021-12-08"),
         ("Active", "Attached_house", "Panorama Hills dr.", "NW", 2, 2, 1, 2, "2021-12-08", NULL),
         ("Active", "Attached_house", "Charleswood dr.", "NW", 2, 2, 1, 2, "2021-12-08", NULL),
         ("Active", "Attached_house", "Brentwood dr.", "NW", 2, 2, 1, 2, "2021-12-08", NULL);
+     
+
 
 INSERT INTO Registered_Renter(username, password, fname, lname)
 VALUES ('coolio123', 'hi', 'Michael', 'Hans');

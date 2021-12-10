@@ -25,13 +25,10 @@ public class Address {
 		this.streetAddress = street_address;
 	}
 
-
+    //for debugging
     @Override
     public String toString() {
-        return "{" +
-            " quadrant='" + getQuadrant() + "'" +
-            ", street_address='" + getStreetAddress() + "'" +
-            "}";
+        return "\nQuadrant: " + getQuadrant() + "\nAddresss: " + getStreetAddress();
     }
 
 }

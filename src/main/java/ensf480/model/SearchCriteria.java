@@ -4,6 +4,8 @@ public class SearchCriteria {
     //private String city;
     
     //SearchCriteria stores a bunch of different attributes that are optional
+    private int renterID;
+    
     private PropertyType type;
     private int numBedrooms;
     private int numBathrooms;
@@ -13,7 +15,8 @@ public class SearchCriteria {
     private Quadrant quadrant;
 
     //starts with all criteria empty
-    public SearchCriteria() {
+    public SearchCriteria(int id) {
+        renterID = id;
         type = null;
         numBedrooms = -1;
         numBathrooms = -1;
@@ -24,7 +27,10 @@ public class SearchCriteria {
 
     //and a bunch of getters/setters
     public String getType() {
-        return this.type.toString();
+        if(this.type != null)
+            return this.type.toString();
+        else
+            return null;
     }
 
     public void setType(PropertyType type) {
@@ -76,5 +82,13 @@ public class SearchCriteria {
 
     public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
+    }
+
+    public int getRenterID() {
+        return this.renterID;
+    }
+
+    public void setRenterID(int renterID) {
+        this.renterID = renterID;
     }
 }

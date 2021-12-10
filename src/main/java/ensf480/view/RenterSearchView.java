@@ -10,7 +10,8 @@ import javax.swing.JToggleButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class URenterView extends JPanel {
+public class RenterSearchView extends JPanel {
+
 	String PT;
 	int NBD;
 	int NBA;
@@ -20,7 +21,7 @@ public class URenterView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public URenterView() {
+	public RenterSearchView(final int renterID) {
 		setBounds(300, 200, 850, 600);
 		setLayout(null);
 		
@@ -91,6 +92,23 @@ public class URenterView extends JPanel {
 		numberOfBathroomsComboBox.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
 		numberOfBathroomsComboBox.setBounds(444, 184, 161, 20);
 		add(numberOfBathroomsComboBox);
+
+		JLabel subscribeLabel = new JLabel("Subscribe");
+		subscribeLabel.setBounds(264, 403, 49, 14);
+		add(subscribeLabel);
+		
+		final JCheckBox subscribeCheckBox = new JCheckBox("");
+		subscribeCheckBox.setBounds(512, 403, 99, 23);
+		add(subscribeCheckBox);
+		
+		JButton btnNewButton = new JButton("Back");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainFrame.getRenterView(renterID);
+			}
+		});
+		btnNewButton.setBounds(761, 5, 89, 23);
+		add(btnNewButton);
 		
 		JButton searchButton = new JButton("Search");
 		searchButton.addActionListener(new ActionListener() {
@@ -104,14 +122,13 @@ public class URenterView extends JPanel {
 				
 				//Number of Bedrooms
 				if(includeCheckBoxNBD.isSelected()) {
-					NBD = Integer.parseInt((String) numberOfBedroomsComboBox.getSelectedItem());
+					NBD = (int) numberOfBedroomsComboBox.getSelectedItem();
 				} else {
 					NBD = -1;
 				}
 				
 				//Number of Bathrooms
 				if(includeCheckBoxNBA.isSelected()) {
-					NBD = Integer.parseInt((String) numberOfBathroomsComboBox.getSelectedItem());
 					NBA = (int) numberOfBathroomsComboBox.getSelectedItem();
 				} else {
 					NBA = -1;
@@ -135,21 +152,18 @@ public class URenterView extends JPanel {
 					CQ = null;
 				}
 				
+				if(subscribeCheckBox.isSelected()) {
+					int x = 0;
+				}
+				
 				MainFrame.getAllRenterViewPropertiesView(PT, NBD, NBA, F, CQ);
 				
 				
 			}
 		});
-		searchButton.setBounds(361, 428, 126, 21);
+		searchButton.setBounds(361, 454, 126, 21);
 		add(searchButton);
 		
-		JButton backButton = new JButton("Back");
-		backButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				MainFrame.getLandingView();
-			}
-		});
-		backButton.setBounds(751, 10, 89, 23);
-		add(backButton);
 	}
 }
+
