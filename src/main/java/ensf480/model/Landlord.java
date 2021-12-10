@@ -4,13 +4,10 @@ import java.util.ArrayList;
 
 public class Landlord extends Account {
     private ArrayList<Property> ownedProperties = new ArrayList<>();
-    private Inbox inbox;
-
     private int id;
 
     public Landlord(String username, String password, String fname, String lname){
         super(username, password, fname, lname);
-        inbox = new Inbox();
     }
 
     public ArrayList<Property> getOwnedProperties() {
@@ -45,9 +42,5 @@ public class Landlord extends Account {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Inbox getInbox() {
-        return inbox;
     }
 }

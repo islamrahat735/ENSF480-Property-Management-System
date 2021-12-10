@@ -25,7 +25,7 @@ public class Address {
 		this.streetAddress = street_address;
 	}
 
-
+    //for debugging
     @Override
     public String toString() {
         return "{" +

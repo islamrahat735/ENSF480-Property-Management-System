@@ -1,10 +1,10 @@
 package ensf480.model;
 
+//represents a Property registered in our system
 public class Property {
-    private static int nextID = 1;
-    
-    private int id;
+    private int id; //property id
 
+    //attributes
     private PropertyStatus status;
     private PropertyType type;
     private Address address;
@@ -12,14 +12,13 @@ public class Property {
     private int numBedrooms;
     private int numBathrooms;
     private boolean isFurnished;
-    private String description;
     private int ownerId;
 
     private String dateListed = null;
     private String dateRented = null;
         
+    //constructor
     public Property(String type, Address address, int numBedrooms, int numBathrooms, boolean isFurnished, int ownerId) {
-        //this.id = idGenerator;
         this.status = PropertyStatus.SUSPENDED;
         this.type = PropertyType.valueOf(type.toUpperCase());
         this.address = address;
@@ -27,9 +26,6 @@ public class Property {
         this.numBathrooms = numBathrooms;
         this.isFurnished = isFurnished;
         this.ownerId = ownerId;
-
-        //id = nextID;
-        //nextID++;
     }
 
     //checks each category and returns false if any of them mismatch
@@ -37,6 +33,7 @@ public class Property {
         //if it isn't null and the values aren't equal, the search doesn't match the criteria
         if(criteria.getType() != null && this.type != PropertyType.valueOf(criteria.getType()))
             return false;
+        //we check each criteria individually
         if(criteria.getNumBedrooms() != -1 && this.numBedrooms != criteria.getNumBedrooms())
             return false;
         if(criteria.getNumBathrooms() != -1 && this.numBathrooms != criteria.getNumBathrooms())
@@ -85,8 +82,6 @@ public class Property {
         this.address = address;
     }
 
-
-
     public int getNumBedrooms() {
         return this.numBedrooms;
     }
@@ -111,14 +106,6 @@ public class Property {
         this.isFurnished = isFurnished;
     }
 
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public int getOwnerId() {
         return this.ownerId;
     }
@@ -135,7 +122,6 @@ public class Property {
         this.dateListed = dateListed;
     }
 
-
     public boolean isIsFurnished() {
         return this.isFurnished;
     }
@@ -143,7 +129,6 @@ public class Property {
     public boolean getIsFurnished() {
         return this.isFurnished;
     }
-
 
     public String getDateListed() {
         return this.dateListed;
@@ -161,17 +146,17 @@ public class Property {
         this.dateRented = dateRented;
     }
 
+    //for debugging
     @Override
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
             ", status='" + getStatus() + "'" +
             ", type='" + getType() + "'" +
-            ", address='" + getAddress() + "'" +
+            address.toString() +
             ", numBedrooms='" + getNumBedrooms() + "'" +
             ", numBathrooms='" + getNumBathrooms() + "'" +
             ", isFurnished='" + isIsFurnished() + "'" +
-            ", description='" + getDescription() + "'" +
             ", ownerId='" + getOwnerId() + "'" +
             ", dateListed='" + getDateListed() + "'" +
             ", dateRented='" + getDateRented() + "'" +

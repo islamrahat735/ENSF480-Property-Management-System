@@ -1,92 +1,66 @@
 package ensf480.view;
-
-import java.util.ArrayList;
-
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import java.awt.BorderLayout;
 
-import ensf480.controller.*;
-import ensf480.model.*;
+import ensf480.controller.ManagerController;
+import ensf480.model.Property;
+
+import java.awt.BorderLayout;
+import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import java.awt.GridLayout;
+import javax.swing.BoxLayout;
+import java.awt.FlowLayout;
+import javax.swing.JMenuBar;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.awt.event.ActionEvent;
 
 public class ManagerViewPropertiesView extends JPanel {
-    private JTable table;
+	private JTable table;
 
-    /**
-     * Create the panel.
-     */
-    // public ManagerViewPropertiesView() {
-    //     setBounds(300, 200, 850, 600);
-    //     setLayout(null);
-
-    //     ManagerController managerController = new ManagerController();
-
-    //     ArrayList<Property> input = managerController.getAllProperties();
-        
-    //     table = new JTable();
-    //     Object columnNames[] = { "Property ID", "Status", "Type", "Address", "Quadrant", "Bedrooms", "Bathrooms", "Furnished", "List Date", "Rent Date"};
-
-    //     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-        
-    //     for(int i=0; i< input.size(); i++) {
-    //         Object rowData[] = {input.get(i).getId(), input.get(i).getStatus(), 
-    //                             input.get(i).getType(), input.get(i).getAddress().getStreetAddress(), input.get(i).getAddress().getQuadrant(), 
-    //                             input.get(i).getNumBedrooms(), input.get(i).getNumBathrooms(), input.get(i).isFurnished(), input.get(i).getDateListed(), input.get(i).getDateRented()
-    //         };
-    //         //System.out.println(input.get(i).getPropertyType());
-    //         model.addRow(rowData);
-    //     }
-    //     table.setModel(model);
-    //     table.setBounds(44, 36, 751, 482);
-    //     //add(table);
-    //     JScrollPane scrollPane = new JScrollPane(table);
-    //     //add(pane, BorderLayout.CENTER);
-    //     scrollPane.setViewportView(table);
-    //     //add(scrollPane, BorderLayout.CENTER);
-    //     MainFrame.contentPane.add(scrollPane);
-
-        
-        
-
-    // }
-
-    public ManagerViewPropertiesView() {
+	/**
+	 * Create the panel.
+	 */
+	public ManagerViewPropertiesView() {
         setBounds(300, 200, 850, 600);
         setLayout(null);
         
         table = new JTable();
-        Object columnNames[] = {"Property ID", "Status", "Type", "Address", "Quadrant", "Bedrooms", "Bathrooms", "Furnished", "List Date", "Rent Date"};
-        //Object columnNames[] = {"Property ID"};
+        Object columnNames[] = {"Property ID", "Status", "Type", "Address", "Quadrant", "Bedrooms", "Bathrooms", "Furnished", "Owner ID", "List Date", "Rent Date"};
         
         ManagerController managerController = new ManagerController();
 
-        ArrayList<Property> input = managerController.getAllProperties();
+      ArrayList<Property> input = managerController.getAllProperties();
 
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-        //Object rowData[] = {"TEST"};
-        //model.addRow(rowData);
-        //populate model
 
-        for(int i=0; i< input.size(); i++) {
-            Object rowData[] = {input.get(i).getId(), input.get(i).getStatus(), 
-                                input.get(i).getType(), input.get(i).getAddress().getStreetAddress(), input.get(i).getAddress().getQuadrant(), 
-                                input.get(i).getNumBedrooms(), input.get(i).getNumBathrooms(), input.get(i).isFurnished(), input.get(i).getDateListed(), input.get(i).getDateRented()
-            };
-            //System.out.println(input.get(i).getPropertyType());
-            model.addRow(rowData);
-        }
+       for(int i=0; i< input.size(); i++) {
+           Object rowData[] = {input.get(i).getId(), input.get(i).getStatus(), 
+                               input.get(i).getType(), input.get(i).getAddress().getStreetAddress(), input.get(i).getAddress().getQuadrant(), 
+                               input.get(i).getNumBedrooms(), input.get(i).getNumBathrooms(), input.get(i).isFurnished(), input.get(i).getOwnerId(), input.get(i).getDateListed(), input.get(i).getDateRented()
+           };
+           //System.out.println(input.get(i).getPropertyType());
+           model.addRow(rowData);
+       }
         
         table.setModel(model);        
-//        table.setBounds(44, 36, 751, 482);    
-//        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-//        add(table);
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setViewportView(table);
-        scrollPane.setBounds(44, 36, 751, 482);
+        scrollPane.setViewportView(table);	
+        scrollPane.setBounds(45, 45, 751, 482);
         add(scrollPane);
-//        scrollPane.add(table);
+        
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		MainFrame.getManagerView();
+        	}
+        });
+        backButton.setBounds(751, 11, 89, 23);
+        add(backButton);
 
     }
 }

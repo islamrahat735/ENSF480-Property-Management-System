@@ -10,7 +10,7 @@ import javax.swing.JToggleButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class URenterView extends JPanel {
+public class RenterSubscribeView extends JPanel {
 	String PT;
 	int NBD;
 	int NBA;
@@ -20,7 +20,7 @@ public class URenterView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public URenterView() {
+	public RenterSubscribeView() {
 		setBounds(300, 200, 850, 600);
 		setLayout(null);
 		
@@ -92,8 +92,8 @@ public class URenterView extends JPanel {
 		numberOfBathroomsComboBox.setBounds(444, 184, 161, 20);
 		add(numberOfBathroomsComboBox);
 		
-		JButton searchButton = new JButton("Search");
-		searchButton.addActionListener(new ActionListener() {
+		JButton subscribeButton = new JButton("Subscribe");
+		subscribeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Property Type
 				if(includeCheckBoxPT.isSelected()) {
@@ -104,14 +104,13 @@ public class URenterView extends JPanel {
 				
 				//Number of Bedrooms
 				if(includeCheckBoxNBD.isSelected()) {
-					NBD = Integer.parseInt((String) numberOfBedroomsComboBox.getSelectedItem());
+					NBD = (int) numberOfBedroomsComboBox.getSelectedItem();
 				} else {
 					NBD = -1;
 				}
 				
 				//Number of Bathrooms
 				if(includeCheckBoxNBA.isSelected()) {
-					NBD = Integer.parseInt((String) numberOfBathroomsComboBox.getSelectedItem());
 					NBA = (int) numberOfBathroomsComboBox.getSelectedItem();
 				} else {
 					NBA = -1;
@@ -140,8 +139,8 @@ public class URenterView extends JPanel {
 				
 			}
 		});
-		searchButton.setBounds(361, 428, 126, 21);
-		add(searchButton);
+		subscribeButton.setBounds(361, 428, 126, 21);
+		add(subscribeButton);
 		
 		JButton backButton = new JButton("Back");
 		backButton.addActionListener(new ActionListener() {

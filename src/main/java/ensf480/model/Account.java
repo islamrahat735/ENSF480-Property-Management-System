@@ -1,12 +1,14 @@
 package ensf480.model;
 
+//superclass that represents an account with a username and password
 public class Account {
+    //fields
     private String username;
     private String password;
-
     private String fname;
     private String lname;
 
+    //constructor
     public Account(String username, String password, String fname, String lname){
         this.username = username;
         this.password = password;
@@ -14,10 +16,7 @@ public class Account {
         this.lname = lname;
     }
 
-    public Account(){
-
-    }
-
+    //getters and setters
 	public String getUsername() {
 		return this.username;
 	}
@@ -50,7 +49,7 @@ public class Account {
         this.lname = lname;
     }
 
-
+    //for debugging
     @Override
     public String toString() {
         return "{" +

@@ -5,14 +5,18 @@ import java.util.ArrayList;
 
 public class ManagerController {
 
-    private dbConnectionController db = new dbConnectionController("propertyms", "ensf480", "jdbc:mysql://localhost/propertyms");
+    private dbConnectionController db = new dbConnectionController();
 
     public ArrayList<Property> getAllProperties(){
         return db.selectProperties();
     }
 
-    public void setFee(int fee, int duration){
-        
+    public void setFee(float cost, int duration){
+        Fee fee = Fee.getInstance();
+        fee.setCost(cost);
+        fee.setDurationDays(duration);
+
+        db.setFee(fee);
     }
     
 }
