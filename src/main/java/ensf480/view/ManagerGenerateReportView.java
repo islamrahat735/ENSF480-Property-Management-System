@@ -5,10 +5,13 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import ensf480.controller.PeriodicReportController;
+import ensf480.model.PeriodicReport;
+import ensf480.model.Property;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class ManagerGenerateReportView extends JPanel {
@@ -21,31 +24,33 @@ public class ManagerGenerateReportView extends JPanel {
 		setBounds(300, 200, 850, 600);
 		setLayout(null);
 		
-		JLabel noHousesListedLabel = new JLabel("Total Houses Listed in Period");
+		JLabel noHousesListedLabel = new JLabel("Total Houses Listed");
 		noHousesListedLabel.setBounds(31, 11, 198, 14);
 		add(noHousesListedLabel);
 		
-		JLabel noHousesRentedLabel = new JLabel("Total Houses Rented in Period");
+		JLabel noHousesRentedLabel = new JLabel("Total Houses Rented");
 		noHousesRentedLabel.setBounds(31, 36, 198, 14);
 		add(noHousesRentedLabel);
 		
-		JLabel noHousesActiveListingsLabel = new JLabel("Total Active Listings in Period");
+		JLabel noHousesActiveListingsLabel = new JLabel("Total Active Listings");
 		noHousesActiveListingsLabel.setBounds(31, 61, 198, 14);
 		add(noHousesActiveListingsLabel);
         
         table = new JTable();
         Object columnNames[] = {"Landlord", "Property ID", "Address"};
         
-        PeriodicReportController periodicReController = new PeriodicReportController();
-//
-//        ArrayList<Landlord> input = managerController.getAllHousesRented();
+        PeriodicReportController periodicReportController = new PeriodicReportController();
+
+        PeriodicReport report = periodicReportController.createPeriodicReport(fromDate, toDate);
+
+        ArrayList<Property> input = report.getRentedHouses();
 
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
-//        for(int i=0; i< input.size(); i++) {
-//            Object rowData[] = {input.get(i).getLandlordID(), input.get(i).propertyID(), input.get(i).getAddress()};
-//            model.addRow(rowData);
-//        }
+       for(int i=0; i< input.size(); i++) {
+           Object rowData[] = {input.get(i).getOwnerId(), input.get(i).getId(), input.get(i).getAddress().getStreetAddress()};
+           model.addRow(rowData);
+       }
         
         table.setModel(model);        
         JScrollPane scrollPane = new JScrollPane();
@@ -53,19 +58,19 @@ public class ManagerGenerateReportView extends JPanel {
         scrollPane.setBounds(31, 107, 794, 482);
         add(scrollPane);
         
-        String noHousesListed = "";
+        String noHousesListed = String.valueOf(report.getNumHousesListed());
         //Set noHousesListed to value
         JLabel noHousesListedValue = new JLabel(noHousesListed);
         noHousesListedValue.setBounds(260, 11, 119, 14);
         add(noHousesListedValue);
         
-        String noHousesRented = "";
+        String noHousesRented = String.valueOf(report.getNumHousesRented());
         //Set noHousesRented to value
         JLabel noHousesRentedValue = new JLabel(noHousesRented);
         noHousesRentedValue.setBounds(260, 36, 119, 14);
         add(noHousesRentedValue);
         
-        String noHousesActiveListings = "";
+        String noHousesActiveListings = String.valueOf(report.getNumActiveListings());
         //Set noHousesActiveListings to value
         JLabel noHousesActiveListingsValue = new JLabel(noHousesActiveListings);
         noHousesActiveListingsValue.setBounds(260, 61, 119, 14);

@@ -45,11 +45,20 @@ public class LandlordView extends JPanel {
 		JButton inboxButton = new JButton("Inbox");
 		inboxButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getLandLordEmailNotif();
+				MainFrame.getLandlordEmailNotif();
 			}
 		});
 		inboxButton.setBounds(337, 438, 148, 45);
 		add(inboxButton);
+
+		JButton logoutButton = new JButton("Logout");
+		logoutButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainFrame.getLandingView();
+				MainFrame.setLandlordID(-1);			}
+		});
+		logoutButton.setBounds(751, 11, 89, 23);
+		add(logoutButton);
 
 	}
 }

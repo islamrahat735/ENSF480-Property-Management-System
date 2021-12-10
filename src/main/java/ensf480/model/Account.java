@@ -49,7 +49,8 @@ public class Account {
         this.lname = lname;
     }
 
-    //for debugging
+    //used for testing
+    /*
     @Override
     public String toString() {
         return "{" +
@@ -59,5 +60,5 @@ public class Account {
             ", lname='" + getLname() + "'" +
             "}";
     }
-
+    */
 }

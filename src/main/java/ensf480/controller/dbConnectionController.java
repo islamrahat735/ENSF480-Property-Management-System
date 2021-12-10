@@ -351,7 +351,37 @@ public class dbConnectionController {
             while(resultSet.next()){
                 renter = new RegisteredRenter(resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("fname"), resultSet.getString("lname"));
                 renter.setID(resultSet.getInt("rid"));
+                renter.setNotifCriteria(this.getSearchCriteria(renter.getId()));
             }
+            myStmt.close();
+            this.close();
+        }catch(SQLException exception){
+            exception.printStackTrace();
+        }
+        return renter;
+    }
+
+    //returns a RegisteredRenter object from the db given an account username and password
+    public RegisteredRenter getRegisteredRenter(int renterID){
+        RegisteredRenter renter = null;
+        try{
+            //creates a query
+            this.createConnection();
+            String query = "SELECT * FROM Registered_Renter WHERE rid = ?";
+            PreparedStatement myStmt = dbConnection.prepareStatement(query);
+
+            myStmt.setInt(1, renterID);
+
+            //executes query
+            resultSet = myStmt.executeQuery();
+            //uses the result to create a new Renter
+            while(resultSet.next()){
+                renter = new RegisteredRenter(resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("fname"), resultSet.getString("lname"));
+                renter.setID(renterID);
+                //subquery that grabs their notification criteria
+                renter.setNotifCriteria(this.getSearchCriteria(renterID));
+            }
+            //closes connections
             myStmt.close();
             this.close();
         }catch(SQLException exception){
@@ -666,7 +696,7 @@ public class dbConnectionController {
         
         try {
             this.createConnection();                    
-            PreparedStatement myStmt = dbConnection.prepareStatement("SELECT * FROM property WHERE listDate <= ? and listDate <= ?");
+            PreparedStatement myStmt = dbConnection.prepareStatement("SELECT * FROM property WHERE listDate >= ? and listDate <= ?");
             myStmt.setDate(1, Date.valueOf(startDate));
             myStmt.setDate(2, Date.valueOf(endDate));
             
@@ -702,7 +732,7 @@ public class dbConnectionController {
         
         try {
             this.createConnection();                    
-            PreparedStatement myStmt = dbConnection.prepareStatement("SELECT * FROM property WHERE rentDate <= ? and rentDate <= ?");
+            PreparedStatement myStmt = dbConnection.prepareStatement("SELECT * FROM property WHERE rentDate >= ? and rentDate <= ?");
             myStmt.setDate(1, Date.valueOf(startDate));
             myStmt.setDate(2, Date.valueOf(endDate));
             

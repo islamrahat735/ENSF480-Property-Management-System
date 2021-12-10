@@ -61,6 +61,15 @@ public class ManagerLoginView extends JPanel {
 		});
 		loginButton.setBounds(10, 161, 104, 21);
 		add(loginButton);
+
+		JButton backButton = new JButton("Back");
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainFrame.getManagerView();
+			}
+		});
+		backButton.setBounds(739, 9, 89, 23);
+		add(backButton);
 	}
 
 }

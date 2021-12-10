@@ -19,8 +19,8 @@ public class MainFrame extends JFrame {
 	public static JPanel contentPane;
 	static MainFrame frame;
 	private JScrollPane scrollPane;
-	private static int landlordID;
-	private static int renterID;
+	private static int landlordID = -1;
+	private static int renterID = -1;
 	
 	
 
@@ -247,7 +247,7 @@ public class MainFrame extends JFrame {
         contentPane.repaint();
 	}
 	
-	public static void getLandLordEmailNotif(){
+	public static void getLandlordEmailNotif(){
 		LandlordEmailNotif landlordEmailNotif =new LandlordEmailNotif(landlordID);
 		contentPane.removeAll();
         contentPane.add(landlordEmailNotif);
@@ -255,12 +255,36 @@ public class MainFrame extends JFrame {
         contentPane.repaint();
 	}
 
-	// public static void getRenterSubscribeView(){
-	// 	RenterSubscribeView 
-	// }
+	public static void getRenterSubscribeView(){
+		RenterSubscribeView renterSubscribeView = new RenterSubscribeView(renterID);
+		contentPane.removeAll();
+        contentPane.add(renterSubscribeView);
+        contentPane.revalidate();
+        contentPane.repaint();
+	}
+
+	public static void getRenterEmailNotif(){
+		RenterEmailNotif renterEmailNotif = new RenterEmailNotif(renterID);
+		contentPane.removeAll();
+        contentPane.add(renterEmailNotif);
+        contentPane.revalidate();
+        contentPane.repaint();
+
+	}
 	
 	public static int getLandlordID() {
 		return landlordID;
 	}
 
+	public static int getRenterID() {
+		return renterID;
+	}
+
+	public static void setRenterID(int Id){
+		renterID = Id;
+	}
+
+	public static void setLandlordID(int Id){
+		landlordID = Id;
+	}
 }

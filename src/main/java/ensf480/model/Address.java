@@ -28,10 +28,7 @@ public class Address {
     //for debugging
     @Override
     public String toString() {
-        return "{" +
-            " quadrant='" + getQuadrant() + "'" +
-            ", street_address='" + getStreetAddress() + "'" +
-            "}";
+        return "\nQuadrant: " + getQuadrant() + "\nAddresss: " + getStreetAddress();
     }
 
 }

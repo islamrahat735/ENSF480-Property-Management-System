@@ -6,16 +6,19 @@ import java.util.ArrayList;
 public class LandlordController {
     private dbConnectionController db = new dbConnectionController();
 
+    //gets all properties owned by a landlord
     public ArrayList<Property> getAllProperties(int landlordID) {
         return db.getLandlordProperties(landlordID);
     }
 
+    //gets all suspended properties owned by a landlord - for paying fee
     public ArrayList<Property> getSuspendedProperties(int landlordID) {
         return db.getSuspendedLandlordProperties(landlordID);
     }
 
+    //adds a given property argument to the database
     public void registerProperty(Property property) {
-
+        db.addProperty(property);
     }
 
     //when a fee is paid, we need to list a property and notify all registered renters

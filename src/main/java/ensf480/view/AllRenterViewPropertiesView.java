@@ -66,10 +66,15 @@ public class AllRenterViewPropertiesView extends JPanel {
         scrollPane.setBounds(45, 45, 751, 306);
         add(scrollPane);
         
-        JButton backButton = new JButton("Back");
+       JButton backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		MainFrame.getURenterView();
+        		if (MainFrame.getRenterID() == -1) {
+        			MainFrame.getLandingView();
+        		} else {
+        			MainFrame.getRenterView(MainFrame.getRenterID());
+        		}
+        		
         	}
         });
         backButton.setBounds(740, 11, 89, 23);
@@ -94,7 +99,7 @@ public class AllRenterViewPropertiesView extends JPanel {
         add(lblBody);
         
         JLabel lblPropertyId = new JLabel("Property ID");
-        lblPropertyId.setBounds(117, 477, 89, 14);
+        lblPropertyId.setBounds(120, 430, 89, 14);
         add(lblPropertyId);
         
         ArrayList<String> propertyIDs = new ArrayList<>();
@@ -104,7 +109,7 @@ public class AllRenterViewPropertiesView extends JPanel {
 
         JComboBox propertyIDComboBox = new JComboBox();
         propertyIDComboBox.setModel(new DefaultComboBoxModel(propertyIDs.toArray()));
-        propertyIDComboBox.setBounds(45, 492, 224, 20);
+        propertyIDComboBox.setBounds(45, 462, 224, 20);
         add(propertyIDComboBox);
         
         JSeparator separator = new JSeparator();
@@ -116,11 +121,11 @@ public class AllRenterViewPropertiesView extends JPanel {
         add(messaginSystemLabel);
 
         JLabel lblNewLabel = new JLabel("Title");
-        lblNewLabel.setBounds(126, 495, 49, 14);
+        lblNewLabel.setBounds(138, 495, 49, 14);
         add(lblNewLabel);
 
          JTextField textField_1 = new JTextField();
-        textField_1.setBounds(65, 520, 150, 20);
+        textField_1.setBounds(45, 521, 224, 20);
         add(textField_1);
         textField_1.setColumns(10);
 	}

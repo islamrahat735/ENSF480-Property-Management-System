@@ -5,10 +5,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JDialog;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ManagerView extends JPanel {
 	private JTextField fromText;
 	private JTextField toText;
+	JDialog invalidInputDialog = new InvalidInputDialog();
 
 	/**
 	 * Create the panel.
@@ -59,8 +63,15 @@ public class ManagerView extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				String fromDate = fromText.getText();
 				String toDate = toText.getText();
-				//optional checking
+				//regex that makes sure the date FORMAT is valid
+				boolean check1 = fromDate.matches("^\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$");
+				boolean check2 = toDate.matches("^\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$");
+				if(!check1 || !check2){
+					invalidInputDialog.setVisible(true);
+				}
+				else{
 				MainFrame.getManagerGenerateReportView(fromDate, toDate);
+				}
 			}
 		});
 		generateReportButton.setBounds(319, 420, 199, 52);
@@ -93,6 +104,13 @@ public class ManagerView extends JPanel {
 		toText.setBounds(607, 306, 199, 19);
 		add(toText);
 		
-
+		JButton logoutButton = new JButton("Logout");
+		logoutButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				MainFrame.getLandingView();
+			}
+		});
+		logoutButton.setBounds(712, 510, 89, 23);
+		add(logoutButton);
 	}
 }

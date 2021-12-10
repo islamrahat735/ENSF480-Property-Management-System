@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JDialog;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -15,7 +16,7 @@ public class RenterRegisterView extends JPanel {
 	private JTextField lastNameTextField;
 	private JTextField emailTextField;
 	private JPasswordField passwordField;
-	
+	JDialog actionSuccessfulDialog = new ActionSuccessfulDialog();
 	/**
 	 * Create the panel.
 	 */
@@ -61,6 +62,7 @@ public class RenterRegisterView extends JPanel {
 		JButton registerButton = new JButton("Register");
 		registerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				actionSuccessfulDialog.setVisible(true);
 			}
 		});
 		registerButton.setBounds(376, 509, 104, 21);

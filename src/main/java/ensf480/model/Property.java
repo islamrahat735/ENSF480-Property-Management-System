@@ -49,6 +49,15 @@ public class Property {
         return true;
     }
 
+    //converts the object's relevant fields into a string format
+    //used when generating notification emails
+    @Override
+    public String toString() {
+        return "Type: " + getType() + address.toString() +
+            "\nNum. Bedrooms: " + getNumBedrooms() + "\nNum. Bathrooms: " + getNumBathrooms() +
+            "\nFurnished: " + isIsFurnished() +"\nDate Listed: " + getDateListed();
+    }
+
     //getters and setters
     public int getId() {
         return this.id;
@@ -145,24 +154,4 @@ public class Property {
     public void setDateRented(String dateRented) {
         this.dateRented = dateRented;
     }
-
-    //for debugging
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", type='" + getType() + "'" +
-            address.toString() +
-            ", numBedrooms='" + getNumBedrooms() + "'" +
-            ", numBathrooms='" + getNumBathrooms() + "'" +
-            ", isFurnished='" + isIsFurnished() + "'" +
-            ", ownerId='" + getOwnerId() + "'" +
-            ", dateListed='" + getDateListed() + "'" +
-            ", dateRented='" + getDateRented() + "'" +
-            "}\n";
-    }
-
-
-   
 }

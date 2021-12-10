@@ -1,5 +1,4 @@
 package ensf480.view;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -8,21 +7,23 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import ensf480.controller.LandlordController;
+import ensf480.model.Address;
+import ensf480.model.Property;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class LandlordRegisterPropertyView extends JPanel {
-	private JTextField numberOfBedroomsText;
 	private JTextField addressText;
-	private JTextField numberOfBathroomsText;
 	JDialog invalidAddressDialog = new InvalidAddressDialog();
-	private boolean isNumeric = true;
-	JDialog invalidInputDialog = new InvalidInputDialog();
+	JDialog payFeeElseWhereDialog = new PayFeeElsewhereDialog();
 
 	/**
 	 * Create the panel.
 	 */
-	public LandlordRegisterPropertyView(int landLordID) {
+	public LandlordRegisterPropertyView(final int landlordID) {
 		setBounds(300, 200, 850, 600);
 		setLayout(null);
 		
@@ -42,11 +43,6 @@ public class LandlordRegisterPropertyView extends JPanel {
 		JLabel numberOfBedroomsLabel = new JLabel("Number of bedrooms");
 		numberOfBedroomsLabel.setBounds(264, 124, 126, 13);
 		add(numberOfBedroomsLabel);
-		
-		numberOfBedroomsText = new JTextField();
-		numberOfBedroomsText.setBounds(444, 121, 161, 19);
-		add(numberOfBedroomsText);
-		numberOfBedroomsText.setColumns(10);
 		
 		JLabel numberOfBathroomsLabel = new JLabel("Number of bathrooms");
 		numberOfBathroomsLabel.setBounds(264, 188, 126, 13);
@@ -74,42 +70,53 @@ public class LandlordRegisterPropertyView extends JPanel {
 		cityQuadrantComboBox.setBounds(444, 323, 161, 23);
 		add(cityQuadrantComboBox);
 		
+		JLabel addressLabel = new JLabel("Address");
+		addressLabel.setBounds(215, 401, 46, 14);
+		add(addressLabel);
+		
+		final JComboBox numberOfBedroomsCombo = new JComboBox();
+		numberOfBedroomsCombo.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		numberOfBedroomsCombo.setBounds(444, 120, 161, 20);
+		add(numberOfBedroomsCombo);
+		
+		final JComboBox numberOfBathroomsCombo = new JComboBox();
+		numberOfBathroomsCombo.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		numberOfBathroomsCombo.setBounds(444, 181, 161, 20);
+		add(numberOfBathroomsCombo);
+		
 		JButton searchButton = new JButton("Add");
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try{
-					int check = Integer.parseInt(numberOfBedroomsText.getText());
-					int check2 = Integer.parseInt(numberOfBathroomsText.getText());
-				} catch(NumberFormatException err){
-					isNumeric = false;
-				}
 				if (addressText.getText().length() == 0) {
 					invalidAddressDialog.setVisible(true);
-				}
-				else if(isNumeric == false){
-					invalidInputDialog.setVisible(true);
 				} else {
 					String address = addressText.getText();
 					String status = "suspended";
 					String type = (String) propertyTypeComboBox.getSelectedItem();
 					String quadrant = (String) cityQuadrantComboBox.getSelectedItem();
-					int bedrooms = Integer.parseInt(numberOfBedroomsText.getText());
-					int bathrooms = Integer.parseInt(numberOfBathroomsText.getText());
+					int bedrooms = Integer.parseInt((String) numberOfBedroomsCombo.getSelectedItem());
+					int bathrooms = Integer.parseInt((String) numberOfBathroomsCombo.getSelectedItem());
 					boolean isFurnished = furnishedCheckBox.isSelected();
 					int ownerID = MainFrame.getLandlordID();
+					//Put your code here to register property
+					Address temp = new Address(address, quadrant.toUpperCase());
+					Property property = new Property(type, temp, bedrooms, bathrooms, isFurnished, ownerID);
+					LandlordController landlordController = new LandlordController();
+					landlordController.registerProperty(property);
+					payFeeElseWhereDialog.setVisible(true);
 				}
 			}
 		});
 		searchButton.setBounds(361, 459, 126, 21);
 		add(searchButton);
 		
-		JLabel addressLabel = new JLabel("Address");
-		addressLabel.setBounds(215, 401, 46, 14);
-		add(addressLabel);
-		
-		numberOfBathroomsText = new JTextField();
-		numberOfBathroomsText.setBounds(444, 184, 161, 20);
-		add(numberOfBathroomsText);
-		numberOfBathroomsText.setColumns(10);
+		JButton backButton = new JButton("Back");
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainFrame.getLandlordView(MainFrame.getLandlordID());
+			}
+		});
+		backButton.setBounds(751, 11, 89, 23);
+		add(backButton);
 	}
 }
