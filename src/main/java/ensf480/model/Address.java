@@ -1,14 +1,18 @@
 package ensf480.model;
 
+//Represents a property's address
+//A simple container that stores the city quadrant and address
 public class Address {
     private Quadrant quadrant;
-    private String streetAddress; //includes apt #
+    private String streetAddress;
 
+    //constructor
     public Address(String streetAddress, String quadrant) {
         this.streetAddress = streetAddress;
         this.quadrant = Quadrant.valueOf(quadrant.toUpperCase());
     }
 
+    //getters and setters
 	public String getQuadrant() {
 		return this.quadrant.toString();
 	}
@@ -25,7 +29,7 @@ public class Address {
 		this.streetAddress = street_address;
 	}
 
-    //for debugging
+    //for email notification system
     @Override
     public String toString() {
         return "\nQuadrant: " + getQuadrant() + "\nAddresss: " + getStreetAddress();

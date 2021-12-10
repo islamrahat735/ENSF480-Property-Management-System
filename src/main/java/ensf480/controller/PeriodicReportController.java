@@ -3,9 +3,9 @@ import java.util.ArrayList;
 
 import ensf480.model.*;
 
+//Controls functionality related to generating the periodic report
 public class PeriodicReportController {
     private dbConnectionController db = new dbConnectionController();
-
 
     //creates and returns a PeriodicReport object by calling various queries
     public PeriodicReport createPeriodicReport(String startDate, String endDate){
@@ -23,6 +23,6 @@ public class PeriodicReportController {
         PeriodicReport result = new PeriodicReport(listedProperties.size(), rentedProperties.size(), activeProperties.size(), rentedProperties);
 
         return result;
-
     }
+    //turns out we only needed one function but it's good to leave room for expansion
 }

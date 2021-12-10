@@ -3,7 +3,7 @@ package ensf480.model;
 //superclass that represents an account with a username and password
 public class Account {
     //fields
-    private String username;
+    private String username; //the user's email
     private String password;
     private String fname;
     private String lname;

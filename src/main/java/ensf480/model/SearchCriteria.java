@@ -1,11 +1,14 @@
 package ensf480.model;
 
+//represents the Search Criteria of a property search
+//or the notification criteria of a Registered Renter
 public class SearchCriteria {
     //private String city;
     
     //SearchCriteria stores a bunch of different attributes that are optional
-    private int renterID;
+    private int renterID; //represents the renter the criteria is tied to in the DB
     
+    //all these fields are optional and can be null/-1 to indicate that we don't care
     private PropertyType type;
     private int numBedrooms;
     private int numBathrooms;
@@ -25,7 +28,7 @@ public class SearchCriteria {
         quadrant = null;
     }
 
-    //and a bunch of getters/setters
+    //getters/setters
     public String getType() {
         if(this.type != null)
             return this.type.toString();

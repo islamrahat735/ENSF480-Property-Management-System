@@ -2,45 +2,21 @@ package ensf480.model;
 
 import java.util.ArrayList;
 
+//Landlord that represents a Landlord user account
 public class Landlord extends Account {
-    private ArrayList<Property> ownedProperties = new ArrayList<>();
-    private int id;
+    private int lid; //landlord ID
 
+    //constructor
     public Landlord(String username, String password, String fname, String lname){
         super(username, password, fname, lname);
     }
 
-    public ArrayList<Property> getOwnedProperties() {
-		return this.ownedProperties;
-	}
-
-    public Property getProperty(int index) {
-        return ownedProperties.get(index);
-    }
-
-    public Property addProperty(String type, Address address, int numBedrooms, int numBathrooms, boolean isFurnished, int ownerId){
-        Property property = new Property(type, address, numBedrooms, numBathrooms, isFurnished, ownerId);
-        ownedProperties.add(property);
-        return property; //returns for convenience
-    }
-
-    public void removeProperty(Property property) {
-        ownedProperties.remove(property);
-    }
-
-    public void editProperty(Property oldProperty, Property newProperty){
-        int target = ownedProperties.indexOf(oldProperty);
-
-        if(target != -1){
-            ownedProperties.set(target, newProperty);
-        } 
-    }
-
+    //getters/setters
     public int getId() {
-        return this.id;
+        return this.lid;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.lid = id;
     }
 }

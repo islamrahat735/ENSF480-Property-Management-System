@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import ensf480.model.*;
 
+//Controller class that interacts with the database
+//All the other controllers use an object of this class to make queries
 public class dbConnectionController {
     //the credentials used to log in to the database
     private final String USERNAME;
@@ -18,12 +20,6 @@ public class dbConnectionController {
         this.USERNAME = "propertyms";
         this.PASSWORD = "ensf480";
         this.URL = "jdbc:mysql://localhost/propertyms";
-    }
-    //constructor - unused
-    public dbConnectionController(String username, String password, String url) {
-        this.USERNAME = username;
-        this.PASSWORD = password;
-        this.URL = url;   
     }
 
     //connects to the MySQL db

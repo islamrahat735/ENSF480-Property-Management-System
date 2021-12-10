@@ -3,6 +3,7 @@ package ensf480.controller;
 import ensf480.model.*;
 import java.util.ArrayList;
 
+//Controller that controls the Landlord functionalities/use cases
 public class LandlordController {
     private dbConnectionController db = new dbConnectionController();
 

@@ -1,5 +1,4 @@
 package ensf480.model;
-import java.util.ArrayList;
 
 //Registered Renter account
 //observer pattern, gets updated whenever a new listing is posted

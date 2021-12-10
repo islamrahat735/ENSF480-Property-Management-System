@@ -4,7 +4,7 @@ package ensf480.model;
 public class Property {
     private int id; //property id
 
-    //attributes
+    //fields stored in the property
     private PropertyStatus status;
     private PropertyType type;
     private Address address;
@@ -28,12 +28,13 @@ public class Property {
         this.ownerId = ownerId;
     }
 
-    //checks each category and returns false if any of them mismatch
+    //checks each category to a given SearchCriteria and returns false if any of the fields mismatch
     public boolean matchesCriteria(SearchCriteria criteria) {
         //if it isn't null and the values aren't equal, the search doesn't match the criteria
+        //recall: null/-1 means we aren't checking this criteria so we move past
         if(criteria.getType() != null && this.type != PropertyType.valueOf(criteria.getType()))
             return false;
-        //we check each criteria individually
+        //we check each criteria individually for any mismatches, returning false if there is
         if(criteria.getNumBedrooms() != -1 && this.numBedrooms != criteria.getNumBedrooms())
             return false;
         if(criteria.getNumBathrooms() != -1 && this.numBathrooms != criteria.getNumBathrooms())
@@ -45,7 +46,7 @@ public class Property {
         if(criteria.getQuadrant() != null && Quadrant.valueOf(this.address.getQuadrant()) != criteria.getQuadrant())
             return false;
         
-        //all criteria passed, thus this property matches it
+        //all criteria passed by this point, thus this property matches it
         return true;
     }
 
