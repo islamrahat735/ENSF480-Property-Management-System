@@ -13,9 +13,9 @@ import ensf480.controller.LoginController;
 
 public class LandlordLoginView extends JPanel {
 
-	private JTextField loginEmailField;
-	private JTextField loginPasswordField;
-	JDialog loginFailedDialog = new LoginFailedDialog();
+	private JTextField loginEmailField; // create new private JTextField
+	private JTextField loginPasswordField; // create new private JTextField
+	JDialog loginFailedDialog = new LoginFailedDialog(); // create new JDialog
 	
 	
 	/**
@@ -23,42 +23,42 @@ public class LandlordLoginView extends JPanel {
 	 * @return 
 	 */
 	public LandlordLoginView() {
-		setBounds(300, 200, 850, 600);
-		setLayout(null);
+		setBounds(300, 200, 850, 600); // set bounds
+		setLayout(null); // set layout to null, absolute positioning
 		
-		JLabel loginEmailLabel = new JLabel("Landlord Email");
-		loginEmailLabel.setBounds(10, 9, 241, 13);
-		add(loginEmailLabel);
+		JLabel loginEmailLabel = new JLabel("Landlord Email"); // create new JLabel
+		loginEmailLabel.setBounds(10, 9, 241, 13); // set bounds
+		add(loginEmailLabel); // add to view
 		
-		loginEmailField = new JTextField();
-		loginEmailField.setBounds(10, 42, 241, 19);
-		loginEmailField.setColumns(10);
-		add(loginEmailField);
+		loginEmailField = new JTextField(); // create new JTextField
+		loginEmailField.setBounds(10, 42, 241, 19); // set bounds
+		loginEmailField.setColumns(10); // set amount o columns for loginEmailField
+		add(loginEmailField); // add to view
 		
-		JLabel loginPasswordLabel = new JLabel("Password");
-		loginPasswordLabel.setBounds(10, 109, 241, 13);
-		add(loginPasswordLabel);
+		JLabel loginPasswordLabel = new JLabel("Password"); // create new JLabel
+		loginPasswordLabel.setBounds(10, 109, 241, 13); // set bounds
+		add(loginPasswordLabel); // add to view
 		
-		loginPasswordField = new JPasswordField();
-		loginPasswordField.setBounds(10, 132, 241, 19);
-		add(loginPasswordField);
+		loginPasswordField = new JPasswordField(); // create new JPasswordField
+		loginPasswordField.setBounds(10, 132, 241, 19); // set bounds
+		add(loginPasswordField); // add to view
 		
-		JButton loginButton = new JButton("Login");
+		JButton loginButton = new JButton("Login");  // create new JButton
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String loginEmail = loginEmailField.getText();
-				String loginPassword = loginPasswordField.getText();
-				LoginController loginController = new LoginController();
-				int landlordID = loginController.loginLandlord(loginEmail, loginPassword);
+				String loginEmail = loginEmailField.getText(); // get text from JTextField and initialize string with value
+				String loginPassword = loginPasswordField.getText(); // get text from JTextField and initialize string with value
+				LoginController loginController = new LoginController(); // create new LoginController();
+				int landlordID = loginController.loginLandlord(loginEmail, loginPassword); // get landlord ID 
 				if(landlordID != -1) {
-					MainFrame.getLandlordView(landlordID);
+					MainFrame.getLandlordView(landlordID); // view is changed to LandlordView of landlord with corresponding ID 
 				}else{
-					loginFailedDialog.setVisible(true);
+					loginFailedDialog.setVisible(true); // if Landlord ID is -1, dialog showing that login failed is visible
 				}
 			}
-		});
-		loginButton.setBounds(10, 161, 104, 21);
-		add(loginButton);
+		}); // action listener in event that button is pressed.
+		loginButton.setBounds(10, 161, 104, 21); // set bounds
+		add(loginButton); // add to view
 	}
 
 }

@@ -17,57 +17,57 @@ public class LandingView extends JPanel {
 	 * Create the panel.
 	 */
 	public LandingView() {
-		setBounds(300, 200, 850, 600);
-		setLayout(null);
+		setBounds(300, 200, 850, 600); // set bounds
+		setLayout(null); // set layout as null, absolute positioning
 		
 		//abc.setVisible(true);
-		registerViewButton = new JButton("Renter Registration");
-		registerViewButton.setBounds(331, 103, 159, 21);
-		add(registerViewButton);
+		registerViewButton = new JButton("Renter Registration"); // create new JButton
+		registerViewButton.setBounds(331, 103, 159, 21); // set bounds
+		add(registerViewButton); // add to view
 		
 		registerViewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getRenterRegisterView();
+				MainFrame.getRenterRegisterView(); // view is changed to RenterRegisterView
 			}
-		});
+		}); // action listener in event that button is pressed
 		
 		
-		JButton renterLoginViewButton = new JButton("Renter Login");
-		renterLoginViewButton.setBounds(331, 185, 159, 21);
-		add(renterLoginViewButton);
+		JButton renterLoginViewButton = new JButton("Renter Login"); // create mew JButton
+		renterLoginViewButton.setBounds(331, 185, 159, 21); // set bounds
+		add(renterLoginViewButton); // add to view
 		
 		renterLoginViewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getRenterLoginView();
+				MainFrame.getRenterLoginView(); // view is changed to RenterLoginView
 			}
-		});
+		}); // action listener in event that button is pressed
 		
-		managerLoginViewButton = new JButton("Manager Login");
-		managerLoginViewButton.setBounds(331, 271, 159, 21);
+		managerLoginViewButton = new JButton("Manager Login"); // create new JButton
+		managerLoginViewButton.setBounds(331, 271, 159, 21); // set bounds
 		managerLoginViewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getManagerLoginView();
+				MainFrame.getManagerLoginView(); // view is changed to ManagerLoginView
 			}
-		});
-		add(managerLoginViewButton);
+		});// action listener in event that button is pressed
+		add(managerLoginViewButton); // add to view
 		
-		landlordLoginViewButton = new JButton("Landlord Login");
-		landlordLoginViewButton.setBounds(331, 377, 159, 21);
+		landlordLoginViewButton = new JButton("Landlord Login"); // create new JButton
+		landlordLoginViewButton.setBounds(331, 377, 159, 21); // set bounds
 		landlordLoginViewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getLandlordLoginView();
+				MainFrame.getLandlordLoginView(); // view is changed to LandlordLoginView
 			}
-		});
-		add(landlordLoginViewButton);
+		});// action listener in event that button is pressed
+		add(landlordLoginViewButton); // add to view
 		
-		uRenterViewButton = new JButton("Continue");
-		uRenterViewButton.setBounds(331, 473, 159, 21);
+		uRenterViewButton = new JButton("Continue"); // create new JButton
+		uRenterViewButton.setBounds(331, 473, 159, 21); // set bounds
 		uRenterViewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getURenterView();
+				MainFrame.getURenterView(); // view is changed to URenterView
 			}
-		});
-		add(uRenterViewButton);
+		});// action listener in event that button is pressed
+		add(uRenterViewButton); // add to view
 	}
 
 }

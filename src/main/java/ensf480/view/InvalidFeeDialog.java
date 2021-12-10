@@ -21,44 +21,44 @@ public class InvalidFeeDialog extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			InvalidFeeDialog dialog = new InvalidFeeDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
+			InvalidFeeDialog dialog = new InvalidFeeDialog(); // create new InvalidFeeDialog
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE); // destroy JDialog and everything contained within when closec
+			dialog.setVisible(true); // set as visible
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} // try and catch for error handling
 	}
 
 	/**
 	 * Create the dialog.
 	 */
 	public InvalidFeeDialog() {
-		setTitle("WARNING");
-		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
+		setTitle("WARNING"); // set title
+		setBounds(100, 100, 450, 300); // set bounds
+		getContentPane().setLayout(new BorderLayout()); // set layout of ContentPane
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5)); //set border of contentPanel
+		getContentPane().add(contentPanel, BorderLayout.CENTER); // add contentPanel to ContentPane
+		contentPanel.setLayout(null); // set layout of contentPanel as null, absolute positioning
 		{
-			JLabel warningLabel = new JLabel("Fee cannot be less than 0");
-			warningLabel.setFont(new Font("Tahoma", Font.PLAIN, 32));
-			warningLabel.setBounds(78, 91, 348, 59);
-			contentPanel.add(warningLabel);
+			JLabel warningLabel = new JLabel("Fee cannot be less than 0"); // create new J:abel
+			warningLabel.setFont(new Font("Tahoma", Font.PLAIN, 32)); // set font
+			warningLabel.setBounds(78, 91, 348, 59); // set bounds
+			contentPanel.add(warningLabel); // add to contentPanel
 		}
 		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			JPanel buttonPane = new JPanel(); // create new JPanel
+			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT)); // set layout of JPanel
+			getContentPane().add(buttonPane, BorderLayout.SOUTH); // add to ContentPane
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("OK"); // create new JButton
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						dispose();
+						dispose(); // destroy JDialog and everything contained inside
 					}
-				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				}); // action listener in event that button is pressed
+				okButton.setActionCommand("OK"); // set action command
+				buttonPane.add(okButton); // add to buttonPane
+				getRootPane().setDefaultButton(okButton); // set default button to okButton
 			}
 		}
 	}

@@ -15,17 +15,17 @@ private JTable table;
 	 * Create the panel.
 	 */
 	public LandlordEmailNotif(final int landlordID) {
-		 	setBounds(300, 200, 850, 600);
-	        setLayout(null);
+		 	setBounds(300, 200, 850, 600); // set bounds
+	        setLayout(null); // set layout to null, absolute positioning
 	        
-	        table = new JTable();
-	        Object columnNames[] = {"From", "Title", "Body"};
+	        table = new JTable(); // create new JTable
+	        Object columnNames[] = {"From", "Title", "Body"}; // initalize new array of objects
 	        
 //	        ManagerController managerController = new ManagerController();
 	//
 //	        ArrayList<Property> input = managerController.getAllProperties();
 
-	        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+	        DefaultTableModel model = new DefaultTableModel(columnNames, 0); // create new DefaultTableModel
 
 //	        for(int i=0; i< input.size(); i++) {
 //	            Object rowData[] = {input.get(i).getId(), input.get(i).getStatus(), 
@@ -36,20 +36,20 @@ private JTable table;
 //	            model.addRow(rowData);
 //	        }
 	        
-	        table.setModel(model);        
-	        JScrollPane scrollPane = new JScrollPane();
-	        scrollPane.setViewportView(table);	
-	        scrollPane.setBounds(45, 45, 751, 482);
-	        add(scrollPane);
+	        table.setModel(model);  // set model of table      
+	        JScrollPane scrollPane = new JScrollPane(); // create new JScrollPane
+	        scrollPane.setViewportView(table); // set scrollPane so it has control over table
+	        scrollPane.setBounds(45, 45, 751, 482); // set bounds
+	        add(scrollPane); // add to View
 	        
-	        JButton backButton = new JButton("Back");
+	        JButton backButton = new JButton("Back"); // create new JButton
 	        backButton.addActionListener(new ActionListener() {
 	        	public void actionPerformed(ActionEvent e) {
-	        		MainFrame.getLandlordView(landlordID);
+	        		MainFrame.getLandlordView(landlordID); // go back to LandlordView of currently logged in landlord
 	        	}
 	        });
-	        backButton.setBounds(751, 11, 89, 23);
-	        add(backButton);
+	        backButton.setBounds(751, 11, 89, 23); // set bounds
+	        add(backButton); // add to view
 
 	 }
 }

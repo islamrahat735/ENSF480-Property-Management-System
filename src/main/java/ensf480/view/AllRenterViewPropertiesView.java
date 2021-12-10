@@ -20,113 +20,113 @@ import java.util.ArrayList;
 import ensf480.controller.SearchCriteriaController;
 
 public class AllRenterViewPropertiesView extends JPanel {
-	private JTable table;
-	private JTextField messageBodyField;
-        JDialog messageSentDialog = new MessageSentDialog();
+	private JTable table; // declare private JTable
+	private JTextField messageBodyField; // declare private JTextField
+        JDialog messageSentDialog = new MessageSentDialog(); // instantiate new JDialog 
 
 	/**
 	 * Create the panel.
 	 */
      //PT = Property Type, NBD = Number of Bedrooms, NBA = Number of Bathrooms, F = Furnished, CQ = City Quadrant
 	public AllRenterViewPropertiesView(String PT, int NBD, int NBA, int F, String CQ) {
-		setBounds(300, 200, 850, 600);
-        setLayout(null);
+	setBounds(300, 200, 850, 600); // set bounds of view
+        setLayout(null); // set layout as null, absolute positioning
         
-        table = new JTable();
-        Object columnNames[] = {"Property ID", "Type", "Address", "Quadrant", "Bedrooms", "Bathrooms", "Furnished", "List Date"};
+        table = new JTable(); // instantiate table
+        Object columnNames[] = {"Property ID", "Type", "Address", "Quadrant", "Bedrooms", "Bathrooms", "Furnished", "List Date"}; // instantiate array and populate
         
-        SearchCriteria searchCriteria = new SearchCriteria(-1);
+        SearchCriteria searchCriteria = new SearchCriteria(-1); // create new object of type SearchCriteria
         if(PT != null){
-                searchCriteria.setType(PropertyType.valueOf(PT.toUpperCase()));
+                searchCriteria.setType(PropertyType.valueOf(PT.toUpperCase())); // set property type if string PT is not null
         }
         if(CQ != null) {
-                searchCriteria.setQuadrant(Quadrant.valueOf(CQ.toUpperCase()));
+                searchCriteria.setQuadrant(Quadrant.valueOf(CQ.toUpperCase())); // set city quadrant if string CQ is not null
         }
-        searchCriteria.setNumBedrooms(NBD);
-        searchCriteria.setNumBathrooms(NBA);
-        searchCriteria.setIsFurnished(F);
+        searchCriteria.setNumBedrooms(NBD); // set number of bedrooms 
+        searchCriteria.setNumBathrooms(NBA); // set number of bathrooms
+        searchCriteria.setIsFurnished(F); // set status of furnishment
 
-        SearchCriteriaController scc = new SearchCriteriaController();
-        ArrayList<Property> input = scc.searchProperties(searchCriteria);
+        SearchCriteriaController scc = new SearchCriteriaController(); // create new SearchCriteriaController
+        ArrayList<Property> input = scc.searchProperties(searchCriteria); // create arraylist of all properties that match search criteria
 
-        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0); // create new DefaultTableModel
 
         for(int i=0; i< input.size(); i++) {
             Object rowData[] = {input.get(i).getId(),  
                                 input.get(i).getType(), input.get(i).getAddress().getStreetAddress(), input.get(i).getAddress().getQuadrant(), 
                                 input.get(i).getNumBedrooms(), input.get(i).getNumBathrooms(), input.get(i).isFurnished(), input.get(i).getDateListed()
-            };
+            };// populate row with array that gets data from arraylist input
             //System.out.println(input.get(i).getPropertyType());
-            model.addRow(rowData);
+            model.addRow(rowData); // add created row to model
         }
         
-        table.setModel(model);        
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setViewportView(table);	
-        scrollPane.setBounds(45, 45, 751, 306);
-        add(scrollPane);
+        table.setModel(model); // set data model    
+        JScrollPane scrollPane = new JScrollPane(); // create new JScrollPane
+        scrollPane.setViewportView(table);// set scrollPane to have table be scrollable	
+        scrollPane.setBounds(45, 45, 751, 306); // set bounds of scrollPane
+        add(scrollPane); // add scrollPane to view
         
-       JButton backButton = new JButton("Back");
+       JButton backButton = new JButton("Back"); // create new JButton
         backButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		if (MainFrame.getRenterID() == -1) {
-        			MainFrame.getLandingView();
+        			MainFrame.getLandingView(); // if renter id returns -1, program goes to default landing view
         		} else {
-        			MainFrame.getRenterView(MainFrame.getRenterID());
+        			MainFrame.getRenterView(MainFrame.getRenterID()); // else goes to the registered renters initial view
         		}
         		
         	}
-        });
-        backButton.setBounds(740, 11, 89, 23);
-        add(backButton);
+        }); // action listener for when button is pressed
+        backButton.setBounds(740, 11, 89, 23); // set bounds of backButton
+        add(backButton); // add to view
         
-        JButton sendMessageButton = new JButton("Send");
+        JButton sendMessageButton = new JButton("Send"); // create new JButton 
         sendMessageButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		messageSentDialog.setVisible(true);
+        		messageSentDialog.setVisible(true); // set JDialog as visible showing message has been sent
         	}
-        });
-        sendMessageButton.setBounds(707, 491, 89, 23);
-        add(sendMessageButton);
+        }); // set action listener for when button is pressed
+        sendMessageButton.setBounds(707, 491, 89, 23); // set bounds for sendMessageButton
+        add(sendMessageButton); // add to view
         
-        messageBodyField = new JTextField();
-        messageBodyField.setBounds(279, 430, 418, 145);
-        add(messageBodyField);
-        messageBodyField.setColumns(10);
+        messageBodyField = new JTextField(); // create new JTextField
+        messageBodyField.setBounds(279, 430, 418, 145); // set bounds of JTextField
+        add(messageBodyField);// add to view
+        messageBodyField.setColumns(10); // set number of columns
         
-        JLabel lblBody = new JLabel("Body");
-        lblBody.setBounds(472, 405, 89, 14);
-        add(lblBody);
+        JLabel lblBody = new JLabel("Body"); // create new JLabel
+        lblBody.setBounds(472, 405, 89, 14); // set bounds of JLabel
+        add(lblBody); // add to view
         
-        JLabel lblPropertyId = new JLabel("Property ID");
-        lblPropertyId.setBounds(120, 430, 89, 14);
-        add(lblPropertyId);
+        JLabel lblPropertyId = new JLabel("Property ID"); // create new JLabel
+        lblPropertyId.setBounds(120, 430, 89, 14); // set bounds 
+        add(lblPropertyId); // add to view
         
-        ArrayList<String> propertyIDs = new ArrayList<>();
-        for(Property property : input) {
-            propertyIDs.add(String.valueOf(property.getId()));
-        }
+        ArrayList<String> propertyIDs = new ArrayList<>(); // create new arraylist
+        for(Property property : input) { // iterate through input
+            propertyIDs.add(String.valueOf(property.getId())); // populate arraylist with property ids from arraylist input
+        } 
 
-        JComboBox propertyIDComboBox = new JComboBox();
-        propertyIDComboBox.setModel(new DefaultComboBoxModel(propertyIDs.toArray()));
-        propertyIDComboBox.setBounds(45, 462, 224, 20);
-        add(propertyIDComboBox);
+        JComboBox propertyIDComboBox = new JComboBox(); // create new JComboBox
+        propertyIDComboBox.setModel(new DefaultComboBoxModel(propertyIDs.toArray())); // set model 
+        propertyIDComboBox.setBounds(45, 462, 224, 20); // set bounds
+        add(propertyIDComboBox); // add to view
         
-        JSeparator separator = new JSeparator();
-        separator.setBounds(10, 367, 830, 2);
-        add(separator);
+        JSeparator separator = new JSeparator(); // create new JSeperator
+        separator.setBounds(10, 367, 830, 2); // set bounds
+        add(separator); // add to view
         
-        JLabel messaginSystemLabel = new JLabel("Messaging System");
-        messaginSystemLabel.setBounds(382, 380, 116, 14);
-        add(messaginSystemLabel);
+        JLabel messaginSystemLabel = new JLabel("Messaging System");// create new JLabel
+        messaginSystemLabel.setBounds(382, 380, 116, 14); // set bounds 
+        add(messaginSystemLabel); // add to view
 
-        JLabel lblNewLabel = new JLabel("Title");
-        lblNewLabel.setBounds(138, 495, 49, 14);
-        add(lblNewLabel);
+        JLabel lblNewLabel = new JLabel("Title"); // create new JLabel
+        lblNewLabel.setBounds(138, 495, 49, 14); // set bounds
+        add(lblNewLabel); // add to view
 
-         JTextField textField_1 = new JTextField();
-        textField_1.setBounds(45, 521, 224, 20);
-        add(textField_1);
-        textField_1.setColumns(10);
+         JTextField textField_1 = new JTextField(); // create new JTextField
+        textField_1.setBounds(45, 521, 224, 20); // set bounds
+        add(textField_1); // add to view
+        textField_1.setColumns(10); // set columns of JTextField
 	}
 }
