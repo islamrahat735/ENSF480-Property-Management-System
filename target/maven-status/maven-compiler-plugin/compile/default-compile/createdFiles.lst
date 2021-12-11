@@ -6,7 +6,6 @@ ensf480\model\PropertyType.class
 ensf480\model\PropertyType$1.class
 ensf480\model\Fee.class
 ensf480\model\Account.class
-ensf480\App.class
 ensf480\model\PropertyStatus.class
 ensf480\model\PeriodicReport.class
 ensf480\model\SearchCriteria.class

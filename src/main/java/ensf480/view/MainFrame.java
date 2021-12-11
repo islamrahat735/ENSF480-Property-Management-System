@@ -124,6 +124,7 @@ public class MainFrame extends JFrame {
         contentPane.add(renterView);
         contentPane.revalidate();
         contentPane.repaint();
+		frame.setTitle("Signed in as Renter");
     }
 
 		public static void getLandlordView(int id) {
@@ -135,6 +136,7 @@ public class MainFrame extends JFrame {
         contentPane.add(landlordView);
         contentPane.revalidate();
         contentPane.repaint();
+		frame.setTitle("Signed in as Landlord");
     }
 	
 	public static void getManagerView() {
@@ -145,6 +147,7 @@ public class MainFrame extends JFrame {
         contentPane.add(managerView);
         contentPane.revalidate();
         contentPane.repaint();
+		frame.setTitle("Signed in as Manager");
     }
 
 	public static void getRenterSearchView() {
@@ -155,6 +158,7 @@ public class MainFrame extends JFrame {
         contentPane.add(renterSearchView);
         contentPane.revalidate();
         contentPane.repaint();
+		frame.setTitle("Search For Properties");
 	}
 	
 
@@ -167,6 +171,7 @@ public class MainFrame extends JFrame {
         contentPane.add(managerViewPropertiesView);
         contentPane.revalidate();
         contentPane.repaint();
+		frame.setTitle("All Properties");
     }
 	
 	public static void getLandlordViewPropertiesView() {
@@ -177,6 +182,7 @@ public class MainFrame extends JFrame {
         contentPane.add(landlordViewPropertiesView);
         contentPane.revalidate();
         contentPane.repaint();
+		frame.setTitle("My Properties");
     }
 	
 	public static void getLandlordChangeStateView(){
@@ -187,6 +193,7 @@ public class MainFrame extends JFrame {
         contentPane.add(landlordChangeStateView);
         contentPane.revalidate();
         contentPane.repaint();
+		frame.setTitle("Change Property State");
     }
 	
 	public static void getManagerGenerateReportView(String fromDate, String toDate){
@@ -197,6 +204,7 @@ public class MainFrame extends JFrame {
         contentPane.add(landlordGenerateReportView);
         contentPane.revalidate();
         contentPane.repaint();
+		frame.setTitle("Periodical Summary");
     }
 	
 	public static void getLandlordRegisterPropertyView(){
@@ -207,6 +215,7 @@ public class MainFrame extends JFrame {
         contentPane.add(landlordRegisterPropertyView);
         contentPane.revalidate();
         contentPane.repaint();
+		frame.setTitle("Register My Property");
     }
 	
 	public static void getLandingView(){
@@ -217,6 +226,7 @@ public class MainFrame extends JFrame {
         contentPane.add(landingView);
         contentPane.revalidate();
         contentPane.repaint();
+		frame.setTitle("Property Rental Management System");
     }
 	
 	public static void getManagerSetFeeView(){
@@ -227,6 +237,7 @@ public class MainFrame extends JFrame {
         contentPane.add(managerSetFeeView);
         contentPane.revalidate();
         contentPane.repaint();
+		frame.setTitle("Change Fee");
 	}
 	
 	public static void getManagerViewLandlordsView(){
@@ -237,6 +248,7 @@ public class MainFrame extends JFrame {
         contentPane.add(managerViewLandlordsView);
         contentPane.revalidate();
         contentPane.repaint();
+		frame.setTitle("All Landlords");
 	}
 	
 	public static void getManagerViewRentersView(){
@@ -247,6 +259,7 @@ public class MainFrame extends JFrame {
         contentPane.add(managerViewRentersView);
         contentPane.revalidate();
         contentPane.repaint();
+		frame.setTitle("All Renters");
 	}
 	
 	
@@ -258,6 +271,7 @@ public class MainFrame extends JFrame {
         contentPane.add(managerChangeStateView);
         contentPane.revalidate();
         contentPane.repaint();
+		frame.setTitle("Change Property State");
 	}
 	
 	public static void getAllRenterViewPropertiesView(String PT, int NBD, int NBA, int F, String CQ){
@@ -267,6 +281,7 @@ public class MainFrame extends JFrame {
         contentPane.add(allRenterViewPropertiesView);
         contentPane.revalidate();
         contentPane.repaint();
+		frame.setTitle("Search Results");
 	}
 	
 	public static void getLandlordEmailNotif(){
@@ -276,6 +291,7 @@ public class MainFrame extends JFrame {
         contentPane.add(landlordEmailNotif);
         contentPane.revalidate();
         contentPane.repaint();
+		frame.setTitle("Email Notifications");
 	}
 
 	public static void getRenterSubscribeView(){
@@ -285,6 +301,7 @@ public class MainFrame extends JFrame {
         contentPane.add(renterSubscribeView);
         contentPane.revalidate();
         contentPane.repaint();
+		frame.setTitle("Subscribe To Criteria");
 	}
 
 	public static void getRenterEmailNotif(){
@@ -294,6 +311,7 @@ public class MainFrame extends JFrame {
         contentPane.add(renterEmailNotif);
         contentPane.revalidate();
         contentPane.repaint();
+		frame.setTitle("Email Notifications");
 
 	}
 
@@ -304,6 +322,7 @@ public class MainFrame extends JFrame {
         contentPane.add(landlordPayFeeView);
         contentPane.revalidate();
         contentPane.repaint();
+		frame.setTitle("Pay Listing Fee");
 	}
 	
 	public static int getLandlordID() {
