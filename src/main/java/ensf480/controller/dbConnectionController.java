@@ -32,24 +32,43 @@ public class dbConnectionController {
         }
     }
 
+    //closes the dbConnections
+    public void close() {
+        try {
+            if(resultSet != null){
+                resultSet.close();
+            }
+            dbConnection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+//--------------------PROPERTIES--------------------------
+
     //returns an ArrayList of all properties stored in the database
     public ArrayList<Property> selectProperties(){
         ArrayList<Property> props = new ArrayList<>();
         
         try {
+            //creates and runs simple query
             this.createConnection();                    
             Statement myStmt = dbConnection.createStatement();
             resultSet = myStmt.executeQuery("SELECT * FROM property");
             
+            //stores the results of the query by creating Property objects and storing them in an ArrayList
             while (resultSet.next()){
                 Address address = new Address(resultSet.getString("address"), resultSet.getString("quadrant"));
                 Property property = new Property(resultSet.getString("type"), address, resultSet.getInt("bedrooms"),
                 resultSet.getInt("bathrooms"), resultSet.getBoolean("isFurnished"), resultSet.getInt("ownerId"));
                 property.setId(resultSet.getInt("pid"));
                 property.setStatus(resultSet.getString("status"));
+                //check if listDate is null
                 if(resultSet.getDate("listDate") != null){
                     property.setDateListed(resultSet.getDate("listDate").toString());
                 }
+                //check if rentDate is null
                 if(resultSet.getDate("rentDate") != null){
                     property.setDateRented(resultSet.getDate("rentDate").toString());
                 }
@@ -57,6 +76,7 @@ public class dbConnectionController {
                 props.add(property);
             }
             
+            //close connections
             myStmt.close();
             this.close();
             
@@ -72,10 +92,12 @@ public class dbConnectionController {
         ArrayList<Property> props = new ArrayList<>();
         
         try {
+            //creates and runs simple query
             this.createConnection();                    
             Statement myStmt = dbConnection.createStatement();
             resultSet = myStmt.executeQuery("SELECT * FROM property WHERE status = 'ACTIVE'");
             
+            //creates Property object for each result
             while (resultSet.next()){
                 Address address = new Address(resultSet.getString("address"), resultSet.getString("quadrant"));
                 Property property = new Property(resultSet.getString("type"), address, resultSet.getInt("bedrooms"),
@@ -89,9 +111,9 @@ public class dbConnectionController {
                     property.setDateRented(resultSet.getDate("rentDate").toString());
                 }
                 props.add(property);
-                
             }
-            
+
+            //closes connections
             myStmt.close();
             this.close();
             
@@ -104,6 +126,7 @@ public class dbConnectionController {
     //adds a property to the database
     public void addProperty(Property property){
         try{
+            //creates a query
             this.createConnection();
             String query = "Insert INTO property (status, type, address, quadrant, bedrooms, bathrooms, isFurnished, ownerId, listDate, rentDate ) VALUES(?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement myStmt = dbConnection.prepareStatement(query);
@@ -116,6 +139,8 @@ public class dbConnectionController {
             myStmt.setInt(6, property.getNumBathrooms());
             myStmt.setBoolean(7, property.isFurnished());
             myStmt.setInt(8, property.getOwnerId());
+
+            //checks for null
             if(property.getDateListed() != null){
                 myStmt.setDate(9, Date.valueOf(property.getdateListed()));
             }
@@ -123,6 +148,7 @@ public class dbConnectionController {
                 myStmt.setDate(9, null);
             }
             
+            //checks for null
             if(property.getDateRented() != null){
                 myStmt.setDate(10, Date.valueOf(property.getDateRented()));
             }
@@ -130,9 +156,10 @@ public class dbConnectionController {
                 myStmt.setDate(10, null);
             }
             
-            
+            //runs the update query
             myStmt.executeUpdate();
 
+            //closes connection
             myStmt.close();
             this.close();
         }
@@ -168,6 +195,9 @@ public class dbConnectionController {
                     property.setDateRented(resultSet.getDate("rentDate").toString());
                 }
             }
+            //closes connections
+            myStmt.close();
+            this.close();
         }
         catch(SQLException exception){
             exception.printStackTrace();
@@ -179,6 +209,7 @@ public class dbConnectionController {
     //updates a property in the database
     public void updateProperty(Property property){
         try{
+            //creates query using fields of property
             this.createConnection();
             String query = "UPDATE property SET status = ?, type = ?, address = ?, quadrant = ?, bedrooms = ?, bathrooms = ?, isFurnished = ?, ownerId = ?, listDate = ?, rentDate = ? WHERE pid = ?";
             PreparedStatement myStmt = dbConnection.prepareStatement(query);
@@ -189,6 +220,8 @@ public class dbConnectionController {
             myStmt.setString(4, property.getAddress().getQuadrant());
             myStmt.setInt(5, property.getNumBedrooms());
             myStmt.setInt(6, property.getNumBathrooms());
+
+            //converts boolean to int
             if(property.isFurnished()){
                 myStmt.setInt(7, 1);
             }
@@ -198,13 +231,15 @@ public class dbConnectionController {
             
             myStmt.setInt(8, property.getOwnerId());
 
+            //checks for null
             if(property.getDateListed() != null){
-                myStmt.setDate(9, Date.valueOf(property.getdateListed()));
+                myStmt.setDate(9, Date.valueOf(property.getdateListed())); //woops typo
             }
             else{
                 myStmt.setDate(9, null);
             }
             
+            //checks for null
             if(property.getDateRented() != null){
                 myStmt.setDate(10, Date.valueOf(property.getDateRented()));
             }
@@ -214,9 +249,10 @@ public class dbConnectionController {
 
             myStmt.setInt(11, property.getId());
             
-
+            //runs the query
             myStmt.executeUpdate();
 
+            //closes the connection
             myStmt.close();
             this.close();
         }
@@ -228,14 +264,17 @@ public class dbConnectionController {
     //deletes a property from the database
     public void deleteProperty(Property property){
         try{
+            //creates query
             this.createConnection();
             String query = "DELETE FROM property WHERE pid = ?";
             PreparedStatement myStmt = dbConnection.prepareStatement(query);
 
             myStmt.setInt(1, property.getId());
 
+            //runs query
             myStmt.executeUpdate();
 
+            //closes connections
             myStmt.close();
             this.close();
         }
@@ -244,7 +283,7 @@ public class dbConnectionController {
         }
     }
 
-    //LANDLORD STUFF
+//--------------------LANDLORDS--------------------------
 
     public ArrayList<Landlord> getAllLandlords(){
         ArrayList<Landlord> landlords = new ArrayList<>();
@@ -361,8 +400,44 @@ public class dbConnectionController {
         return props;
     }
 
+     //returns an ArrayList of active properties owned by a landlord
+     public ArrayList<Property> getActiveLandlordProperties(int landlordID){
+        ArrayList<Property> props = new ArrayList<>();
+        
+        try {
+            this.createConnection();                    
+            PreparedStatement myStmt = dbConnection.prepareStatement("SELECT * FROM property WHERE ownerId = ? AND status = ?");
 
-    //Manager
+            myStmt.setInt(1, landlordID);
+            myStmt.setString(2, "ACTIVE");
+            resultSet = myStmt.executeQuery();
+            
+            while (resultSet.next()){
+                Address address = new Address(resultSet.getString("address"), resultSet.getString("quadrant"));
+                Property property = new Property(resultSet.getString("type"), address, resultSet.getInt("bedrooms"),
+                resultSet.getInt("bathrooms"), resultSet.getBoolean("isFurnished"), resultSet.getInt("ownerId"));
+                property.setId(resultSet.getInt("pid"));
+                property.setStatus(resultSet.getString("status"));
+                if(resultSet.getDate("listDate") != null){
+                    property.setDateListed(resultSet.getDate("listDate").toString());
+                }
+                if(resultSet.getDate("rentDate") != null){
+                    property.setDateRented(resultSet.getDate("rentDate").toString());
+                }
+                props.add(property);
+            }
+            
+            myStmt.close();
+            this.close();
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return props;
+    }
+
+
+//--------------------MANAGER--------------------------
 
     //returns a Manager object from the db given an account username and password
     public Manager getManager(String username, String password){
@@ -388,7 +463,7 @@ public class dbConnectionController {
         return manager;
     }
 
-    //REGISTERED_RENTER
+//--------------------REGISTERED RENTER--------------------------
 
     //returns a RegisteredRenter object from the db given an account username and password
     public RegisteredRenter getRegisteredRenter(String username, String password){
@@ -497,22 +572,25 @@ public class dbConnectionController {
         }
     }
 
-
-    //Search Criteria
+//--------------------SEARCH CRITERIA--------------------------
 
     //returns a registered renter's search criteria from the db
     public SearchCriteria getSearchCriteria(int renterID){
         SearchCriteria criteria = null;
         try{
+            //creates the query
             this.createConnection();
             String query = "SELECT * FROM Search_Criteria WHERE rid = ?";
             PreparedStatement myStmt = dbConnection.prepareStatement(query);
             myStmt.setInt(1, renterID);
 
+            //runs the query
             resultSet = myStmt.executeQuery();
 
+            //creates a new SearchCriteria object for each result
             while(resultSet.next()){
                 criteria = new SearchCriteria(renterID);
+                //converts char/string to int for our purposes
                 if(resultSet.getString("isFurnished") != null){
                     if(resultSet.getString("isFurnished").equals("T")){
                         criteria.setIsFurnished(1);
@@ -524,9 +602,12 @@ public class dbConnectionController {
                 else{
                     criteria.setIsFurnished(-1);
                 }
+
+                //checks for null
                 if(resultSet.getString("type") != null){
                     criteria.setType(PropertyType.valueOf(resultSet.getString("type").toUpperCase()));
                 }
+                //checks for null
                 if(resultSet.getString("quadrant") != null){
                     criteria.setQuadrant(Quadrant.valueOf(resultSet.getString("quadrant").toUpperCase()));
                 }
@@ -534,6 +615,8 @@ public class dbConnectionController {
                 criteria.setNumBathrooms(resultSet.getInt("bathrooms"));  
                 criteria.setRenterID(resultSet.getInt("rid"));
             }
+
+            //closes connections
             myStmt.close();
             this.close();
         }catch(SQLException e){
@@ -588,6 +671,7 @@ public class dbConnectionController {
     //updates a user's search criteria in the db
     public void setSearchCriteria(SearchCriteria criteria) {
         try {
+            //creates query
             this.createConnection();
             String sql = "UPDATE Search_Criteria SET type = ?, quadrant = ?, bedrooms = ?,"
                     + "bathrooms = ?, isFurnished = ? WHERE rid = ?";
@@ -595,6 +679,7 @@ public class dbConnectionController {
             
             myStmt.setString(1, criteria.getType());
 
+            //checks for null
             if(criteria.getQuadrant() == null)
                 myStmt.setString(2, null);
             else
@@ -603,6 +688,8 @@ public class dbConnectionController {
             myStmt.setInt(3, criteria.getNumBedrooms());
             myStmt.setInt(4, criteria.getNumBathrooms());
             int isF = criteria.getIsFurnished(); //is furnished
+
+            //converts int to char for purposes of database
             if(isF == -1)
                 myStmt.setString(5, null);
             else if(isF == 0)
@@ -611,8 +698,10 @@ public class dbConnectionController {
                 myStmt.setString(5, "T");
             myStmt.setInt(6, criteria.getRenterID());
 
+            //executes update
             myStmt.executeUpdate();
 
+            //closes connections
             myStmt.close();
             this.close();
         }
@@ -621,16 +710,20 @@ public class dbConnectionController {
         }
     }
 
+    //deletes a user's search criteria (unsubscribe)
     public void deleteSearchCriteria(int renterId){
         try{
+            //creates query
             this.createConnection();
             String query = "DELETE FROM Search_Criteria WHERE rid = ?";
             PreparedStatement myStmt = dbConnection.prepareStatement(query);
 
             myStmt.setInt(1, renterId);
 
+            //runs query
             myStmt.executeUpdate();
 
+            //closes connections
             myStmt.close();
             this.close();
         }
@@ -676,22 +769,28 @@ public class dbConnectionController {
         }
     }
 
-    //Fee
+//--------------------FEE--------------------------
+
+    //gets the fee from the database
     public Fee getFee(){
         Fee fee = null;
         try{
+            //creates query
             this.createConnection();
             String sql = "SELECT * FROM Fee";
             PreparedStatement myStmt = dbConnection.prepareStatement(sql);
 
+            //runs query
             resultSet = myStmt.executeQuery();
 
+            //creates a fee object for the result
             while(resultSet.next()){
                 fee = Fee.getInstance();
-                fee.setCost(resultSet.getInt("fee"));
+                fee.setCost(resultSet.getFloat("fee"));
                 fee.setDurationDays(resultSet.getInt("durationInDays"));
             }
 
+            //closes the connections
             myStmt.close();
             this.close();
         }catch(SQLException e){
@@ -700,15 +799,22 @@ public class dbConnectionController {
         return fee;
     }
 
+    //updates the fee in the database
     public void setFee(Fee fee){
         try{
+            //creates query
             this.createConnection();
             String sql = "UPDATE Fee SET fee = ?, durationInDays = ?";
             PreparedStatement myStmt = dbConnection.prepareStatement(sql);
+
+            //updates to the fields in the given Fee object
             myStmt.setFloat(1, fee.getCost());
             myStmt.setInt(2, fee.getDurationDays());
+
+            //runs query
             myStmt.executeUpdate();
             
+            //closes connections
             myStmt.close();
             this.close();
             
@@ -717,7 +823,7 @@ public class dbConnectionController {
         }
     }
 
-    //Email / Inbox Functions
+//--------------------EMAIL--------------------------
 
     //gets all emails attached to a Renter from the DB
     public ArrayList<Email> getRenterInbox(int renterID) {
@@ -776,6 +882,7 @@ public class dbConnectionController {
         ArrayList<Email> inbox = new ArrayList<>();
         try{
             //creates a query that returns all emails belonging to a landlord
+            this.createConnection();
             String query = "SELECT * FROM L_Inbox WHERE lid = ?";
             PreparedStatement myStmt = dbConnection.prepareStatement(query);
             myStmt.setInt(1, landlordID);
@@ -821,7 +928,8 @@ public class dbConnectionController {
         }
     }
     
-    // MANAGER REPORT
+//--------------------PERIODIC REPORT--------------------------
+
     public ArrayList<Property> getlistedPropertiesOverPeriod(String startDate, String endDate){
         ArrayList<Property> props = new ArrayList<>();
         
@@ -892,17 +1000,5 @@ public class dbConnectionController {
             ex.printStackTrace();
         }
         return props;
-    }
-    
-    //closes the dbConnections
-    public void close() {
-        try {
-            if(resultSet != null){
-                resultSet.close();
-            }
-            dbConnection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }

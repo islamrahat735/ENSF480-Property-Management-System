@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LoginFailedDialog extends JDialog {
 
@@ -48,8 +50,13 @@ public class LoginFailedDialog extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT)); // set layout 
 			getContentPane().add(buttonPane, BorderLayout.SOUTH); // add to content pane
 			{
-				JButton okButton = new JButton("OK"); // new JButton 
-				okButton.setActionCommand("OK"); // set action command 
+				JButton okButton = new JButton("OK"); // create new JBUtton
+				okButton.addActionListener(new ActionListener() { 
+					public void actionPerformed(ActionEvent e) {
+						dispose(); // destroy JDialog
+					}
+				}); // action listener in event that button is pressed.
+				okButton.setActionCommand("OK"); // set action command
 				buttonPane.add(okButton); // add to button pane 
 				getRootPane().setDefaultButton(okButton); // set as default button 
 			}

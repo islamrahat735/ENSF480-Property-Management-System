@@ -18,9 +18,18 @@ public class LandlordController {
         return db.getProperty(propertyID);
     }
 
+    public void updateProperty(Property property){
+        db.updateProperty(property);
+    }
+
     //gets all suspended properties owned by a landlord - for paying fee
     public ArrayList<Property> getSuspendedProperties(int landlordID) {
         return db.getSuspendedLandlordProperties(landlordID);
+    }
+
+    //gets all active properties owned by a landlord - for changing state
+    public ArrayList<Property> getActiveProperties(int landlordID) {
+        return db.getActiveLandlordProperties(landlordID);
     }
 
     //adds a given property argument to the database

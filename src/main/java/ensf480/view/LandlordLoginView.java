@@ -14,7 +14,7 @@ import ensf480.controller.LoginController;
 public class LandlordLoginView extends JPanel {
 
 	private JTextField loginEmailField; // create new private JTextField
-	private JTextField loginPasswordField; // create new private JTextField
+	private JPasswordField loginPasswordField; // create new private JTextField
 	JDialog loginFailedDialog = new LoginFailedDialog(); // create new JDialog
 	
 	

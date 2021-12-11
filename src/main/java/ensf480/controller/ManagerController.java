@@ -13,6 +13,18 @@ public class ManagerController {
         return db.selectProperties();
     }
 
+    public ArrayList<Property> getAllActiveProperties(){
+        return db.selectActiveProperties();
+    }
+
+    public Property getProperty(int id){
+        return db.getProperty(id);
+    }
+
+    public void updateProperty(Property property){
+        db.updateProperty(property);
+    }
+
     public ArrayList<Landlord> getAllLandlords(){
         return db.getAllLandlords();
     }

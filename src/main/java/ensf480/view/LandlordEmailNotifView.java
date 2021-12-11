@@ -9,32 +9,34 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class LandlordEmailNotif extends JPanel {
-private JTable table;
+import ensf480.controller.LandlordController;
+import java.util.ArrayList;
+import ensf480.model.*;
+
+public class LandlordEmailNotifView extends JPanel {
+	private JTable table;
 	/**
 	 * Create the panel.
 	 */
-	public LandlordEmailNotif() {
+	public LandlordEmailNotifView() {
 		 	setBounds(300, 200, 850, 600); // set bounds
 	        setLayout(null); // set layout to null, absolute positioning
 	        
 	        table = new JTable(); // create new JTable
 	        Object columnNames[] = {"From", "Title", "Body"}; // initalize new array of objects
 	        
-//	        LandlordController lc = new LandlordController();
-//
-//	        ArrayList<Email> input = managerController.getAllProperties();
+	        LandlordController lc = new LandlordController();
+
+	        ArrayList<Email> input = lc.getInbox(MainFrame.getLandlordID());
 
 	        DefaultTableModel model = new DefaultTableModel(columnNames, 0); // create new DefaultTableModel
 
-//	        for(int i=0; i< input.size(); i++) {
-//	            Object rowData[] = {input.get(i).getId(), input.get(i).getStatus(), 
-//	                                input.get(i).getType(), input.get(i).getAddress().getStreetAddress(), input.get(i).getAddress().getQuadrant(), 
-//	                                input.get(i).getNumBedrooms(), input.get(i).getNumBathrooms(), input.get(i).isFurnished(), input.get(i).getownerId(), input.get(i).getDateListed(), input.get(i).getDateRented()
-//	            };
-//	            //System.out.println(input.get(i).getPropertyType());
-//	            model.addRow(rowData);
-//	        }
+	        for (int i = 0; i < input.size(); i++) {
+            Object rowData[] = { input.get(i).getFrom(), input.get(i).getTitle(), input.get(i).getMessage()
+            };
+            // System.out.println(input.get(i).getPropertyType());
+            model.addRow(rowData);
+        }
 	        
 	        table.setModel(model);  // set model of table      
 	        JScrollPane scrollPane = new JScrollPane(); // create new JScrollPane

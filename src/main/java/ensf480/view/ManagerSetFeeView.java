@@ -16,7 +16,7 @@ import java.awt.event.ActionEvent;
 public class ManagerSetFeeView extends JPanel {
 	private JTextField newFeeText;
 	private JTextField newDurationText;
-	JDialog invalidFeeDialog = new InvalidFeeDialog();
+	private JDialog invalidFeeDialog = new InvalidFeeDialog();
 
 
 	/**
@@ -74,8 +74,8 @@ public class ManagerSetFeeView extends JPanel {
 				try
 			     {
 					 //Checks if the new fee is negative and if it is a float value
-			         Float.parseFloat(potentialNewFee);
-			         if (Float.parseFloat(potentialNewFee) < 0) {
+			         float potentialFee = Float.parseFloat(potentialNewFee);
+			         if (potentialFee < 0) {
 			        	 flag = false;
 			         } else {
 			        	 flag = true;

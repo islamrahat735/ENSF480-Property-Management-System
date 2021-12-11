@@ -5,6 +5,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
@@ -13,6 +15,7 @@ import ensf480.controller.LandlordController;
 import ensf480.model.*;
 
 public class LandlordPayFeeView extends JPanel {
+	JDialog feePaidDialog = new FeePaidDialog();
 
 	/**
 	 * Create the panel.
@@ -85,7 +88,7 @@ public class LandlordPayFeeView extends JPanel {
 			int colonIndex = propertyToChange.indexOf(":");
 			int propId = Integer.parseInt(propertyToChange.substring(0, colonIndex));
 			lc.listProperty(lc.getProperty(propId)); //gets the property of the ID and then lists it, changing to ACTIVE
-			//
+			feePaidDialog.setVisible(true);
 		}
 	}); // action listener in even that button is pressed 
 	payFeeButton.setFont(new Font("Tahoma", Font.PLAIN, 15)); // set font 

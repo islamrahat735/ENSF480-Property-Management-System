@@ -31,16 +31,17 @@ public class ManagerViewPropertiesView extends JPanel {
         setLayout(null);
 
         // JTable used in order to store and view
-        table = new JTable();
+        table = new JTable();//Create JTable object
         Object columnNames[] = { "Property ID", "Status", "Type", "Address", "Quadrant", "Bedrooms", "Bathrooms",
                 "Furnished", "Owner ID", "List Date", "Rent Date" };
 
-        ManagerController managerController = new ManagerController();
+        ManagerController managerController = new ManagerController(); //Create ManagerController object
 
-        ArrayList<Property> input = managerController.getAllProperties();
+        ArrayList<Property> input = managerController.getAllProperties(); //Create ArrayList with all data required for Table
 
-        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0); //Set Column Names
 
+        //Populate Table Model
         for (int i = 0; i < input.size(); i++) {
             Object rowData[] = { input.get(i).getId(), input.get(i).getStatus(),
                     input.get(i).getType(), input.get(i).getAddress().getStreetAddress(),
@@ -48,17 +49,19 @@ public class ManagerViewPropertiesView extends JPanel {
                     input.get(i).getNumBedrooms(), input.get(i).getNumBathrooms(), input.get(i).isFurnished(),
                     input.get(i).getOwnerId(), input.get(i).getDateListed(), input.get(i).getDateRented()
             };
-            // System.out.println(input.get(i).getPropertyType());
             model.addRow(rowData);
         }
 
+        //Set Table Model to table
         table.setModel(model);
 
+        //Create Scroll Pane and add table to it
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setViewportView(table);
         scrollPane.setBounds(45, 45, 751, 482);
         add(scrollPane);
 
+        //Back Button used to go back to Manager View
         JButton backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

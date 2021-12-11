@@ -147,9 +147,9 @@ public class MainFrame extends JFrame {
         contentPane.repaint();
     }
 
-	public static void getRenterSearchView(int id) {
+	public static void getRenterSearchView() {
 		// set view to RenterSearchView 
-		RenterSearchView renterSearchView = new RenterSearchView(renterID);
+		RenterSearchView renterSearchView = new RenterSearchView();
 	      
         contentPane.removeAll();
         contentPane.add(renterSearchView);
@@ -271,7 +271,7 @@ public class MainFrame extends JFrame {
 	
 	public static void getLandlordEmailNotif(){
 		// set view to LandlordEmailNotif
-		LandlordEmailNotif landlordEmailNotif =new LandlordEmailNotif();
+		LandlordEmailNotifView landlordEmailNotif = new LandlordEmailNotifView();
 		contentPane.removeAll();
         contentPane.add(landlordEmailNotif);
         contentPane.revalidate();
@@ -289,7 +289,7 @@ public class MainFrame extends JFrame {
 
 	public static void getRenterEmailNotif(){
 		// set view to RenterEmailNotif
-		RenterEmailNotif renterEmailNotif = new RenterEmailNotif();
+		RenterEmailNotifView renterEmailNotif = new RenterEmailNotifView();
 		contentPane.removeAll();
         contentPane.add(renterEmailNotif);
         contentPane.revalidate();

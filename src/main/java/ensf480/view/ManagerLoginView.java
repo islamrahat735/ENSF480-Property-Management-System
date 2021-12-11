@@ -16,7 +16,7 @@ import java.awt.event.ActionEvent;
 public class ManagerLoginView extends JPanel {
 
 	private JTextField loginEmailField;
-	private JTextField loginPasswordField;
+	private JPasswordField loginPasswordField;
 	JDialog loginFailedDialog = new LoginFailedDialog();
 	
 	/**

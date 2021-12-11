@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class InvalidDurationDialog extends JDialog {
+public class StateChangedDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
@@ -21,35 +21,38 @@ public class InvalidDurationDialog extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			InvalidDurationDialog dialog = new InvalidDurationDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
+			StateChangedDialog dialog = new StateChangedDialog();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE); // set default close operation 
+			dialog.setVisible(true); // set as visible
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	} // try and catch for error handling
 
 	/**
 	 * Create the dialog.
 	 */
-	public InvalidDurationDialog() {
-		setTitle("WARNING");
-		setBounds(100, 100, 552, 361);
+	public StateChangedDialog() {
+		// set up JDialog
+		setBounds(100, 100, 547, 346);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		{
-			JLabel warningLabel = new JLabel("Invalid Duration");
-			warningLabel.setFont(new Font("Tahoma", Font.PLAIN, 32));
-			warningLabel.setBounds(78, 91, 448, 59);
-			contentPanel.add(warningLabel);
+		{	
+			// JLabel holding message that JDialog displays
+			JLabel messageLabel = new JLabel("Property State Changed");
+			messageLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+			messageLabel.setBounds(137, 101, 322, 74);
+			contentPanel.add(messageLabel);
 		}
 		{
+			// JPanel that holds okButton
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
+				// JButton used inorder to close and dispose of JDialog
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {

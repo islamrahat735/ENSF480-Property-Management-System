@@ -14,7 +14,7 @@ import java.awt.event.ActionEvent;
 public class RenterLoginView extends JPanel {
 
 	private JTextField loginEmailTextField;
-	private JTextField loginPasswordField;
+	private JPasswordField loginPasswordField;
 	JDialog loginFailedDialog = new LoginFailedDialog();
 	
 	/**
@@ -24,27 +24,30 @@ public class RenterLoginView extends JPanel {
 		setBounds(300, 200, 850, 600);
 		setLayout(null);
 		
-		// Prompt user for email and password using JLabels,
+		// JLabel to prompt user for email
 		JLabel loginEmailLabel = new JLabel("Renter Email");
 		loginEmailLabel.setBounds(10, 9, 241, 13);
 		add(loginEmailLabel);
 		
+		// JTextField to hold users answer
 		loginEmailTextField = new JTextField();
 		loginEmailTextField.setBounds(10, 42, 241, 19);
 		loginEmailTextField.setColumns(10);
 		add(loginEmailTextField);
 		
+		// JLabel to prompt user for password
 		JLabel loginPasswordLabel = new JLabel("Password");
 		loginPasswordLabel.setBounds(10, 109, 241, 13);
 		add(loginPasswordLabel);
 		
+		// JButton used to login user
 		JButton loginButton = new JButton("Login");
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
 				String loginEmail = loginEmailTextField.getText();
 				String loginPassword = loginPasswordField.getText();
 				LoginController loginController = new LoginController();
-				int renterId = loginController.loginRenter(loginEmail, loginPassword);
+				int renterId = loginController.loginRenter(loginEmail, loginPassword); // get renter ID
 				if(renterId != -1){
 					MainFrame.getRenterView(renterId);
 				}
@@ -56,6 +59,7 @@ public class RenterLoginView extends JPanel {
 		loginButton.setBounds(10, 161, 104, 21);
 		add(loginButton);
 		
+		// JButton to take user back to LandingView
 		JButton backButton = new JButton("Back");
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -65,7 +69,7 @@ public class RenterLoginView extends JPanel {
 		backButton.setBounds(751, 9, 89, 23);
 		add(backButton);
 		
-		loginPasswordField = new JTextField();
+		loginPasswordField = new JPasswordField();
 		loginPasswordField.setBounds(10, 130, 241, 20);
 		add(loginPasswordField);
 		loginPasswordField.setColumns(10);
