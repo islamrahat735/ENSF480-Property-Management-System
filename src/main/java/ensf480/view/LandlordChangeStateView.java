@@ -4,6 +4,8 @@ import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.sql.ResultSet;
 
 import javax.swing.DefaultComboBoxModel;
@@ -19,6 +21,7 @@ public class LandlordChangeStateView extends JPanel {
 		setLayout(null); // set layout to null, absolute positioning
 		
 //      LandlordController landlordController = new LandlordController();
+
 //      String[] addresses = landlordController.getAddresses();
 		
 //		JComboBox propertyComboBox = new JComboBox(addresses);
@@ -41,5 +44,14 @@ public class LandlordChangeStateView extends JPanel {
 		JButton confirmButton = new JButton("Confirm"); // new JButton
 		confirmButton.setBounds(378, 382, 89, 23); // set bounds
 		add(confirmButton); // add to view
+
+		JButton backButton = new JButton("Back");
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainFrame.getRenterView(MainFrame.getLandlordID());
+			}
+		});
+		backButton.setBounds(751, 11, 89, 23);
+		add(backButton);
 	}
 }

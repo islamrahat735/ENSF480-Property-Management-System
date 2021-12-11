@@ -7,19 +7,21 @@ import javax.swing.JDialog;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import ensf480.controller.RegRenterController;
+
 public class RenterView extends JPanel {
 	JDialog actionSuccessfulDialog= new ActionSuccessfulDialog();
 	/**
 	 * Create the panel.
 	 */
-	public RenterView(final int renterID) {
+	public RenterView() {
 		setBounds(300, 200, 850, 600);
 		setLayout(null);
 		
 		JButton btnNewButton = new JButton("Search Properties"); 
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getRenterSearchView(renterID);
+				MainFrame.getRenterSearchView(MainFrame.getRenterID());
 			}
 		});
 		btnNewButton.setBounds(120, 188, 200, 50);
@@ -46,6 +48,8 @@ public class RenterView extends JPanel {
 		JButton btnNewButton_3 = new JButton("Unsubscribe"); // Need to delete search criteria from DB 
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				RegRenterController rrc = new RegRenterController();
+				rrc.unsubscribe(MainFrame.getRenterID());
 				actionSuccessfulDialog.setVisible(true);
 			}
 		});

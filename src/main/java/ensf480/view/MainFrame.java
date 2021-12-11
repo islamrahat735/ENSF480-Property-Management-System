@@ -45,20 +45,21 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(300, 200, 850, 600);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // set default close operation 
+		setBounds(300, 200, 850, 600); // set bounds 
+		contentPane = new JPanel(); // new JPanel 
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5)); // set border 
+		contentPane.setLayout(new BorderLayout(0, 0)); // set layout 
+		setContentPane(contentPane); // set content pane
 		
-		LandingView landingView = new LandingView();
-		contentPane.add(landingView);
+		LandingView landingView = new LandingView(); // new LandingView 
+		contentPane.add(landingView); // add to content pane 
 
 		
 	}
 	
 	public static void getRenterLoginView() {
+		// set view to RenterLoginView 
 		RenterLoginView renterLoginView = new RenterLoginView();
 		
 		contentPane.removeAll();
@@ -69,6 +70,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	public static void getManagerLoginView() {
+		// set view to ManagerLoginView 
 		ManagerLoginView managerLoginView = new ManagerLoginView();
 		
 		contentPane.removeAll();
@@ -79,6 +81,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	public static void getLandlordLoginView() {
+		// set view to LandlordLoginView 
 		LandlordLoginView LandlordLoginView = new LandlordLoginView();
 		
 		contentPane.removeAll();
@@ -91,6 +94,7 @@ public class MainFrame extends JFrame {
 	
 	
 	public static void getRenterRegisterView() {
+		// set view to RenterRegisterView 
 		RenterRegisterView renterRegisterView = new RenterRegisterView();
 		
 		contentPane.removeAll();
@@ -101,6 +105,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	public static void getURenterView() {
+		// set view to URenterView 
 		URenterView uRenterView = new URenterView();
 		
 		contentPane.removeAll();
@@ -110,7 +115,30 @@ public class MainFrame extends JFrame {
 		frame.setTitle("Search For Properties");
 	}
 
+	public static void getRenterView(int id) {
+		// set view to RenterView 
+		renterID = id;
+        RenterView renterView = new RenterView();
+      
+        contentPane.removeAll();
+        contentPane.add(renterView);
+        contentPane.revalidate();
+        contentPane.repaint();
+    }
+
+		public static void getLandlordView(int id) {
+			// set view to LandlordView 
+		landlordID = id;
+        LandlordView landlordView = new LandlordView();
+        
+        contentPane.removeAll();
+        contentPane.add(landlordView);
+        contentPane.revalidate();
+        contentPane.repaint();
+    }
+	
 	public static void getManagerView() {
+		// set view to ManagerView 
         ManagerView managerView = new ManagerView();
         
         contentPane.removeAll();
@@ -118,18 +146,9 @@ public class MainFrame extends JFrame {
         contentPane.revalidate();
         contentPane.repaint();
     }
-	
-	public static void getRenterView(int id) {
-		renterID = id;
-        RenterView renterView = new RenterView(renterID);
-      
-        contentPane.removeAll();
-        contentPane.add(renterView);
-        contentPane.revalidate();
-        contentPane.repaint();
-    }
-	
+
 	public static void getRenterSearchView(int id) {
+		// set view to RenterSearchView 
 		RenterSearchView renterSearchView = new RenterSearchView(renterID);
 	      
         contentPane.removeAll();
@@ -138,17 +157,10 @@ public class MainFrame extends JFrame {
         contentPane.repaint();
 	}
 	
-	public static void getLandlordView(int id) {
-		landlordID = id;
-        LandlordView landlordView = new LandlordView(landlordID);
-        
-        contentPane.removeAll();
-        contentPane.add(landlordView);
-        contentPane.revalidate();
-        contentPane.repaint();
-    }
+
 
 	public static void getManagerViewPropertiesView() {
+		// set view to ManagerViewPropertiesView 
         ManagerViewPropertiesView managerViewPropertiesView = new ManagerViewPropertiesView();
         
         contentPane.removeAll();
@@ -158,6 +170,7 @@ public class MainFrame extends JFrame {
     }
 	
 	public static void getLandlordViewPropertiesView() {
+		// set view to LandlordViewPropertiesView 
         LandlordViewPropertiesView landlordViewPropertiesView = new LandlordViewPropertiesView(landlordID);
         
         contentPane.removeAll();
@@ -167,6 +180,7 @@ public class MainFrame extends JFrame {
     }
 	
 	public static void getLandlordChangeStateView(){
+		// set view to LandlordChangeStateView 
         LandlordChangeStateView landlordChangeStateView = new LandlordChangeStateView(landlordID);
         
         contentPane.removeAll();
@@ -176,6 +190,7 @@ public class MainFrame extends JFrame {
     }
 	
 	public static void getManagerGenerateReportView(String fromDate, String toDate){
+		// set view to ManagerGenerateReportView 
 		ManagerGenerateReportView landlordGenerateReportView = new ManagerGenerateReportView(fromDate, toDate);
         
         contentPane.removeAll();
@@ -185,6 +200,7 @@ public class MainFrame extends JFrame {
     }
 	
 	public static void getLandlordRegisterPropertyView(){
+		// set view to getLandlordRegisterPropertyView 
 		LandlordRegisterPropertyView landlordRegisterPropertyView = new LandlordRegisterPropertyView(landlordID);
         
         contentPane.removeAll();
@@ -194,6 +210,7 @@ public class MainFrame extends JFrame {
     }
 	
 	public static void getLandingView(){
+		// set view to getLandingView 
 		LandingView landingView = new LandingView();
         
         contentPane.removeAll();
@@ -203,6 +220,7 @@ public class MainFrame extends JFrame {
     }
 	
 	public static void getManagerSetFeeView(){
+		// set view to ManagerSetFeeView 
 		ManagerSetFeeView managerSetFeeView = new ManagerSetFeeView();
 		
 		contentPane.removeAll();
@@ -212,6 +230,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	public static void getManagerViewLandlordsView(){
+		// set view to ManagerViewLandlordsView 
 		ManagerViewLandlordsView managerViewLandlordsView = new ManagerViewLandlordsView();
 		
 		contentPane.removeAll();
@@ -221,6 +240,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	public static void getManagerViewRentersView(){
+		// set view to ManagerViewRentersView 
 		ManagerViewRentersView managerViewRentersView = new ManagerViewRentersView();
 		
 		contentPane.removeAll();
@@ -231,6 +251,7 @@ public class MainFrame extends JFrame {
 	
 	
 	public static void getManagerChangeStateView(){
+		// set view to ManagerChangeStateView 
 		ManagerChangeStateView managerChangeStateView = new ManagerChangeStateView();
 		
 		contentPane.removeAll();
@@ -240,6 +261,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	public static void getAllRenterViewPropertiesView(String PT, int NBD, int NBA, int F, String CQ){
+		// set view to AllRenterViewPropertiesView 
 		AllRenterViewPropertiesView allRenterViewPropertiesView = new AllRenterViewPropertiesView(PT, NBD, NBA, F, CQ);
 		contentPane.removeAll();
         contentPane.add(allRenterViewPropertiesView);
@@ -248,7 +270,8 @@ public class MainFrame extends JFrame {
 	}
 	
 	public static void getLandlordEmailNotif(){
-		LandlordEmailNotif landlordEmailNotif =new LandlordEmailNotif(landlordID);
+		// set view to LandlordEmailNotif
+		LandlordEmailNotif landlordEmailNotif =new LandlordEmailNotif();
 		contentPane.removeAll();
         contentPane.add(landlordEmailNotif);
         contentPane.revalidate();
@@ -256,7 +279,8 @@ public class MainFrame extends JFrame {
 	}
 
 	public static void getRenterSubscribeView(){
-		RenterSubscribeView renterSubscribeView = new RenterSubscribeView(renterID);
+		// set view to RenterSubscribeView
+		RenterSubscribeView renterSubscribeView = new RenterSubscribeView();
 		contentPane.removeAll();
         contentPane.add(renterSubscribeView);
         contentPane.revalidate();
@@ -264,27 +288,41 @@ public class MainFrame extends JFrame {
 	}
 
 	public static void getRenterEmailNotif(){
-		RenterEmailNotif renterEmailNotif = new RenterEmailNotif(renterID);
+		// set view to RenterEmailNotif
+		RenterEmailNotif renterEmailNotif = new RenterEmailNotif();
 		contentPane.removeAll();
         contentPane.add(renterEmailNotif);
         contentPane.revalidate();
         contentPane.repaint();
 
 	}
+
+	public static void getLandlordPayFeeView(){
+		// set view to LandlordPayFeeView
+		LandlordPayFeeView landlordPayFeeView = new LandlordPayFeeView();
+		contentPane.removeAll();
+        contentPane.add(landlordPayFeeView);
+        contentPane.revalidate();
+        contentPane.repaint();
+	}
 	
 	public static int getLandlordID() {
-		return landlordID;
+		// landlord ID getter
+		return landlordID; 
 	}
 
 	public static int getRenterID() {
+		// renter id getter 
 		return renterID;
 	}
 
 	public static void setRenterID(int Id){
+		// renter id setter 
 		renterID = Id;
 	}
 
 	public static void setLandlordID(int Id){
+		// landlord id setter
 		landlordID = Id;
 	}
 }

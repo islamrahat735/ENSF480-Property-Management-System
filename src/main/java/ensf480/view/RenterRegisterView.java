@@ -10,6 +10,8 @@ import javax.swing.JDialog;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import ensf480.controller.LoginController;
+
 public class RenterRegisterView extends JPanel {
 
 	private JTextField firstNameTextField;
@@ -62,6 +64,16 @@ public class RenterRegisterView extends JPanel {
 		JButton registerButton = new JButton("Register");
 		registerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				LoginController lc = new LoginController();
+
+				String username = emailTextField.getText();
+				String password = passwordField.getText();
+				String fname = firstNameTextField.getText();
+				String lname = lastNameTextField.getText();
+
+				lc.registerRenter(username, password, fname, lname);
+				//need exception handling here
+				//if no exception is thrown
 				actionSuccessfulDialog.setVisible(true);
 			}
 		});

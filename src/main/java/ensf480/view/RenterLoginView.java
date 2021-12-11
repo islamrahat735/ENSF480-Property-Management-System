@@ -24,6 +24,7 @@ public class RenterLoginView extends JPanel {
 		setBounds(300, 200, 850, 600);
 		setLayout(null);
 		
+		// Prompt user for email and password using JLabels,
 		JLabel loginEmailLabel = new JLabel("Renter Email");
 		loginEmailLabel.setBounds(10, 9, 241, 13);
 		add(loginEmailLabel);
@@ -57,7 +58,7 @@ public class RenterLoginView extends JPanel {
 		
 		JButton backButton = new JButton("Back");
 		backButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				MainFrame.getLandingView();
 			}
 		});

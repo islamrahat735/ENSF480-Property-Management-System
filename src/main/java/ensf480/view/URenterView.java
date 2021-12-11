@@ -112,7 +112,6 @@ public class URenterView extends JPanel {
 				//Number of Bathrooms
 				if(includeCheckBoxNBA.isSelected()) {
 					NBD = Integer.parseInt((String) numberOfBathroomsComboBox.getSelectedItem());
-					NBA = (int) numberOfBathroomsComboBox.getSelectedItem();
 				} else {
 					NBA = -1;
 				}

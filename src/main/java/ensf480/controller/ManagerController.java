@@ -13,10 +13,8 @@ public class ManagerController {
         return db.selectProperties();
     }
 
-    //returns an ArrayList of all landlords in DB in the form of objects
-    public ArrayList<Landlord> getAllLandlords() {
-        //return db.selectLandlords(); //need to implement
-        return null; //placeholder
+    public ArrayList<Landlord> getAllLandlords(){
+        return db.getAllLandlords();
     }
 
     //returns an ArrayList of all renters in DB in the form of objects
@@ -32,6 +30,10 @@ public class ManagerController {
         fee.setDurationDays(duration); //sets the fee's duration (period)
 
         db.setFee(fee); //updates the fee stored in the database
+    }
+
+    public Fee getFee(){
+        return db.getFee();
     }
     
 }

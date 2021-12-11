@@ -14,14 +14,15 @@ private JTable table;
 	/**
 	 * Create the panel.
 	 */
-	public RenterEmailNotif(final int renterID) {
-		setBounds(300, 200, 850, 600);
+	public RenterEmailNotif() {
+	setBounds(300, 200, 850, 600);
         setLayout(null);
         
+        // new JTable in order to display email notifications for renters
         table = new JTable();
         Object columnNames[] = {"From", "Title", "Body"};
         
-//        ManagerController managerController = new ManagerController();
+//      RegRenterController managerController = new ManagerController();
 //
 //        ArrayList<Property> input = managerController.getAllProperties();
 
@@ -37,15 +38,17 @@ private JTable table;
 //        }
         
         table.setModel(model);        
+        // JScrollPane used inorder to scroll in order to view information in table
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setViewportView(table);	
         scrollPane.setBounds(45, 45, 751, 482);
         add(scrollPane);
         
+        //JButton used inorder to go back and change view to GetRenterView 
         JButton backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		MainFrame.getRenterView(renterID);
+        		MainFrame.getRenterView(MainFrame.getRenterID());
         	}
         });
         backButton.setBounds(751, 11, 89, 23);

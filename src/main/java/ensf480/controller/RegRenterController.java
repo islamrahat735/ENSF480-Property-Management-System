@@ -14,10 +14,15 @@ public class RegRenterController {
         return result;
     }
 
+    public ArrayList<RegisteredRenter> getAllRenters(){
+        return db.getAllRenters();
+    }
+
     //Subscribes a renter to a given SearchCriteria
     public void subscribe(int renterID, SearchCriteria notifCriteria) {
-        RegisteredRenter renter = db.getRegisteredRenter(renterID); //gets the renter with the ID
-        if(renter.getNotifCriteria() == null) //if they aren't already subscribed,
+        SearchCriteria renterCriteria = db.getSearchCriteria(renterID);
+        System.out.println(renterCriteria);
+        if(renterCriteria == null) //if they aren't already subscribed,
             db.addSearchCriteria(notifCriteria); //add a new criteria to the db
         else
             db.setSearchCriteria(notifCriteria); //otherwise, replace their existing criteria in the db
@@ -26,5 +31,9 @@ public class RegRenterController {
     //Unsubscribes a renter from any SearchCriteria
     public void unsubscribe(int renterID) {
         db.deleteSearchCriteria(renterID);
+    }
+
+    public ArrayList<Email> getInbox(int renterID) {
+        return db.getRenterInbox(renterID);
     }
 }

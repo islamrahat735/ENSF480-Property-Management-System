@@ -8,6 +8,12 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JToggleButton;
+
+import ensf480.controller.RegRenterController;
+import ensf480.model.PropertyType;
+import ensf480.model.Quadrant;
+import ensf480.model.SearchCriteria;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -22,7 +28,7 @@ public class RenterSubscribeView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public RenterSubscribeView(final int renterID) {
+	public RenterSubscribeView() {
 		setBounds(300, 200, 850, 600);
 		setLayout(null);
 		
@@ -98,48 +104,58 @@ public class RenterSubscribeView extends JPanel {
 		subscribeButton.addActionListener(new ActionListener() { // add code to strore search criteria into db
 			public void actionPerformed(ActionEvent e) {
                 actionSuccessfulDialog.setVisible(true);
+				SearchCriteria searchCriteria = new SearchCriteria(MainFrame.getRenterID());
 				//Property Type
-				// if(includeCheckBoxPT.isSelected()) {
-				// 	PT = (String) propertyTypeComboBox.getSelectedItem();
-				// } else {
-				// 	PT = null;
-				// }
+				if(includeCheckBoxPT.isSelected()) {
+					PT = (String) propertyTypeComboBox.getSelectedItem();
+					searchCriteria.setType(PropertyType.valueOf(PT.toUpperCase()));
+				} else {
+					PT = null;
+				}
 				
 				// //Number of Bedrooms
-				// if(includeCheckBoxNBD.isSelected()) {
-				// 	NBD = (int) numberOfBedroomsComboBox.getSelectedItem();
-				// } else {
-				// 	NBD = -1;
-				// }
+				if(includeCheckBoxNBD.isSelected()) {
+					NBD = Integer.parseInt((String) numberOfBedroomsComboBox.getSelectedItem());
+					searchCriteria.setNumBedrooms(NBD);
+				} else {
+					NBD = -1;
+				}
 				
 				// //Number of Bathrooms
-				// if(includeCheckBoxNBA.isSelected()) {
-				// 	NBA = (int) numberOfBathroomsComboBox.getSelectedItem();
-				// } else {
-				// 	NBA = -1;
-				// }
+				if(includeCheckBoxNBA.isSelected()) {
+					NBA = Integer.parseInt((String) numberOfBathroomsComboBox.getSelectedItem());
+					searchCriteria.setNumBathrooms(NBA);
+				} else {
+					NBA = -1;
+				}
 				
 				// //Furnished
-				// if(includeCheckBoxF.isSelected()) {
-				// 	if (furnishedCheckBox.isSelected()) {
-				// 		F = 1;
-				// 	} else {
-				// 		F = 0;
-				// 	}
-				// } else {
-				// 	F = -1;
-				// }
+				if(includeCheckBoxF.isSelected()) {
+					if (furnishedCheckBox.isSelected()) {
+						F = 1;
+					} else {
+						F = 0;
+					}
+				} else {
+					F = -1;
+				}
+				searchCriteria.setIsFurnished(F);
 				
 				// //City Quadrant
-				// if(includeCheckBoxCQ.isSelected()) {
-				// 	CQ = (String) cityQuadrantComboBox.getSelectedItem();
-				// } else {
-				// 	CQ = null;
-				// }
+				if(includeCheckBoxCQ.isSelected()) {
+					CQ = (String) cityQuadrantComboBox.getSelectedItem();
+					searchCriteria.setQuadrant(Quadrant.valueOf(CQ.toUpperCase()));
+				} else {
+					CQ = null;
+				}
+
+				RegRenterController regRenterController = new RegRenterController();
+
+				regRenterController.subscribe(MainFrame.getRenterID(), searchCriteria);
+
+				actionSuccessfulDialog.setVisible(true);
 				
-				// MainFrame.getAllRenterViewPropertiesView(PT, NBD, NBA, F, CQ);
-				
-				
+				MainFrame.getRenterView(MainFrame.getRenterID());
 			}
 		});
 		subscribeButton.setBounds(361, 428, 126, 21);
@@ -148,7 +164,7 @@ public class RenterSubscribeView extends JPanel {
 		JButton backButton = new JButton("Back");
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getRenterView(renterID);
+				MainFrame.getRenterView(MainFrame.getRenterID());
 			}
 		});
 		backButton.setBounds(751, 10, 89, 23);

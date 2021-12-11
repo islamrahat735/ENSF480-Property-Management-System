@@ -2,6 +2,10 @@ package ensf480.view;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import ensf480.controller.ManagerController;
+import ensf480.model.Fee;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
@@ -23,31 +27,45 @@ public class ManagerSetFeeView extends JPanel {
 		setLayout(null);
 		float currentFee = 0;
 		int currentDuration = 0;
-		//currentFee = getFee();
-		//currentDuration = getDuration();
+
+		//Create ManagerController Object
+		final ManagerController mc = new ManagerController();
+
+		//Create Fee Object
+		Fee fee = mc.getFee();
+
+		//Get Current Fee and Current Duration
+		currentFee = fee.getCost();
+		currentDuration = fee.getDurationDays();
 		
+		//CurrentFee JLabel
 		JLabel currentFeeLabel = new JLabel("Current Fee");
 		currentFeeLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		currentFeeLabel.setBounds(176, 164, 218, 25);
 		add(currentFeeLabel);
 		
+		//CurrentFeeValue JLabel to show current fee
 		JLabel currentFeeValue = new JLabel(String.valueOf(currentFee));
 		currentFeeValue.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		currentFeeValue.setBounds(498, 164, 179, 25);
 		add(currentFeeValue);
 		
+		//newFeeLabel JLabel
 		JLabel newFeeLabel = new JLabel("New Fee");
 		newFeeLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		newFeeLabel.setBounds(176, 254, 218, 25);
 		add(newFeeLabel);
 		
+		//newFeeText text field for manager to set new fee
 		newFeeText = new JTextField();
 		newFeeText.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		newFeeText.setBounds(498, 255, 142, 22);
 		add(newFeeText);
 		newFeeText.setColumns(10);
 		
+		//setFeeButton to initiate the update
 		JButton setFeeButton = new JButton("Set Fee");
+		//ActionListener used to update and error check the input
 		setFeeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String potentialNewFee = newFeeText.getText();
@@ -55,6 +73,7 @@ public class ManagerSetFeeView extends JPanel {
 				
 				try
 			     {
+					 //Checks if the new fee is negative and if it is a float value
 			         Float.parseFloat(potentialNewFee);
 			         if (Float.parseFloat(potentialNewFee) < 0) {
 			        	 flag = false;
@@ -68,12 +87,18 @@ public class ManagerSetFeeView extends JPanel {
 			     }
 				
 				if (flag == false) {
+					//Display invalidFeeDialog JDialog
 					invalidFeeDialog.setVisible(true);
 				} else {
+					//Updated the fee in the database
 					float newFee = Float.parseFloat(potentialNewFee);
+					Fee anotherFee = Fee.getInstance();
 					//Update newFee
-					revalidate();
-					repaint();
+					anotherFee.setCost(newFee);
+					mc.setFee(anotherFee.getCost(), anotherFee.getDurationDays());
+					MainFrame.getManagerSetFeeView(); //Refresh JPanel
+					// revalidate();
+					// repaint();
 				}
 			}
 		});
@@ -110,6 +135,7 @@ public class ManagerSetFeeView extends JPanel {
 				
 				try
 			     {
+					 //Checks if the new fee is greater than one and if it is an Integer value
 			         Integer.parseInt(potentialNewDuration);
 			         if (Integer.parseInt(potentialNewDuration) < 1) {
 			        	 flag = false;
@@ -127,8 +153,12 @@ public class ManagerSetFeeView extends JPanel {
 				} else {
 					int newDuration = Integer.parseInt(potentialNewDuration);
 					//Update newDuration
-					revalidate();
-					repaint();
+					Fee secondFee = Fee.getInstance();
+					secondFee.setDurationDays(newDuration);
+					mc.setFee(secondFee.getCost(), secondFee.getDurationDays());
+					MainFrame.getManagerSetFeeView(); //Refresh JPanel
+					// revalidate();
+					// repaint();
 				}
 			}
 		});
@@ -136,6 +166,7 @@ public class ManagerSetFeeView extends JPanel {
 		setDurationButton.setBounds(459, 495, 153, 38);
 		add(setDurationButton);
 		
+		//Back button used to go back to Manager View
 		JButton backButton = new JButton("Back");
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

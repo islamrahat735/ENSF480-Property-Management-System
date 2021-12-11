@@ -15,7 +15,8 @@ public class dbConnectionController {
     private Connection dbConnection; //the connection to the db
     private ResultSet resultSet; //the results from any query we do
 
-    //default constructor
+    //constructor that determines the connection credentials
+    //change this if you want to change the account/url that you connect with
     public dbConnectionController() {
         this.USERNAME = "propertyms";
         this.PASSWORD = "ensf480";
@@ -140,6 +141,41 @@ public class dbConnectionController {
         }
     }
 
+    //get single Property
+    public Property getProperty(int propertyID) {
+        Property property = null;
+        try{
+            //creates the query
+            this.createConnection();
+            String query = "SELECT * FROM property WHERE pid = ?";
+            PreparedStatement myStmt = dbConnection.prepareStatement(query);
+            myStmt.setInt(1, propertyID);
+
+            //runs the query
+            resultSet = myStmt.executeQuery();
+
+            //returns the result
+            while(resultSet.next()){
+                Address address = new Address(resultSet.getString("address"), resultSet.getString("quadrant"));
+                property = new Property(resultSet.getString("type"), address, resultSet.getInt("bedrooms"),
+                resultSet.getInt("bathrooms"), resultSet.getBoolean("isFurnished"), resultSet.getInt("ownerId"));
+                property.setId(resultSet.getInt("pid"));
+                property.setStatus(resultSet.getString("status"));
+                if(resultSet.getDate("listDate") != null){
+                    property.setDateListed(resultSet.getDate("listDate").toString());
+                }
+                if(resultSet.getDate("rentDate") != null){
+                    property.setDateRented(resultSet.getDate("rentDate").toString());
+                }
+            }
+        }
+        catch(SQLException exception){
+            exception.printStackTrace();
+        }
+        return property;
+    }
+    
+
     //updates a property in the database
     public void updateProperty(Property property){
         try{
@@ -209,6 +245,28 @@ public class dbConnectionController {
     }
 
     //LANDLORD STUFF
+
+    public ArrayList<Landlord> getAllLandlords(){
+        ArrayList<Landlord> landlords = new ArrayList<>();
+        try{
+            this.createConnection();
+            String query = "SELECT * FROM landlord ";
+            PreparedStatement myStmt = dbConnection.prepareStatement(query);
+
+
+            resultSet = myStmt.executeQuery();
+            while(resultSet.next()){
+            
+                Landlord landlord = new Landlord(resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("fname"), resultSet.getString("lname"));
+                landlord.setId(resultSet.getInt("lid"));
+                landlords.add(landlord);
+            }
+        }catch(SQLException exception){
+            exception.printStackTrace();
+        }
+        return landlords;
+
+    }
 
     //returns a Landlord object from the db given an account username and password
     public Landlord getLandlord(String username, String password){
@@ -347,7 +405,7 @@ public class dbConnectionController {
             while(resultSet.next()){
                 renter = new RegisteredRenter(resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("fname"), resultSet.getString("lname"));
                 renter.setID(resultSet.getInt("rid"));
-                renter.setNotifCriteria(this.getSearchCriteria(renter.getId()));
+                //renter.setNotifCriteria(this.getSearchCriteria(renter.getId()));
             }
             myStmt.close();
             this.close();
@@ -357,7 +415,8 @@ public class dbConnectionController {
         return renter;
     }
 
-    //returns a RegisteredRenter object from the db given an account username and password
+
+    //returns a RegisteredRenter object from the db given an id
     public RegisteredRenter getRegisteredRenter(int renterID){
         RegisteredRenter renter = null;
         try{
@@ -374,8 +433,6 @@ public class dbConnectionController {
             while(resultSet.next()){
                 renter = new RegisteredRenter(resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("fname"), resultSet.getString("lname"));
                 renter.setID(renterID);
-                //subquery that grabs their notification criteria
-                renter.setNotifCriteria(this.getSearchCriteria(renterID));
             }
             //closes connections
             myStmt.close();
@@ -400,8 +457,6 @@ public class dbConnectionController {
                 //create a new RegisteredRenter with its fields
                 RegisteredRenter renter = new RegisteredRenter(resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("fname"), resultSet.getString("lname"));
                 renter.setID(resultSet.getInt("rid"));
-                //and adds any search criteria linked to their id to the object - nested query
-                renter.setNotifCriteria(this.getSearchCriteria(renter.getId()));
                 //and add the final renter to the ArrayList
                 allRenters.add(renter);
             }
@@ -414,6 +469,32 @@ public class dbConnectionController {
             ex.printStackTrace();
         }
         return allRenters;
+    }
+
+    //adds a Registered Renter to the DB
+    //will throw SQLException if username already exists
+    public void addRegisteredRenter(String username, String password, String fname, String lname) {
+         try{
+             //creates the query
+            this.createConnection();
+            String query = "Insert INTO Registered_Renter (username, password, fname, lname) VALUES (?,?,?,?)";
+            PreparedStatement myStmt = dbConnection.prepareStatement(query);
+
+            myStmt.setString(1, username);
+            myStmt.setString(2, password);
+            myStmt.setString(3, fname);
+            myStmt.setString(4, lname);  
+            
+            //runs the query
+            myStmt.executeUpdate();
+
+            //closes the connections
+            myStmt.close();
+            this.close();
+        }
+        catch(SQLException exception){
+            exception.printStackTrace();
+        }
     }
 
 
@@ -461,6 +542,49 @@ public class dbConnectionController {
         return criteria;
     }
 
+    //gets all search criteria
+    public ArrayList<SearchCriteria> getAllSearchCriteria() {
+        ArrayList<SearchCriteria> searchList = new ArrayList<>();   
+        try {
+            //creates and executes a simple query
+            this.createConnection();                    
+            Statement myStmt = dbConnection.createStatement();
+            resultSet = myStmt.executeQuery("SELECT * FROM Search_Criteria");
+            
+            //for each result
+            while (resultSet.next()){
+                //create a new RegisteredRenter with its fields
+                SearchCriteria criteria = new SearchCriteria(resultSet.getInt("rid"));
+                //check if type is null
+                if(resultSet.getString("type") != null)
+                    criteria.setType(PropertyType.valueOf(resultSet.getString("type")));
+                //check if quadrant is null
+                if(resultSet.getString("quadrant") != null)
+                    criteria.setQuadrant(Quadrant.valueOf(resultSet.getString("quadrant")));
+                criteria.setNumBedrooms(resultSet.getInt("bedrooms"));
+                criteria.setNumBathrooms(resultSet.getInt("bathrooms"));
+                //convert isFurnished char to int
+                String isF = resultSet.getString("isFurnished");
+                if(isF == null)
+                    criteria.setIsFurnished(-1);
+                else if(isF.equals("T"))
+                    criteria.setIsFurnished(1);
+                else if(isF.equals("F"))
+                    criteria.setIsFurnished(0);
+                //and add the final renter to the ArrayList
+                searchList.add(criteria);
+            }
+            
+            //close connections
+            myStmt.close();
+            this.close();
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return searchList;
+    }
+
     //updates a user's search criteria in the db
     public void setSearchCriteria(SearchCriteria criteria) {
         try {
@@ -478,7 +602,13 @@ public class dbConnectionController {
 
             myStmt.setInt(3, criteria.getNumBedrooms());
             myStmt.setInt(4, criteria.getNumBathrooms());
-            myStmt.setInt(5, criteria.getIsFurnished());
+            int isF = criteria.getIsFurnished(); //is furnished
+            if(isF == -1)
+                myStmt.setString(5, null);
+            else if(isF == 0)
+                myStmt.setString(5, "F");
+            else if(isF == 1)
+                myStmt.setString(5, "T");
             myStmt.setInt(6, criteria.getRenterID());
 
             myStmt.executeUpdate();
@@ -518,10 +648,15 @@ public class dbConnectionController {
             PreparedStatement myStmt = dbConnection.prepareStatement(query);
 
             myStmt.setInt(1, criteria.getRenterID());
-            myStmt.setString(2, criteria.getType().toUpperCase());
-            myStmt.setString(3, criteria.getQuadrant().toString().toUpperCase());
+            myStmt.setString(2, criteria.getType());
+            //getQuadrant returns the Quadrant which we need as a string so we have to check here
+            if(criteria.getQuadrant() != null)
+                myStmt.setString(3, criteria.getQuadrant().toString().toUpperCase());
+            else
+                myStmt.setString(3, null);
             myStmt.setInt(4, criteria.getNumBedrooms());
             myStmt.setInt(5, criteria.getNumBathrooms());
+            //we need to convert isFurnished(int) to a char
             if(criteria.getIsFurnished() == 1)
                 myStmt.setString(6, "T");
             else if(criteria.getIsFurnished() == 0)
@@ -552,7 +687,7 @@ public class dbConnectionController {
             resultSet = myStmt.executeQuery();
 
             while(resultSet.next()){
-                fee.getInstance();
+                fee = Fee.getInstance();
                 fee.setCost(resultSet.getInt("fee"));
                 fee.setDurationDays(resultSet.getInt("durationInDays"));
             }

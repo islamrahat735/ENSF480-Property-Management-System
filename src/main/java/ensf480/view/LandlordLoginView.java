@@ -59,6 +59,15 @@ public class LandlordLoginView extends JPanel {
 		}); // action listener in event that button is pressed.
 		loginButton.setBounds(10, 161, 104, 21); // set bounds
 		add(loginButton); // add to view
+
+		JButton backButton = new JButton("Back"); // create new JButton 
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				MainFrame.getLandingView(); // Change view to LandingView 
+			}
+		}); // action listener created in event that button is pressed 
+		backButton.setBounds(751, 9, 89, 23); // set bounds
+		add(backButton); // add to view  
 	}
 
 }

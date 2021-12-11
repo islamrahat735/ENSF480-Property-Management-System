@@ -33,32 +33,32 @@ public class InvalidFeeDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public InvalidFeeDialog() {
-		setTitle("WARNING"); // set title
-		setBounds(100, 100, 450, 300); // set bounds
-		getContentPane().setLayout(new BorderLayout()); // set layout of ContentPane
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5)); //set border of contentPanel
-		getContentPane().add(contentPanel, BorderLayout.CENTER); // add contentPanel to ContentPane
-		contentPanel.setLayout(null); // set layout of contentPanel as null, absolute positioning
+		setTitle("WARNING");
+		setBounds(100, 100, 552, 361);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
 		{
-			JLabel warningLabel = new JLabel("Fee cannot be less than 0"); // create new J:abel
-			warningLabel.setFont(new Font("Tahoma", Font.PLAIN, 32)); // set font
-			warningLabel.setBounds(78, 91, 348, 59); // set bounds
-			contentPanel.add(warningLabel); // add to contentPanel
+			JLabel warningLabel = new JLabel("Invalid Fee");
+			warningLabel.setFont(new Font("Tahoma", Font.PLAIN, 32));
+			warningLabel.setBounds(78, 91, 448, 59);
+			contentPanel.add(warningLabel);
 		}
 		{
-			JPanel buttonPane = new JPanel(); // create new JPanel
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT)); // set layout of JPanel
-			getContentPane().add(buttonPane, BorderLayout.SOUTH); // add to ContentPane
+			JPanel buttonPane = new JPanel();
+			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK"); // create new JButton
+				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						dispose(); // destroy JDialog and everything contained inside
+						dispose();
 					}
-				}); // action listener in event that button is pressed
-				okButton.setActionCommand("OK"); // set action command
-				buttonPane.add(okButton); // add to buttonPane
-				getRootPane().setDefaultButton(okButton); // set default button to okButton
+				});
+				okButton.setActionCommand("OK");
+				buttonPane.add(okButton);
+				getRootPane().setDefaultButton(okButton);
 			}
 		}
 	}

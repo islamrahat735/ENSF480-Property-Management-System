@@ -14,16 +14,16 @@ private JTable table;
 	/**
 	 * Create the panel.
 	 */
-	public LandlordEmailNotif(final int landlordID) {
+	public LandlordEmailNotif() {
 		 	setBounds(300, 200, 850, 600); // set bounds
 	        setLayout(null); // set layout to null, absolute positioning
 	        
 	        table = new JTable(); // create new JTable
 	        Object columnNames[] = {"From", "Title", "Body"}; // initalize new array of objects
 	        
-//	        ManagerController managerController = new ManagerController();
-	//
-//	        ArrayList<Property> input = managerController.getAllProperties();
+//	        LandlordController lc = new LandlordController();
+//
+//	        ArrayList<Email> input = managerController.getAllProperties();
 
 	        DefaultTableModel model = new DefaultTableModel(columnNames, 0); // create new DefaultTableModel
 
@@ -45,7 +45,7 @@ private JTable table;
 	        JButton backButton = new JButton("Back"); // create new JButton
 	        backButton.addActionListener(new ActionListener() {
 	        	public void actionPerformed(ActionEvent e) {
-	        		MainFrame.getLandlordView(landlordID); // go back to LandlordView of currently logged in landlord
+	        		MainFrame.getLandlordView(MainFrame.getLandlordID()); // go back to LandlordView of currently logged in landlord
 	        	}
 	        });
 	        backButton.setBounds(751, 11, 89, 23); // set bounds
