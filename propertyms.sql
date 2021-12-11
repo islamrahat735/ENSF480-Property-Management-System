@@ -105,7 +105,7 @@ INSERT INTO Property(status, type, address, quadrant, bedrooms, bathrooms, isFur
 VALUES ("Cancelled", "Apartment", "Centre St.", "NE", 2, 2, 1, 1, "2021-11-08", NULL),
         ("Active", "Attached_house", "University Dr.", "NW", 2, 3, 1, 2, "2021-10-08", NULL ),
         ("Rented", "Attached_house", "Bowness Dr.", "SW", 3, 4, 0, 3, NULL, "2021-12-08"),
-        ("Active", "Commerical", "Panorama Hills Dr.", "NW", 3, 2, 0, 1, "2021-12-04", NULL),
+        ("Active", "Commercial", "Panorama Hills Dr.", "NW", 3, 2, 0, 1, "2021-12-04", NULL),
         ("Active", "Attached_house", "Charleswood Dr.", "NW", 2, 1, 1, 2, "2021-11-08", NULL),
         ("Suspended", "Attached_house", "Brentwood Dr.", "NW", 1, 2, 1, 2, "2021-12-05", NULL);
      
