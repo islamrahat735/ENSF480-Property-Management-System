@@ -4,7 +4,7 @@ Property Management System
 Go to the directory with propertyms.jar and run the following command
 
 ## Run the Program:
-Simply click on the jar file propert
+Simply click on the jar file propertyms.jar
 
 
 Using the Database: You will need to install MySQL on your system and create a new user
