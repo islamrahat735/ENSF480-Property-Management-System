@@ -11,54 +11,64 @@ public class LandlordView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public LandlordView(int landlordID) {
-		setBounds(300, 200, 850, 600);
-		setLayout(null);
+	public LandlordView() {
+		setBounds(300, 200, 850, 600); // set bounds
+		setLayout(null); // set layout 
 		
-		JButton registerPropertyButton = new JButton("Register Property");
+		JButton registerPropertyButton = new JButton("Register Property"); // new JButton
 		registerPropertyButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getLandlordRegisterPropertyView();
+				MainFrame.getLandlordRegisterPropertyView(); // View is switched to LandlordRegisterPropertyView
 			}
-		});
-		registerPropertyButton.setBounds(337, 56, 148, 45);
-		add(registerPropertyButton);
+		}); // action listener for when button is pressed 
+		registerPropertyButton.setBounds(337, 56, 148, 45); // set bounds
+		add(registerPropertyButton); // add to view
 		
-		JButton viewProperties = new JButton("View Properties");
+		JButton viewProperties = new JButton("View Properties"); // new JButton 
 		viewProperties.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getLandlordViewPropertiesView();
+				MainFrame.getLandlordViewPropertiesView(); // view is switched to LandlordViewPropertiesView
 			}
-		});
-		viewProperties.setBounds(337, 183, 148, 45);
-		add(viewProperties);
+		}); // action listener for when button is pressed 
+		viewProperties.setBounds(337, 183, 148, 45); // set bounds
+		add(viewProperties); // add to view 
 		
-		JButton changeStateButton = new JButton("Change State");
+		JButton changeStateButton = new JButton("Change State");// new JButton 
 		changeStateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getLandlordChangeStateView();
+				MainFrame.getLandlordChangeStateView(); // view is switched to LandlordChangeStateView 
 			}
-		});
-		changeStateButton.setBounds(337, 312, 148, 45);
-		add(changeStateButton);
+		}); // action listener for when button is pressed 
+		changeStateButton.setBounds(337, 383, 148, 45); // set bounds
+		add(changeStateButton); // add to view
 		
-		JButton inboxButton = new JButton("Inbox");
+		JButton inboxButton = new JButton("Inbox");// new JButton 
 		inboxButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getLandlordEmailNotif();
+				MainFrame.getLandlordEmailNotif(); // view is switched to getLandlordEmailNotif
 			}
-		});
-		inboxButton.setBounds(337, 438, 148, 45);
-		add(inboxButton);
+		}); // action listener for when button is pressed 
+		inboxButton.setBounds(337, 476, 148, 45); // set bounds
+		add(inboxButton); // add to view
 
-		JButton logoutButton = new JButton("Logout");
+		JButton logoutButton = new JButton("Logout");// new JButton 
 		logoutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getLandingView();
-				MainFrame.setLandlordID(-1);			}
+				MainFrame.getLandingView(); // view is changed to getLandingView
+				MainFrame.setLandlordID(-1); // set landlord id to -1		
+				}
 		});
-		logoutButton.setBounds(751, 11, 89, 23);
-		add(logoutButton);
+		logoutButton.setBounds(751, 11, 89, 23);  // set bounds
+		add(logoutButton); // add to view
+		
+		JButton payFeeButton = new JButton("Pay Fee");// new JButton 
+		payFeeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainFrame.getLandlordPayFeeView(); // view is changed to getLandlordPayFeeView
+			}
+		}); // action listener for when button is pressed 
+		payFeeButton.setBounds(337, 289, 148, 45); // set bounds
+		add(payFeeButton); // add to view
 
 	}
 }

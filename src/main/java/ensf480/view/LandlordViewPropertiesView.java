@@ -15,23 +15,23 @@ import java.util.ArrayList;
 import ensf480.model.*;
 
 public class LandlordViewPropertiesView extends JPanel {
-	private JTable table;
+	private JTable table; // create JTable
 
 	/**
 	 * Create the panel.
 	 */
 	public LandlordViewPropertiesView(final int landlordID) {
-        setBounds(300, 200, 850, 600);
-        setLayout(null);
+        setBounds(300, 200, 850, 600); // set bounds
+        setLayout(null); // set layout to null
         
-        table = new JTable();
-        Object columnNames[] = {"Property ID", "Status", "Type", "Address", "Quadrant", "Bedrooms", "Bathrooms", "Furnished", "List Date", "Rent Date"};
+        table = new JTable(); // initialize table 
+        Object columnNames[] = {"Property ID", "Status", "Type", "Address", "Quadrant", "Bedrooms", "Bathrooms", "Furnished", "List Date", "Rent Date"}; // create object array of strings
         
-        LandlordController landlordController = new LandlordController();
+        LandlordController landlordController = new LandlordController(); // new LandlordController
 
-        ArrayList<Property> input = landlordController.getAllProperties(landlordID);
+        ArrayList<Property> input = landlordController.getAllProperties(landlordID); // create new arraylist, and populate 
 
-        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0); // create new DefaultTableModel
 
         for(int i=0; i< input.size(); i++) {
             Object rowData[] = {input.get(i).getId(), input.get(i).getStatus(), 
@@ -40,22 +40,22 @@ public class LandlordViewPropertiesView extends JPanel {
             };
             //System.out.println(input.get(i).getPropertyType());
             model.addRow(rowData);
-        }
+        } // populate row in model 
         
-        table.setModel(model);        
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setViewportView(table);
-        scrollPane.setBounds(44, 36, 751, 482);
-        add(scrollPane);
+        table.setModel(model); // set data model     
+        JScrollPane scrollPane = new JScrollPane(); // new JScrollPane
+        scrollPane.setViewportView(table); // set ScrolllPane to have control over table 
+        scrollPane.setBounds(44, 36, 751, 482); // set bounds 
+        add(scrollPane); // add to view 
 
-        JButton backButton = new JButton("Back");
+        JButton backButton = new JButton("Back"); // create new JButton 
         backButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		MainFrame.getLandlordView(landlordID);
+        		MainFrame.getLandlordView(landlordID); // view is changed to LandlordView
         	}
-        });
-        backButton.setBounds(751, 11, 89, 23);
-        add(backButton);
+        }); // action listener for when button is pressed 
+        backButton.setBounds(751, 11, 89, 23); // set bounds 
+        add(backButton); // add to view 
 
     }
 }

@@ -45,4 +45,9 @@ public class LoginController {
             return renter.getId(); //if found, return their ID
         }
     }
+
+    //Adds a renter to the DB with argument credentials
+    public void registerRenter(String username, String password, String fname, String lname) {
+        db.addRegisteredRenter(username, password, fname, lname);
+    }
 }

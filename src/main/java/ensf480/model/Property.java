@@ -41,8 +41,6 @@ public class Property {
             return false;
         if(criteria.getIsFurnished() != -1 && this.isFurnished != criteria.isFurnished())
             return false;
-        if(criteria.getStreetAddress() != null && this.address.getStreetAddress() != criteria.getStreetAddress())
-            return false;
         if(criteria.getQuadrant() != null && Quadrant.valueOf(this.address.getQuadrant()) != criteria.getQuadrant())
             return false;
         
@@ -58,6 +56,16 @@ public class Property {
             "\nNum. Bedrooms: " + getNumBedrooms() + "\nNum. Bathrooms: " + getNumBathrooms() +
             "\nFurnished: " + isIsFurnished() +"\nDate Listed: " + getDateListed();
     }
+
+
+    // @Override
+    // public String toString() {
+    //     return "{" +
+    //         " id='" + getId() + "'" +
+    //         ", address='" + getAddress() + "'" +
+    //         "}";
+    // }
+
 
     //getters and setters
     public int getId() {

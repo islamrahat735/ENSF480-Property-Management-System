@@ -19,4 +19,13 @@ public class Landlord extends Account {
     public void setId(int id) {
         this.lid = id;
     }
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            " lid='" + getId() + "'" +
+            "}";
+    }
+
 }

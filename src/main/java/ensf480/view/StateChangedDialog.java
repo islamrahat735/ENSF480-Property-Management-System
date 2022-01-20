@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class PayFeeElsewhereDialog extends JDialog {
+public class StateChangedDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
@@ -21,39 +21,38 @@ public class PayFeeElsewhereDialog extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			PayFeeElsewhereDialog dialog = new PayFeeElsewhereDialog();
+			StateChangedDialog dialog = new StateChangedDialog();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE); // set default close operation 
-			dialog.setVisible(true); // set as visible 
+			dialog.setVisible(true); // set as visible
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	} // try and catch 
+	} // try and catch for error handling
 
 	/**
 	 * Create the dialog.
 	 */
-	public PayFeeElsewhereDialog() {
+	public StateChangedDialog() {
 		// set up JDialog
-		setTitle("ATTENTION");
-		setBounds(100, 100, 765, 458);
+		setBounds(100, 100, 547, 346);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		{
-			// JLabel holding message viewed on JDialog
-			JLabel warningLabel = new JLabel("Your property has been registered. Please go to the Pay Fees tab to set your property's status to active");
-			warningLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			warningLabel.setBounds(47, 144, 666, 59);
-			contentPanel.add(warningLabel);
+		{	
+			// JLabel holding message that JDialog displays
+			JLabel messageLabel = new JLabel("Property State Changed");
+			messageLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+			messageLabel.setBounds(137, 101, 322, 74);
+			contentPanel.add(messageLabel);
 		}
 		{
-			// JPanel used in order to hold JButton 
+			// JPanel that holds okButton
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				// JButton used inorder to close and dispose of JDialog when pressed 
+				// JButton used inorder to close and dispose of JDialog
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -66,4 +65,5 @@ public class PayFeeElsewhereDialog extends JDialog {
 			}
 		}
 	}
+
 }

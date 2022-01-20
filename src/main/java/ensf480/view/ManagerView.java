@@ -18,10 +18,11 @@ public class ManagerView extends JPanel {
 	 * Create the panel.
 	 */
 	public ManagerView() {
-		setBounds(300, 200, 850, 600);
-		setLayout(null);
+		setBounds(300, 200, 850, 600); // set bound
+		setLayout(null); // set layout 
 		
-		JButton changeFee = new JButton("Set/Change Fee");
+		// JButton used in order to go to the ManagerSetFeeView 
+		JButton changeFee = new JButton("Set/Change Fee"); 
 		changeFee.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainFrame.getManagerSetFeeView();
@@ -30,6 +31,7 @@ public class ManagerView extends JPanel {
 		changeFee.setBounds(51, 32, 199, 52);
 		add(changeFee);
 		
+		// JButton used in order to go to the ManagerViewRentersView 
 		JButton viewRentersButton = new JButton("View Renters");
 		viewRentersButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -39,6 +41,7 @@ public class ManagerView extends JPanel {
 		viewRentersButton.setBounds(51, 135, 199, 52);
 		add(viewRentersButton);
 		
+		// JButton used in order to go to the ManagerViewLandlordsView 
 		JButton viewLandlordsButton = new JButton("View Landlords");
 		viewLandlordsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -49,6 +52,7 @@ public class ManagerView extends JPanel {
 		viewLandlordsButton.setBounds(579, 32, 199, 52);
 		add(viewLandlordsButton);
 		
+		// JButton used in order to go to the ManagerViewPropertiesView 
 		JButton viewPropertiesButton = new JButton("View Properties");
 		viewPropertiesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -58,6 +62,7 @@ public class ManagerView extends JPanel {
 		viewPropertiesButton.setBounds(319, 32, 199, 52);
 		add(viewPropertiesButton);
 		
+		// JButton used in order to go to the ManagerGenerateReportView 
 		JButton generateReportButton = new JButton("Generate Report");
 		generateReportButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -77,6 +82,7 @@ public class ManagerView extends JPanel {
 		generateReportButton.setBounds(319, 420, 199, 52);
 		add(generateReportButton);
 		
+		// JButton used in order to go to the ManagerChangeStateView 
 		JButton changeStateButton = new JButton("Change State");
 		changeStateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -86,6 +92,7 @@ public class ManagerView extends JPanel {
 		changeStateButton.setBounds(579, 135, 199, 52);
 		add(changeStateButton);
 		
+		// Prompt user input from date and to date 
 		JLabel fromLabel = new JLabel("From (YYYY-MM-DD)");
 		fromLabel.setBounds(51, 310, 144, 13);
 		add(fromLabel);
@@ -104,6 +111,7 @@ public class ManagerView extends JPanel {
 		toText.setBounds(607, 306, 199, 19);
 		add(toText);
 		
+		//JButton used in order to logout and change view to LandingView 
 		JButton logoutButton = new JButton("Logout");
 		logoutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

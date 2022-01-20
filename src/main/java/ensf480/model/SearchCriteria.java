@@ -14,7 +14,6 @@ public class SearchCriteria {
     private int numBathrooms;
     private int isFurnished;
 
-    private String streetAddress;
     private Quadrant quadrant;
 
     //starts with all criteria empty
@@ -24,8 +23,19 @@ public class SearchCriteria {
         numBedrooms = -1;
         numBathrooms = -1;
         isFurnished = -1;
-        streetAddress = null;
         quadrant = null;
+    }
+
+    public Email checkIfNotify(Property property) {
+        //if the user is subscribed to some sort of criteria and the property matches their criteria
+        if(property.matchesCriteria(this)) {
+            //create and return an email to send them
+            String from = "Notification System";
+            String title = "A property with your criteria has been posted!";
+            String message = property.toString();
+            return new Email(from, title, message); 
+        }
+        return null; //if it doesn't match their criteria, returns null
     }
 
     //getters/setters
@@ -71,20 +81,14 @@ public class SearchCriteria {
         this.isFurnished = isFurnished;
     }
 
+    //i don't know who made this but i'm afraid to change it
+    //so our code is very weird with quadrant
     public Quadrant getQuadrant() {
         return this.quadrant;
     }
 
     public void setQuadrant(Quadrant quadrant) {
         this.quadrant = quadrant;
-    }
-
-    public String getStreetAddress() {
-        return this.streetAddress;
-    }
-
-    public void setStreetAddress(String streetAddress) {
-        this.streetAddress = streetAddress;
     }
 
     public int getRenterID() {

@@ -60,8 +60,8 @@ public class LandingView extends JPanel {
 		});// action listener in event that button is pressed
 		add(landlordLoginViewButton); // add to view
 		
-		uRenterViewButton = new JButton("Continue"); // create new JButton
-		uRenterViewButton.setBounds(331, 473, 159, 21); // set bounds
+		uRenterViewButton = new JButton("Search as Unregistered Renter"); // create new JButton
+		uRenterViewButton.setBounds(272, 473, 288, 21); // set bounds
 		uRenterViewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainFrame.getURenterView(); // view is changed to URenterView
