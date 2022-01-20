@@ -1,12 +1,10 @@
 # ENSF_480_Final_Project
 Property Management System
 
-Go to the directory with propertyms-1.0-SNAPSHOT.jar and run the following command
+Go to the directory with propertyms.jar and run the following command
 
 ## Run the Program:
-```
-java -cp propertyms-1.0-SNAPSHOT.jar ensf480.view.MainFrame
-```
+Simply click on the jar file propert
 
 
 Using the Database: You will need to install MySQL on your system and create a new user
@@ -26,7 +24,7 @@ Next you can download the schema onto your system using the following command on
 ```
 source <full path to propertyms.sql>
 ```
-
+propertyms.sql is located under the src directory
 Here are some sample accounts to run our Program
 ### Landlord Accounts
 ```

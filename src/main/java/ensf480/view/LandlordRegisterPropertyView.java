@@ -36,7 +36,7 @@ public class LandlordRegisterPropertyView extends JPanel {
 		add(proeprtyTypeLabel); // add to view 
 		
 		final JComboBox propertyTypeComboBox = new JComboBox(); // create new JComboBox
-		propertyTypeComboBox.setModel(new DefaultComboBoxModel(new String[] {"Apartment", "Attached_House", "Detached_House", "Townhouse"})); // set data model to DefaultComboBox initialized with array of strings 
+		propertyTypeComboBox.setModel(new DefaultComboBoxModel(new String[] {"Apartment", "Attached_House", "Detached_House", "Townhouse", "Commercial", "Other"})); // set data model to DefaultComboBox initialized with array of strings 
 		propertyTypeComboBox.setBounds(444, 60, 161, 23); // set bounds
 		add(propertyTypeComboBox); // add to view 
 		

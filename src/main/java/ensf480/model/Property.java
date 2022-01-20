@@ -50,21 +50,21 @@ public class Property {
 
     //converts the object's relevant fields into a string format
     //used when generating notification emails
-    // @Override
-    // public String toString() {
-    //     return "Type: " + getType() + address.toString() +
-    //         "\nNum. Bedrooms: " + getNumBedrooms() + "\nNum. Bathrooms: " + getNumBathrooms() +
-    //         "\nFurnished: " + isIsFurnished() +"\nDate Listed: " + getDateListed();
-    // }
-
-
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", address='" + getAddress() + "'" +
-            "}";
+        return "Type: " + getType() + address.toString() +
+            "\nNum. Bedrooms: " + getNumBedrooms() + "\nNum. Bathrooms: " + getNumBathrooms() +
+            "\nFurnished: " + isIsFurnished() +"\nDate Listed: " + getDateListed();
     }
+
+
+    // @Override
+    // public String toString() {
+    //     return "{" +
+    //         " id='" + getId() + "'" +
+    //         ", address='" + getAddress() + "'" +
+    //         "}";
+    // }
 
 
     //getters and setters
